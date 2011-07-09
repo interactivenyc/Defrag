@@ -1,0 +1,311 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AB0CE71D13B1615E004E9497 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB0CE71C13B1615E004E9497 /* MediaPlayer.framework */; };
+		AB6EEE1C13B158CD00BBFB64 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6EEE1B13B158CD00BBFB64 /* UIKit.framework */; };
+		AB6EEE1E13B158CD00BBFB64 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6EEE1D13B158CD00BBFB64 /* Foundation.framework */; };
+		AB6EEE2013B158CD00BBFB64 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6EEE1F13B158CD00BBFB64 /* CoreGraphics.framework */; };
+		AB6EEE2613B158CD00BBFB64 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AB6EEE2413B158CD00BBFB64 /* InfoPlist.strings */; };
+		AB6EEE2913B158CD00BBFB64 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6EEE2813B158CD00BBFB64 /* main.m */; };
+		AB6EEE2C13B158CD00BBFB64 /* DefragAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6EEE2B13B158CD00BBFB64 /* DefragAppDelegate.m */; };
+		AB6EEE2F13B158CD00BBFB64 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB6EEE2D13B158CD00BBFB64 /* MainWindow.xib */; };
+		AB6EEE3213B158CE00BBFB64 /* DefragViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6EEE3113B158CE00BBFB64 /* DefragViewController.m */; };
+		AB6EEE3513B158CE00BBFB64 /* DefragViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB6EEE3313B158CE00BBFB64 /* DefragViewController.xib */; };
+		AB8928ED13B2C44D00B7C67B /* space.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = AB8928EC13B2C44D00B7C67B /* space.mp4 */; };
+		AB8928EF13B2C69A00B7C67B /* DeFragCvr2 V.mov in Resources */ = {isa = PBXBuildFile; fileRef = AB8928EE13B2C69A00B7C67B /* DeFragCvr2 V.mov */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AB0CE71C13B1615E004E9497 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		AB6EEE1713B158CD00BBFB64 /* Defrag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Defrag.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB6EEE1B13B158CD00BBFB64 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		AB6EEE1D13B158CD00BBFB64 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AB6EEE1F13B158CD00BBFB64 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		AB6EEE2313B158CD00BBFB64 /* Defrag-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Defrag-Info.plist"; sourceTree = "<group>"; };
+		AB6EEE2513B158CD00BBFB64 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AB6EEE2713B158CD00BBFB64 /* Defrag-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Defrag-Prefix.pch"; sourceTree = "<group>"; };
+		AB6EEE2813B158CD00BBFB64 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AB6EEE2A13B158CD00BBFB64 /* DefragAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefragAppDelegate.h; sourceTree = "<group>"; };
+		AB6EEE2B13B158CD00BBFB64 /* DefragAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefragAppDelegate.m; sourceTree = "<group>"; };
+		AB6EEE2E13B158CD00BBFB64 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		AB6EEE3013B158CE00BBFB64 /* DefragViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefragViewController.h; sourceTree = "<group>"; };
+		AB6EEE3113B158CE00BBFB64 /* DefragViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefragViewController.m; sourceTree = "<group>"; };
+		AB6EEE3413B158CE00BBFB64 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DefragViewController.xib; sourceTree = "<group>"; };
+		AB8928EC13B2C44D00B7C67B /* space.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = space.mp4; sourceTree = "<group>"; };
+		AB8928EE13B2C69A00B7C67B /* DeFragCvr2 V.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = "DeFragCvr2 V.mov"; path = "../../../../../Projects_NoCommit/Defrag/Assets/CvrTst_Stack/Links/DeFragCvr2 V.mov"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AB6EEE1413B158CD00BBFB64 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB6EEE1C13B158CD00BBFB64 /* UIKit.framework in Frameworks */,
+				AB6EEE1E13B158CD00BBFB64 /* Foundation.framework in Frameworks */,
+				AB6EEE2013B158CD00BBFB64 /* CoreGraphics.framework in Frameworks */,
+				AB0CE71D13B1615E004E9497 /* MediaPlayer.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AB6EEE0C13B158CD00BBFB64 = {
+			isa = PBXGroup;
+			children = (
+				AB6EEE2113B158CD00BBFB64 /* Defrag */,
+				AB6EEE1A13B158CD00BBFB64 /* Frameworks */,
+				AB6EEE1813B158CD00BBFB64 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AB6EEE1813B158CD00BBFB64 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AB6EEE1713B158CD00BBFB64 /* Defrag.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AB6EEE1A13B158CD00BBFB64 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AB0CE71C13B1615E004E9497 /* MediaPlayer.framework */,
+				AB6EEE1B13B158CD00BBFB64 /* UIKit.framework */,
+				AB6EEE1D13B158CD00BBFB64 /* Foundation.framework */,
+				AB6EEE1F13B158CD00BBFB64 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AB6EEE2113B158CD00BBFB64 /* Defrag */ = {
+			isa = PBXGroup;
+			children = (
+				AB6EEE2A13B158CD00BBFB64 /* DefragAppDelegate.h */,
+				AB6EEE2B13B158CD00BBFB64 /* DefragAppDelegate.m */,
+				AB6EEE2D13B158CD00BBFB64 /* MainWindow.xib */,
+				AB6EEE3013B158CE00BBFB64 /* DefragViewController.h */,
+				AB6EEE3113B158CE00BBFB64 /* DefragViewController.m */,
+				AB6EEE3313B158CE00BBFB64 /* DefragViewController.xib */,
+				AB8928EB13B2C44D00B7C67B /* Resources */,
+				AB6EEE2213B158CD00BBFB64 /* Supporting Files */,
+			);
+			path = Defrag;
+			sourceTree = "<group>";
+		};
+		AB6EEE2213B158CD00BBFB64 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AB6EEE2313B158CD00BBFB64 /* Defrag-Info.plist */,
+				AB6EEE2413B158CD00BBFB64 /* InfoPlist.strings */,
+				AB6EEE2713B158CD00BBFB64 /* Defrag-Prefix.pch */,
+				AB6EEE2813B158CD00BBFB64 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AB8928EB13B2C44D00B7C67B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AB8928EE13B2C69A00B7C67B /* DeFragCvr2 V.mov */,
+				AB8928EC13B2C44D00B7C67B /* space.mp4 */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AB6EEE1613B158CD00BBFB64 /* Defrag */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AB6EEE3813B158CE00BBFB64 /* Build configuration list for PBXNativeTarget "Defrag" */;
+			buildPhases = (
+				AB6EEE1313B158CD00BBFB64 /* Sources */,
+				AB6EEE1413B158CD00BBFB64 /* Frameworks */,
+				AB6EEE1513B158CD00BBFB64 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Defrag;
+			productName = Defrag;
+			productReference = AB6EEE1713B158CD00BBFB64 /* Defrag.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AB6EEE0E13B158CD00BBFB64 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Funny Garbage";
+			};
+			buildConfigurationList = AB6EEE1113B158CD00BBFB64 /* Build configuration list for PBXProject "Defrag" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AB6EEE0C13B158CD00BBFB64;
+			productRefGroup = AB6EEE1813B158CD00BBFB64 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AB6EEE1613B158CD00BBFB64 /* Defrag */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AB6EEE1513B158CD00BBFB64 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB6EEE2613B158CD00BBFB64 /* InfoPlist.strings in Resources */,
+				AB6EEE2F13B158CD00BBFB64 /* MainWindow.xib in Resources */,
+				AB6EEE3513B158CE00BBFB64 /* DefragViewController.xib in Resources */,
+				AB8928ED13B2C44D00B7C67B /* space.mp4 in Resources */,
+				AB8928EF13B2C69A00B7C67B /* DeFragCvr2 V.mov in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AB6EEE1313B158CD00BBFB64 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB6EEE2913B158CD00BBFB64 /* main.m in Sources */,
+				AB6EEE2C13B158CD00BBFB64 /* DefragAppDelegate.m in Sources */,
+				AB6EEE3213B158CE00BBFB64 /* DefragViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		AB6EEE2413B158CD00BBFB64 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AB6EEE2513B158CD00BBFB64 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AB6EEE2D13B158CD00BBFB64 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AB6EEE2E13B158CD00BBFB64 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		AB6EEE3313B158CE00BBFB64 /* DefragViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AB6EEE3413B158CE00BBFB64 /* en */,
+			);
+			name = DefragViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AB6EEE3613B158CE00BBFB64 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		AB6EEE3713B158CE00BBFB64 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+		AB6EEE3913B158CE00BBFB64 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Defrag/Defrag-Prefix.pch";
+				INFOPLIST_FILE = "Defrag/Defrag-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		AB6EEE3A13B158CE00BBFB64 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Defrag/Defrag-Prefix.pch";
+				INFOPLIST_FILE = "Defrag/Defrag-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AB6EEE1113B158CD00BBFB64 /* Build configuration list for PBXProject "Defrag" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB6EEE3613B158CE00BBFB64 /* Debug */,
+				AB6EEE3713B158CE00BBFB64 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AB6EEE3813B158CE00BBFB64 /* Build configuration list for PBXNativeTarget "Defrag" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB6EEE3913B158CE00BBFB64 /* Debug */,
+				AB6EEE3A13B158CE00BBFB64 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AB6EEE0E13B158CD00BBFB64 /* Project object */;
+}
