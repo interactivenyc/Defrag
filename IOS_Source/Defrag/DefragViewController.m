@@ -17,38 +17,12 @@
 @synthesize headerText;
 @synthesize movieURL; 
 
-@synthesize swipeRightRecognizer, swipeLeftRecognizer, tapRecognizer;
-
-//@synthesize contentContainer;
-
-//@synthesize startTouchPosition;
+@synthesize swipeRightRecognizer, swipeLeftRecognizer;
 
 
 
 //*****************************************
-//
-  #pragma mark - MEMORY CLEANUP
-//
-//*****************************************
-
-- (void)dealloc
-{
-    [super dealloc];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-
-//*****************************************
-//
-  #pragma mark - VIEW DID LOAD
-//
+	#pragma mark - VIEW DID LOAD
 //*****************************************
 
 
@@ -64,11 +38,8 @@
 
 
 //*****************************************
-//
-  #pragma mark - EVENT HANDLING
-//
+	#pragma mark - EVENT HANDLING
 //*****************************************
-
 
 
 -(IBAction)defragButtonClicked:(id)sender;
@@ -86,33 +57,6 @@
 {
     
     NSLog(@"setupGestureRecognizer");
-    
-    /*
-     Create and configure the four recognizers. Add each to the view as a gesture recognizer.
-     */
-	
-	/*
-	UIGestureRecognizer *recognizer;
-	*/
-	 
-    /*
-     Create a tap recognizer and add it to the view.
-     Keep a reference to the recognizer to test in gestureRecognizer:shouldReceiveTouch:.
-     */
-	
-	
-	tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-	[self.view addGestureRecognizer:tapRecognizer];
-    //tapRecognizer = (UITapGestureRecognizer *)recognizer;
-    //recognizer.delegate = self;
-	//[recognizer release];
-	
-    
-    /*
-     Create a swipe gesture recognizer to recognize right swipes (the default).
-     We're only interested in receiving messages from this recognizer, and the view will take ownership of it, so we don't need to keep a reference to it.
-     */
-	
 	
 	swipeRightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
 	swipeRightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
@@ -121,61 +65,12 @@
 	swipeLeftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
 	swipeLeftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
 	[self.view addGestureRecognizer:swipeLeftRecognizer];
-	
-	
-    /*
-     Create a swipe gesture recognizer to recognize left swipes.
-     Keep a reference to the recognizer so that it can be added to and removed from the view in takeLeftSwipeRecognitionEnabledFrom:.
-     Add the recognizer to the view if the segmented control shows that left swipe recognition is allowed.
-     */
-	
-	/*
-	recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFrom:)];
-	self.swipeLeftRecognizer = (UISwipeGestureRecognizer *)recognizer;
-    swipeLeftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
-    
-    if ([segmentedControl selectedSegmentIndex] == 0) {
-        [self.view addGestureRecognizer:swipeLeftRecognizer];
-    }
-    self.swipeLeftRecognizer = (UISwipeGestureRecognizer *)recognizer;
-	[recognizer release];
-	 */
-    
-    /*
-     Create a rotation gesture recognizer.
-     We're only interested in receiving messages from this recognizer, and the view will take ownership of it, so we don't need to keep a reference to it.
-     */
-	
-	/*
-	recognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotationFrom:)];
-	[self.view addGestureRecognizer:recognizer];
-	[recognizer release];
-	 */
-    
-    // For illustrative purposes, set exclusive touch for the segmented control (see the ReadMe).
-    
-	/*
-	[segmentedControl setExclusiveTouch:YES];
-    */
-	 
-    /*
-     Create an image view to display the gesture description.
-     */
-	
-	/*
-    UIImageView *anImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 300.0, 75.0)];
-    anImageView.contentMode = UIViewContentModeCenter;
-    self.imageView = anImageView;
-    [anImageView release];
-    [self.view addSubview:imageView];
-	 */
 }
 
 
 -(void)handleGesture: (UISwipeGestureRecognizer *)sender
 {
 	NSLog(@"handleGesture");
-	//NSLog(sender.id);	
 	
 	if (sender.direction == UISwipeGestureRecognizerDirectionLeft) {
 		NSLog(@"handleGesture Left");
@@ -187,19 +82,12 @@
 	
 }
 
--(void)handleTap: (UIGestureRecognizer *)sender
-{
-	NSLog(@"handleTap");
-	
-}
 
 
 
 
 //*****************************************
-//
-    #pragma - SWIPE GESTURE HANDLING
-//
+	#pragma mark - SWIPE GESTURE HANDLING
 //*****************************************
 
 /*
@@ -260,6 +148,25 @@
 {
     // Return YES for supported orientations
     return YES;
+}
+
+
+
+//*****************************************
+	#pragma mark - MEMORY CLEANUP
+//*****************************************
+
+- (void)dealloc
+{
+    [super dealloc];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Release any cached data, images, etc that aren't in use.
 }
 
 @end

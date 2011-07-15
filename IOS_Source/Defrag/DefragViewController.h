@@ -11,36 +11,49 @@
 
 @interface DefragViewController : UIViewController <UIGestureRecognizerDelegate>{
     
+	
+	//*********************************************************
+		#pragma mark - INTERFACE BUILDER PROPERTIES
+	//*********************************************************
+	
     UIButton *defragButton;    
     UILabel *headerText;
+	
+	//*********************************************************
+		#pragma mark - INTERNAL PROPERTIES
+	//*********************************************************
+	
     NSURL *movieURL; 
     
-    UITapGestureRecognizer *tapRecognizer;
 	UISwipeGestureRecognizer *swipeRightRecognizer;
 	UISwipeGestureRecognizer *swipeLeftRecognizer;
 	
-	//UIViewController *contentContainer;
-    
-    CGPoint *startTouchPosition;
     
 }
 
+//*********************************************************
+	#pragma mark - INTERFACE BUILDER PROPERTIES AND METHODS
+//*********************************************************
+
+
 @property (nonatomic, retain) IBOutlet UIButton *defragButton;
 @property (nonatomic, retain) IBOutlet UILabel *headerText;
-@property (nonatomic, retain) NSURL *movieURL;
 
 -(IBAction)defragButtonClicked:(id)sender;
 
-@property (nonatomic, retain) UITapGestureRecognizer *tapRecognizer;
+
+//*********************************************************
+	#pragma mark - INTERNAL PROPERTIES AND METHODS
+//*********************************************************
+
+@property (nonatomic, retain) NSURL *movieURL;
+
 @property (nonatomic, retain) UISwipeGestureRecognizer *swipeRightRecognizer;
 @property (nonatomic, retain) UISwipeGestureRecognizer *swipeLeftRecognizer;
 
-//@property (nonatomic, retain) UIViewController *contentContainer;
-
-//@property (nonatomic, retain) CGPoint *startTouchPosition;
 
 -(void)setupGestureRecognizer;
 -(void)handleGesture: (UIGestureRecognizer *)sender;
--(void)handleTap: (UIGestureRecognizer *)sender;
+
 
 @end

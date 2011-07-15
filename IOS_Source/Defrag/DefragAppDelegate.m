@@ -8,6 +8,7 @@
 
 #import "DefragAppDelegate.h"
 #import "DefragViewController.h"
+#import "Utils.h"
 
 NSString *kScalingModeKey	= @"scalingMode";
 NSString *kControlModeKey	= @"controlMode";
@@ -33,6 +34,11 @@ NSString *kBackgroundColorKey	= @"backgroundColor";
 -(void)initAndPlayMovie:(NSString *)filename
 {
     NSLog(@"function called in delegate - about to play movie");
+	NSLog(@"filename:");
+	//NSLog(filename);
+	
+	[Utils test];
+	
     
     NSString *rootPath = [[NSBundle mainBundle] resourcePath];
     NSString *filePath = [rootPath stringByAppendingPathComponent:filename];

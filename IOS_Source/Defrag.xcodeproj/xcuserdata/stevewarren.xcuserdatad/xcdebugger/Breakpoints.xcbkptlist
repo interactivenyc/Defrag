@@ -9,11 +9,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Defrag/DefragViewController.m"
-         timestampString = "331677715.781289"
+         timestampString = "331933389.908869"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "117"
-         endingLineNumber = "117"
+         startingLineNumber = "61"
+         endingLineNumber = "61"
          landmarkName = "-setupGestureRecognizer"
          landmarkType = "5">
       </FileBreakpoint>
