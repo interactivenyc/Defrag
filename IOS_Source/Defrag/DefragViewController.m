@@ -47,16 +47,53 @@
     NSLog(@"defragButtonClicked");
     
     DefragAppDelegate *appDelegate = (DefragAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+    
+    //[[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    //[self becomeFirstResponder];
+    
+    [appDelegate createMoviePlayer];
+    
     [appDelegate initAndPlayMovie:@"DeFragCvr2 V.mov"];
 
+
 }
+
+//- (void) remoteControlReceivedWithEvent: (UIEvent *) receivedEvent {
+//    
+//    NSLog(@"remoteControlReceivedWithEvent");
+//
+//    
+//    if (receivedEvent.type == UIEventTypeRemoteControl) {
+//        
+//        switch (receivedEvent.subtype) {
+//                
+//            case UIEventSubtypeRemoteControlTogglePlayPause:
+//                NSLog(@"UIEventSubtypeRemoteControlTogglePlayPause");
+//                break;
+//            case UIEventSubtypeRemoteControlPlay:
+//                NSLog(@"UIEventSubtypeRemoteControlPlay");
+//                break;
+//            case UIEventSubtypeRemoteControlPause:
+//                NSLog(@"UIEventSubtypeRemoteControlPause");
+//                break;
+//            case UIEventSubtypeRemoteControlStop:
+//                NSLog(@"UIEventSubtypeRemoteControlStop");
+//                break;
+//                
+//                
+//            default:
+//                break;
+//        }
+//    }
+//}
 
 
 
 -(void)setupGestureRecognizer
 {
     
-    NSLog(@"setupGestureRecognizer");
+    NSLog(@"setupGestureRecognizer NEW");
 	
 	swipeRightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
 	swipeRightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;

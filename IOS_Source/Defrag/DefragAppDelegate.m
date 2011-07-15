@@ -25,38 +25,51 @@ NSString *kBackgroundColorKey	= @"backgroundColor";
     // Override point for customization after application launch.
     
     NSLog(@"DefragAppDelegate didFinishLaunchingWithOptions");
-     
+    
+    [Utils test];
+         
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;
+    
+    
 }
 
--(void)initAndPlayMovie:(NSString *)filename
+-(void)createMoviePlayer
 {
-    NSLog(@"function called in delegate - about to play movie");
-	NSLog(@"filename:");
-	//NSLog(filename);
-	
-	[Utils test];
-	
+    NSLog(@"createMoviePlayer");
     
-    NSString *rootPath = [[NSBundle mainBundle] resourcePath];
-    NSString *filePath = [rootPath stringByAppendingPathComponent:filename];
-    NSURL *fileURL = [NSURL fileURLWithPath:filePath isDirectory:NO];
-    //yourMoviePlayer = [[MPMoviePlayerController alloc] initWithContentURL: fileURL];
-    
-    
-    MPMoviePlayerController *player = [[MPMoviePlayerController alloc] initWithContentURL: fileURL];
+    MPMoviePlayerController *player = [[MPMoviePlayerController alloc] init];
     [player.view setFrame: _viewController.view.bounds];  // player's frame must match parent's
 	[_viewController.view addSubview: player.view];
     
     self.moviePlayer = player;
     [player release];
-   
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerPlaybackDidFinish:) name:MPMoviePlayerPlaybackDidFinishNotification object:self.moviePlayer];
+
+
+}
+
+-(void)initAndPlayMovie:(NSString *)filename
+{
+    NSLog(@"initAndPlayMovie");
+    
+    NSString *rootPath = [[NSBundle mainBundle] resourcePath];
+    NSString *filePath = [rootPath stringByAppendingPathComponent:filename];
+    NSURL *fileURL = [NSURL fileURLWithPath:filePath isDirectory:NO];
         
+    [self.moviePlayer setContentURL:fileURL]; 
     [self.moviePlayer play];
 
 }
+
+-(void)playerPlaybackDidFinish:(NSNotification *)notification
+{
+    NSLog(@"playerPlaybackDidFinish");
+}
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

@@ -22,6 +22,11 @@
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet DefragViewController *viewController;
 
+-(void)createMoviePlayer;
 -(void)initAndPlayMovie:(NSString *)filename;
+-(void)playerPlaybackDidFinish:(NSNotification *)notification;
+
+//-(void)beginReceivingRemoteControlEvents:(id *)sender;
 
 @end
+
