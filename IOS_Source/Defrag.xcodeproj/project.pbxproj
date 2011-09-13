@@ -56,6 +56,10 @@
 		AB6EEE3513B158CE00BBFB64 /* DefragViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB6EEE3313B158CE00BBFB64 /* DefragViewController.xib */; };
 		AB8928ED13B2C44D00B7C67B /* space.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = AB8928EC13B2C44D00B7C67B /* space.mp4 */; };
 		ABA350A913C8EB7400A953FC /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA350A813C8EB7400A953FC /* Utils.m */; };
+		ABB48C2B14195A71001D84D9 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABB48C2914195A71001D84D9 /* FirstViewController.m */; };
+		ABB48C2C14195A71001D84D9 /* FirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABB48C2A14195A71001D84D9 /* FirstViewController.xib */; };
+		ABB48C2E141970BB001D84D9 /* Content.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABB48C2D141970BB001D84D9 /* Content.plist */; };
+		ABCA9C51141E7F6E00DC7A9C /* Content.xml in Resources */ = {isa = PBXBuildFile; fileRef = ABCA9C50141E7F6E00DC7A9C /* Content.xml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -114,6 +118,11 @@
 		AB8928EC13B2C44D00B7C67B /* space.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = space.mp4; sourceTree = "<group>"; };
 		ABA350A713C8EB7400A953FC /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		ABA350A813C8EB7400A953FC /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		ABB48C2814195A71001D84D9 /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		ABB48C2914195A71001D84D9 /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		ABB48C2A14195A71001D84D9 /* FirstViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstViewController.xib; sourceTree = "<group>"; };
+		ABB48C2D141970BB001D84D9 /* Content.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Content.plist; sourceTree = "<group>"; };
+		ABCA9C50141E7F6E00DC7A9C /* Content.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Content.xml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +140,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AB4FC3CB14195331005C48DD /* XIB files */ = {
+			isa = PBXGroup;
+			children = (
+				AB6EEE2D13B158CD00BBFB64 /* MainWindow.xib */,
+				AB6EEE3313B158CE00BBFB64 /* DefragViewController.xib */,
+				ABB48C2A14195A71001D84D9 /* FirstViewController.xib */,
+			);
+			name = "XIB files";
+			sourceTree = "<group>";
+		};
 		AB58860F13C8C1500090FD28 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -337,10 +356,11 @@
 			children = (
 				AB6EEE2A13B158CD00BBFB64 /* DefragAppDelegate.h */,
 				AB6EEE2B13B158CD00BBFB64 /* DefragAppDelegate.m */,
-				AB6EEE2D13B158CD00BBFB64 /* MainWindow.xib */,
 				AB6EEE3013B158CE00BBFB64 /* DefragViewController.h */,
 				AB6EEE3113B158CE00BBFB64 /* DefragViewController.m */,
-				AB6EEE3313B158CE00BBFB64 /* DefragViewController.xib */,
+				ABB48C2814195A71001D84D9 /* FirstViewController.h */,
+				ABB48C2914195A71001D84D9 /* FirstViewController.m */,
+				AB4FC3CB14195331005C48DD /* XIB files */,
 				AB58860F13C8C1500090FD28 /* Assets */,
 				AB8928EB13B2C44D00B7C67B /* Resources */,
 				AB6EEE2213B158CD00BBFB64 /* Supporting Files */,
@@ -353,10 +373,12 @@
 		AB6EEE2213B158CD00BBFB64 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				ABCA9C50141E7F6E00DC7A9C /* Content.xml */,
 				AB6EEE2313B158CD00BBFB64 /* Defrag-Info.plist */,
 				AB6EEE2413B158CD00BBFB64 /* InfoPlist.strings */,
 				AB6EEE2713B158CD00BBFB64 /* Defrag-Prefix.pch */,
 				AB6EEE2813B158CD00BBFB64 /* main.m */,
+				ABB48C2D141970BB001D84D9 /* Content.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -460,6 +482,9 @@
 				AB58866713C8C1500090FD28 /* IMG_0412.JPG in Resources */,
 				AB58866813C8C1500090FD28 /* Tash cmprsd.mov in Resources */,
 				AB58866913C8C1500090FD28 /* Tash_v.indd in Resources */,
+				ABB48C2C14195A71001D84D9 /* FirstViewController.xib in Resources */,
+				ABB48C2E141970BB001D84D9 /* Content.plist in Resources */,
+				ABCA9C51141E7F6E00DC7A9C /* Content.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,6 +499,7 @@
 				AB6EEE2C13B158CD00BBFB64 /* DefragAppDelegate.m in Sources */,
 				AB6EEE3213B158CE00BBFB64 /* DefragViewController.m in Sources */,
 				ABA350A913C8EB7400A953FC /* Utils.m in Sources */,
+				ABB48C2B14195A71001D84D9 /* FirstViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

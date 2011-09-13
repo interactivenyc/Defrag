@@ -2,23 +2,23 @@
 //  DefragAppDelegate.m
 //  Defrag
 //
-//  Created by swarren on 6/21/11.
-//  Copyright 2011 Funny Garbage. All rights reserved.
+//  Created by swarren
 //
 
 #import "DefragAppDelegate.h"
 #import "DefragViewController.h"
 #import "Utils.h"
 
-NSString *kScalingModeKey	= @"scalingMode";
-NSString *kControlModeKey	= @"controlMode";
-NSString *kBackgroundColorKey	= @"backgroundColor";
+//NSString *kScalingModeKey	= @"scalingMode";
+//NSString *kControlModeKey	= @"controlMode";
+//NSString *kBackgroundColorKey	= @"backgroundColor";
 
 @implementation DefragAppDelegate
 
 @synthesize window=_window;
 @synthesize viewController=_viewController;
 @synthesize moviePlayer;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -47,8 +47,7 @@ NSString *kBackgroundColorKey	= @"backgroundColor";
     [player release];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerPlaybackDidFinish:) name:MPMoviePlayerPlaybackDidFinishNotification object:self.moviePlayer];
-
-
+    
 }
 
 -(void)initAndPlayMovie:(NSString *)filename
@@ -67,6 +66,15 @@ NSString *kBackgroundColorKey	= @"backgroundColor";
 -(void)playerPlaybackDidFinish:(NSNotification *)notification
 {
     NSLog(@"playerPlaybackDidFinish");
+    
+    [[NSNotificationCenter defaultCenter]
+     removeObserver: self
+     name: MPMoviePlayerPlaybackDidFinishNotification
+     object: moviePlayer];
+    
+    // Release the movie instance created in playMovieAtURL:
+    [moviePlayer release];
+    
 }
 
 

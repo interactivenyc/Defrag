@@ -9,51 +9,27 @@
 #import <UIKit/UIKit.h>
 
 
-@interface DefragViewController : UIViewController <UIGestureRecognizerDelegate>{
-    
-	
-	//*********************************************************
-		#pragma mark - INTERFACE BUILDER PROPERTIES
-	//*********************************************************
-	
-    UIButton *defragButton;    
-    UILabel *headerText;
-	
-	//*********************************************************
-		#pragma mark - INTERNAL PROPERTIES
-	//*********************************************************
-	
-    NSURL *movieURL; 
-    
+@interface DefragViewController : UINavigationController <UIGestureRecognizerDelegate, NSXMLParserDelegate>
+{	    
 	UISwipeGestureRecognizer *swipeRightRecognizer;
-	UISwipeGestureRecognizer *swipeLeftRecognizer;
-	
-    
+	UISwipeGestureRecognizer *swipeLeftRecognizer;   
+    int pageIndex;
+    NSDictionary *contentDict;
+    NSMutableData *contentData;
 }
-
-//*********************************************************
-	#pragma mark - INTERFACE BUILDER PROPERTIES AND METHODS
-//*********************************************************
-
-
-@property (nonatomic, retain) IBOutlet UIButton *defragButton;
-@property (nonatomic, retain) IBOutlet UILabel *headerText;
-
--(IBAction)defragButtonClicked:(id)sender;
 
 
 //*********************************************************
 	#pragma mark - INTERNAL PROPERTIES AND METHODS
 //*********************************************************
 
-@property (nonatomic, retain) NSURL *movieURL;
-
 @property (nonatomic, retain) UISwipeGestureRecognizer *swipeRightRecognizer;
 @property (nonatomic, retain) UISwipeGestureRecognizer *swipeLeftRecognizer;
-
+@property int pageIndex;
+@property (nonatomic, retain) NSDictionary *contentDict;
+@property (nonatomic, retain) NSMutableData *contentData;
 
 -(void)setupGestureRecognizer;
 -(void)handleGesture: (UIGestureRecognizer *)sender;
-
 
 @end
