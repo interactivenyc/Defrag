@@ -7,17 +7,11 @@
 
 #import "DefragAppDelegate.h"
 #import "DefragViewController.h"
-#import "Utils.h"
-
-//NSString *kScalingModeKey	= @"scalingMode";
-//NSString *kControlModeKey	= @"controlMode";
-//NSString *kBackgroundColorKey	= @"backgroundColor";
 
 @implementation DefragAppDelegate
 
 @synthesize window=_window;
 @synthesize viewController=_viewController;
-@synthesize moviePlayer;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -25,55 +19,11 @@
     // Override point for customization after application launch.
     
     NSLog(@"DefragAppDelegate didFinishLaunchingWithOptions");
-    
-    [Utils test];
-         
+
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;
     
-    
-}
-
--(void)createMoviePlayer
-{
-    NSLog(@"createMoviePlayer");
-    
-    MPMoviePlayerController *player = [[MPMoviePlayerController alloc] init];
-    [player.view setFrame: _viewController.view.bounds];  // player's frame must match parent's
-	[_viewController.view addSubview: player.view];
-    
-    self.moviePlayer = player;
-    [player release];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerPlaybackDidFinish:) name:MPMoviePlayerPlaybackDidFinishNotification object:self.moviePlayer];
-    
-}
-
--(void)initAndPlayMovie:(NSString *)filename
-{
-    NSLog(@"initAndPlayMovie");
-    
-    NSString *rootPath = [[NSBundle mainBundle] resourcePath];
-    NSString *filePath = [rootPath stringByAppendingPathComponent:filename];
-    NSURL *fileURL = [NSURL fileURLWithPath:filePath isDirectory:NO];
-        
-    [self.moviePlayer setContentURL:fileURL]; 
-    [self.moviePlayer play];
-
-}
-
--(void)playerPlaybackDidFinish:(NSNotification *)notification
-{
-    NSLog(@"playerPlaybackDidFinish");
-    
-    [[NSNotificationCenter defaultCenter]
-     removeObserver: self
-     name: MPMoviePlayerPlaybackDidFinishNotification
-     object: moviePlayer];
-    
-    // Release the movie instance created in playMovieAtURL:
-    [moviePlayer release];
     
 }
 

@@ -8,6 +8,9 @@
 
 #import "DefragViewController.h"
 #import "FirstViewController.h"
+#import "Animator.h"
+#import "DefragAppDelegate.h"
+#import <QuartzCore/CoreAnimation.h>
 
 
 #define HORIZ_SWIPE_DRAG_MIN  12
@@ -16,61 +19,301 @@
 @implementation DefragViewController
 
 
-@synthesize swipeRightRecognizer, swipeLeftRecognizer;
+@synthesize swipeRightRecognizer, swipeLeftRecognizer, swipeUpRecognizer, swipeDownRecognizer;
 
-@synthesize pageIndex;
+@synthesize pageIndex, articleIndex, pageCount, articleCount;
 @synthesize contentDict;
-@synthesize contentData;
+@synthesize moviePlayer;
+
+
+- (void)dealloc {
+    [swipeRightRecognizer release];
+    [swipeLeftRecognizer release];
+    [swipeUpRecognizer release];
+    [swipeDownRecognizer release];
+
+
+    [contentDict release];
+
+
+    [super dealloc];
+}
 
 //*****************************************
-	#pragma mark - VIEW DID LOAD
+#pragma mark - VIEW DID LOAD
 //*****************************************
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"DefragViewController viewDidLoad");
-    
-    pageIndex = 0;
-    
-    //Load and parse Content.plist
-    NSLog(@"DefragViewController PARSE PLIST");
+
+    //NSLog(@"DefragViewController PARSE PLIST");
     contentDict = [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Content" ofType:@"plist"]];
-    NSLog(@"Title: %@", [[[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:0] objectForKey:@"Title"]);
-    
-    
+
+    articleCount = 9;
+    articleIndex = 0;
+    pageCount = 1;
+    pageIndex = 0;
+
+    [self turnPage:1];
+
+    [self setupGestureRecognizer];
+
+    [self setNavigationBarHidden:YES];
+
+    //[self pushViewController:[[[FirstViewController alloc] init] autorelease] animated:TRUE];
+
+
+    /*
+     
+     //PARSING XML CODE LEFT HERE FOR FUTURE REFERENCE
+     
     NSLog(@"DefragViewController PARSE XML");
     contentData = [[NSMutableData alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Content" ofType:@"xml"]];
     NSXMLParser *parser = [[NSXMLParser alloc] initWithData:contentData];
     [parser setDelegate:self];
     [parser parse];
-    
-    
+    */
+
     //[NSXMLParser *contentXML] = [NSXMLParser initialize
+
+
+
+
+}
+
+//*****************************************
+#pragma mark - PAGE NAVIGATION
+//*****************************************
+
+
+-(void)turnPage: (char)whichDirection
+{
+    NSLog(@"turnPage");
+    [self logPageInfo];
+
+
     
-    [self setupGestureRecognizer];
+
+    if ([[[self getMediaItem] objectForKey:@"Type"] isEqualToString:@"jpg"]){
+        NSLog(@"MEDIA TYPE: JPG");
+
+        UIImage *nextImage;
+        UIView *nextView;
+        UIViewController *nextController;
+
+        nextImage = [UIImage imageNamed:[[self getMediaItem] objectForKey:@"Media"]];
+        nextView = [[UIImageView alloc] initWithImage:nextImage];
+        nextController = [[UIViewController alloc] init];
+        nextController.view = nextView;
+
+
+        CATransition *transition = [CATransition animation];
+        [transition setType:kCATransitionPush];
+
+
+        switch (whichDirection)
+        {
+            case 1:   //left
+                [transition setSubtype:kCATransitionFromRight];
+                break;
+            case 2:       //right
+                [transition setSubtype:kCATransitionFromLeft];
+                break;
+            case 3:      //up
+                [transition setSubtype:kCATransitionFromTop];
+                break;
+            case 4:     //down
+                [transition setSubtype:kCATransitionFromBottom];
+                break;
+            default:
+                [transition setSubtype:kCATransitionFromRight];
+
+        }
+
+        [transition setDuration:0.2f];
+
+        CALayer *layer;
+        layer = nextController.view.layer;
+        [layer addAnimation:transition forKey:@"Transition"];
+
+        [self pushViewController:nextController animated:NO];
+
+
+        [nextView release];
+        [nextImage release];
+        [nextController release];
+
+
+    } else if ([[[self getMediaItem] objectForKey:@"Type"] isEqualToString:@"mov"]){
+        NSLog(@"MEDIA TYPE: MOV");
+        NSLog(@"createMoviePlayer");
+
+        MPMoviePlayerController *player = [[MPMoviePlayerController alloc] init];
+        [player.view setFrame: self.view.bounds];  // player's frame must match parent's
+        [self.view addSubview: player.view];
+
+        self.moviePlayer = player;
+        [player release];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerPlaybackDidFinish:) name:MPMoviePlayerPlaybackDidFinishNotification object:self.moviePlayer];
+
+
+        NSLog(@"initAndPlayMovie: %@", [[self getMediaItem] objectForKey:@"Media"]);
+
+        NSString *rootPath = [[NSBundle mainBundle] resourcePath];
+        NSString *filePath = [rootPath stringByAppendingPathComponent:[[self getMediaItem] objectForKey:@"Media"]];
+        NSURL *fileURL = [NSURL fileURLWithPath:filePath isDirectory:NO];
+
+        [self.moviePlayer setContentURL:fileURL];
+        [self.moviePlayer play];
+
+
+
+    }
+
+
     
-    [self pushViewController:[[FirstViewController alloc] init] animated:TRUE];
-    
-    
-    
+
 }
 
 
 
 
 
+
+-(void)playerPlaybackDidFinish:(NSNotification *)notification
+{
+    NSLog(@"playerPlaybackDidFinish");
+
+    [[NSNotificationCenter defaultCenter]
+     removeObserver: self
+     name: MPMoviePlayerPlaybackDidFinishNotification
+     object: moviePlayer];
+
+    [moviePlayer.view removeFromSuperview];
+
+    // Release the movie instance created in playMovieAtURL:
+    [moviePlayer release];
+
+    articleIndex = articleIndex + 1;
+    [self turnPage:1];
+
+}
+
+
+//*****************************************
+#pragma mark - SWIPE GESTURE HANDLING
+//*****************************************
+
+
+- (void)setupGestureRecognizer {
+
+    //NSLog(@"setupGestureRecognizer NEW");
+
+    swipeRightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+    swipeRightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:swipeRightRecognizer];
+
+    swipeLeftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+    swipeLeftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:swipeLeftRecognizer];
+
+    swipeUpRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+    swipeUpRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
+    [self.view addGestureRecognizer:swipeUpRecognizer];
+
+    swipeDownRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+    swipeDownRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
+    [self.view addGestureRecognizer:swipeDownRecognizer];
+}
+
+
+- (void)handleGesture:(UISwipeGestureRecognizer *)sender {
+    //NSLog(@"handleGesture");
+
+    char direction;
+
+
+    switch (sender.direction) {
+        case UISwipeGestureRecognizerDirectionLeft:
+           // NSLog(@"handleGesture Left");
+            articleIndex = articleIndex + 1;
+            pageIndex = 0;
+            direction = 1;
+
+            break;
+
+        case UISwipeGestureRecognizerDirectionRight:
+           // NSLog(@"handleGesture Right");
+
+            if (articleIndex == 0) return;
+
+            articleIndex = articleIndex - 1;
+            pageIndex = 0;
+            direction = 2;
+
+            break;
+
+        case UISwipeGestureRecognizerDirectionUp:
+            NSLog(@"handleGesture Up");
+            pageIndex = pageIndex + 1;
+            direction = 3;
+
+            break;
+
+        case UISwipeGestureRecognizerDirectionDown:
+            NSLog(@"handleGesture Down");
+
+            if (pageIndex == 0) return;
+            pageIndex = pageIndex - 1;
+            direction = 4;
+
+            break;
+
+        default:
+            break;
+    }
+
+    [self turnPage:direction];
+}
+
+
+
+//*****************************************
+#pragma mark - UTILITIES AND GETTER/SETTER
+//*****************************************
+
+- (void)logPageInfo {
+    //NSLog(@"Title: %@ Page: %i", [[[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:articleIndex] objectForKey:@"Title"], pageIndex);
+
+    NSLog(@"Media: %@", [[self getMediaItem] objectForKey:@"Media"]);
+
+}
+
+
+- (NSDictionary *)getMediaItem {
+    return [[[[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:articleIndex] objectForKey:@"Media"] objectAtIndex:pageIndex];
+}
+
+
+
+    //*****************************************
+    //#pragma mark - VIDEO PLAYER EVENT HANDLING
+    //*****************************************
+
+/*
 //- (void) remoteControlReceivedWithEvent: (UIEvent *) receivedEvent {
-//    
+//
 //    NSLog(@"remoteControlReceivedWithEvent");
 //
-//    
+//
 //    if (receivedEvent.type == UIEventTypeRemoteControl) {
-//        
+//
 //        switch (receivedEvent.subtype) {
-//                
+//
 //            case UIEventSubtypeRemoteControlTogglePlayPause:
 //                NSLog(@"UIEventSubtypeRemoteControlTogglePlayPause");
 //                break;
@@ -83,56 +326,18 @@
 //            case UIEventSubtypeRemoteControlStop:
 //                NSLog(@"UIEventSubtypeRemoteControlStop");
 //                break;
-//                
-//                
+//
+//
 //            default:
 //                break;
 //        }
 //    }
 //}
-
-
-
--(void)setupGestureRecognizer
-{
-    
-    NSLog(@"setupGestureRecognizer NEW");
-	
-	swipeRightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
-	swipeRightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
-	[self.view addGestureRecognizer:swipeRightRecognizer];
-	
-	swipeLeftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
-	swipeLeftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
-	[self.view addGestureRecognizer:swipeLeftRecognizer];
-}
-
-
--(void)handleGesture: (UISwipeGestureRecognizer *)sender
-{
-	NSLog(@"handleGesture");
-	
-	if (sender.direction == UISwipeGestureRecognizerDirectionLeft) {
-		NSLog(@"handleGesture Left");
-        pageIndex = pageIndex + 1;
-    }
-    else {
-		NSLog(@"handleGesture Right");
-        pageIndex = pageIndex - 1;
-    }
-    
-    
-    NSLog(@"pageIndex: %@", [NSString stringWithFormat:@"%i", pageIndex]);
-	
-	
-}
-
-
-
+*/
 
 
 //*****************************************
-	#pragma mark - SWIPE GESTURE HANDLING
+//#pragma mark - SWIPE GESTURE HANDLING
 //*****************************************
 
 /*
@@ -179,15 +384,16 @@
 
 
 //*****************************************
-    #pragma mark NSXMLParser delegate methods
+//#pragma mark NSXMLParser delegate methods
 //*****************************************
 
+/*
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict {
     
-    NSLog(@"parser didStartElement: %@", elementName);
-    NSLog(@"attributes: %@", [attributeDict objectEnumerator]);
+    //NSLog(@"parser didStartElement: %@", elementName);
+    //NSLog(@"attributes: %@", [attributeDict objectEnumerator]);
     
-    /*
+    
     // If the number of parsed earthquakes is greater than kMaximumNumberOfEarthquakesToParse, abort the parse.
     if (parsedEarthquakesCounter >= kMaximumNumberOfEarthquakesToParse) {
         // Use the flag didAbortParsing to distinguish between this deliberate stop and other parser errors.
@@ -212,14 +418,14 @@
         // The mutable string needs to be reset to empty.
         [currentParsedCharacterData setString:@""];
     }
-     */
+     
 }
 
 - (void)parser:(NSXMLParser *)parser didEndElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName {     
     
-    NSLog(@"parser didEndElement: ");
+    //NSLog(@"parser didEndElement: ");
     
-    /*
+    
     if ([elementName isEqualToString:kEntryElementName]) {
         [self.currentParseBatch addObject:self.currentEarthquakeObject];
         parsedEarthquakesCounter++;
@@ -260,70 +466,67 @@
      
     // Stop accumulating parsed character data. We won't start again until specific elements begin.
     accumulatingParsedCharacterData = NO;
-     */
+     
 }
 
 // This method is called by the parser when it find parsed character data ("PCDATA") in an element. The parser is not
 // guaranteed to deliver all of the parsed character data for an element in a single invocation, so it is necessary to
 // accumulate character data until the end of the element is reached.
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {
-    NSLog(@"parser foundCharacters: %@", string);
+    //NSLog(@"parser foundCharacters: %@", string);
     
-    /*
-    if (accumulatingParsedCharacterData) {
-        // If the current element is one whose content we care about, append 'string'
-        // to the property that holds the content of the current element.
-        [self.currentParsedCharacterData appendString:string];
-    }
-     */
+    
+    //if (accumulatingParsedCharacterData) {
+    //    // If the current element is one whose content we care about, append 'string'
+    //    // to the property that holds the content of the current element.
+    //    [self.currentParsedCharacterData appendString:string];
+    //}
+     
 }
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
-    NSLog(@"parser parseErrorOccurred: %@", parseError);
+    //NSLog(@"parser parseErrorOccurred: %@", parseError);
     
     // If the number of earthquake records received is greater than kMaximumNumberOfEarthquakesToParse, we abort parsing.
     // The parser will report this as an error, but we don't want to treat it as an error. The flag didAbortParsing is
     // how we distinguish real errors encountered by the parser.
     
-    /*
-    if (didAbortParsing == NO) {
-        // Pass the error to the main thread for handling.
-        [self performSelectorOnMainThread:@selector(handleError:) withObject:parseError waitUntilDone:NO];
-    }
-     */
+    
+    //if (didAbortParsing == NO) {
+    //    // Pass the error to the main thread for handling.
+    //    [self performSelectorOnMainThread:@selector(handleError:) withObject:parseError waitUntilDone:NO];
+    //}
+     
 }
+*/
 
 
-- (void)viewDidUnload
-{
+
+
+
+
+//*****************************************
+#pragma mark - MEMORY CLEANUP
+//*****************************************
+
+
+
+- (void)viewDidUnload {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
 
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return YES;
 }
 
-
-
-//*****************************************
-	#pragma mark - MEMORY CLEANUP
-//*****************************************
-
-- (void)dealloc
-{
-    [super dealloc];
-}
-
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
+
     // Release any cached data, images, etc that aren't in use.
 }
 

@@ -7,26 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <MediaPlayer/MediaPlayer.h>
-#import "DefragViewController.h"
 
 @class DefragViewController;
 
 @interface DefragAppDelegate : NSObject <UIApplicationDelegate> {
-    
-    MPMoviePlayerController *moviePlayer;
-    
+
 }
 
-@property (nonatomic, retain) MPMoviePlayerController *moviePlayer;
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet DefragViewController *viewController;
-
--(void)createMoviePlayer;
--(void)initAndPlayMovie:(NSString *)filename;
--(void)playerPlaybackDidFinish:(NSNotification *)notification;
-
-//-(void)beginReceivingRemoteControlEvents:(id *)sender;
 
 @end
 

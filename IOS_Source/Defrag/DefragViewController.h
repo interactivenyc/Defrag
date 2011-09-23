@@ -7,15 +7,26 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MediaPlayer/MediaPlayer.h>
 
 
 @interface DefragViewController : UINavigationController <UIGestureRecognizerDelegate, NSXMLParserDelegate>
 {	    
 	UISwipeGestureRecognizer *swipeRightRecognizer;
 	UISwipeGestureRecognizer *swipeLeftRecognizer;   
-    int pageIndex;
+	UISwipeGestureRecognizer *swipeUpRecognizer;
+	UISwipeGestureRecognizer *swipeDownRecognizer;   
+    
     NSDictionary *contentDict;
-    NSMutableData *contentData;
+    
+    int articleCount;
+    int articleIndex;
+    int pageCount;
+    int pageIndex;
+
+    MPMoviePlayerController *moviePlayer;
+    
+    
 }
 
 
@@ -25,11 +36,24 @@
 
 @property (nonatomic, retain) UISwipeGestureRecognizer *swipeRightRecognizer;
 @property (nonatomic, retain) UISwipeGestureRecognizer *swipeLeftRecognizer;
-@property int pageIndex;
+@property (nonatomic, retain) UISwipeGestureRecognizer *swipeUpRecognizer;
+@property (nonatomic, retain) UISwipeGestureRecognizer *swipeDownRecognizer;
+
 @property (nonatomic, retain) NSDictionary *contentDict;
-@property (nonatomic, retain) NSMutableData *contentData;
+
+@property int articleCount;
+@property int pageCount;
+@property int articleIndex;
+@property int pageIndex;
+
+@property (nonatomic, retain) MPMoviePlayerController *moviePlayer;
+
 
 -(void)setupGestureRecognizer;
+-(void)logPageInfo;
+-(NSDictionary *)getMediaItem;
 -(void)handleGesture: (UIGestureRecognizer *)sender;
+-(void)turnPage: (char)whichDirection;
+-(void)playerPlaybackDidFinish:(NSNotification *)notification;
 
 @end

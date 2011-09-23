@@ -8,20 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FirstViewController : UIViewController
-
+@interface FirstViewController : UIViewController {
+    
     //*********************************************************
     #pragma mark - INTERFACE BUILDER PROPERTIES
     //*********************************************************
-
+    
     UIButton *defragButton;    
     UILabel *headerText;
-
+    
     //*********************************************************
     #pragma mark - INTERNAL PROPERTIES
     //*********************************************************
-
+    
     NSURL *movieURL; 
+}
+
+
 
     //*********************************************************
     #pragma mark - INTERFACE BUILDER PROPERTIES AND METHODS
