@@ -7,8 +7,8 @@
 //
 
 #import "DefragViewController.h"
-#import "FirstViewController.h"
-#import "Animator.h"
+//#import "FirstViewController.h"
+//#import "Animator.h"
 #import "DefragAppDelegate.h"
 #import <QuartzCore/CoreAnimation.h>
 
@@ -32,9 +32,8 @@
     [swipeUpRecognizer release];
     [swipeDownRecognizer release];
 
-
+    [moviePlayer release];
     [contentDict release];
-
 
     [super dealloc];
 }
@@ -198,8 +197,8 @@
     // Release the movie instance created in playMovieAtURL:
     [moviePlayer release];
 
-    articleIndex = articleIndex + 1;
-    [self turnPage:1];
+    //articleIndex = articleIndex + 1;
+    //[self turnPage:1];
 
 }
 
@@ -240,6 +239,8 @@
     switch (sender.direction) {
         case UISwipeGestureRecognizerDirectionLeft:
            // NSLog(@"handleGesture Left");
+            if (articleIndex > (articleCount-1)) return;
+            
             articleIndex = articleIndex + 1;
             pageIndex = 0;
             direction = 1;
@@ -259,6 +260,27 @@
 
         case UISwipeGestureRecognizerDirectionUp:
             NSLog(@"handleGesture Up");
+            
+            @try {
+                NSLog(@"handleGesture TRY");
+                
+                NSLog(@"length: %i", [[[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:articleIndex] count]);
+            }
+            @catch (NSException *exception) {
+                 NSLog(@"handleGesture CATCH:");
+            }
+            @finally {
+                 NSLog(@"handleGesture FINALLY");
+            }
+        
+            
+            
+            if (pageIndex > ([[[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:articleIndex] count] -1))
+            {
+                NSLog(@"LAST PAGE");
+                    return;
+            }
+            
             pageIndex = pageIndex + 1;
             direction = 3;
 
