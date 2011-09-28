@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <MediaPlayer/MediaPlayer.h>
+#import <QuartzCore/CoreAnimation.h>
+#import "PageViewController.h"
 
 
 @interface DefragViewController : UINavigationController <UIGestureRecognizerDelegate, NSXMLParserDelegate>
@@ -18,6 +20,8 @@
 	UISwipeGestureRecognizer *swipeDownRecognizer;   
     
     NSDictionary *contentDict;
+    PageViewController *currentPageView;
+    
     
     int articleCount;
     int articleIndex;
@@ -40,20 +44,26 @@
 @property (nonatomic, retain) UISwipeGestureRecognizer *swipeDownRecognizer;
 
 @property (nonatomic, retain) NSDictionary *contentDict;
+@property (nonatomic, retain) PageViewController *currentPageView;
 
 @property int articleCount;
-@property int pageCount;
 @property int articleIndex;
 @property int pageIndex;
+@property int pageCount;
 
 @property (nonatomic, retain) MPMoviePlayerController *moviePlayer;
 
 
 -(void)setupGestureRecognizer;
+
 -(void)logPageInfo;
 -(NSDictionary *)getMediaItem;
+
 -(void)handleGesture: (UIGestureRecognizer *)sender;
+-(void)calculatePageCount;
 -(void)turnPage: (char)whichDirection;
+-(void)displayJPG:(int)whichDirection;
+-(void)displayMOV:(int)whichDirection;
 -(void)playerPlaybackDidFinish:(NSNotification *)notification;
 
 @end
