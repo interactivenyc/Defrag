@@ -10,18 +10,7 @@
 		AB0CE71D13B1615E004E9497 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB0CE71C13B1615E004E9497 /* MediaPlayer.framework */; };
 		AB46F7A5143219580049DFEC /* PageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB46F7A3143219580049DFEC /* PageViewController.m */; };
 		AB46F7A6143219580049DFEC /* PageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB46F7A4143219580049DFEC /* PageViewController.xib */; };
-		AB46F7AB14321A4A0049DFEC /* PageData.m in Sources */ = {isa = PBXBuildFile; fileRef = AB46F7AA14321A4A0049DFEC /* PageData.m */; };
-		AB4CDB08143385B800B6DD15 /* ArtOfRev-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDAD3143385B800B6DD15 /* ArtOfRev-fpo.jpg */; };
-		AB4CDB09143385B800B6DD15 /* ArtOfRev10-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDAD4143385B800B6DD15 /* ArtOfRev10-fpo.jpg */; };
-		AB4CDB0A143385B800B6DD15 /* ArtOfRev11-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDAD5143385B800B6DD15 /* ArtOfRev11-fpo.jpg */; };
-		AB4CDB0B143385B800B6DD15 /* ArtOfRev2-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDAD6143385B800B6DD15 /* ArtOfRev2-fpo.jpg */; };
-		AB4CDB0C143385B800B6DD15 /* ArtOfRev3-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDAD7143385B800B6DD15 /* ArtOfRev3-fpo.jpg */; };
-		AB4CDB0D143385B800B6DD15 /* ArtOfRev4-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDAD8143385B800B6DD15 /* ArtOfRev4-fpo.jpg */; };
-		AB4CDB0E143385B800B6DD15 /* ArtOfRev5-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDAD9143385B800B6DD15 /* ArtOfRev5-fpo.jpg */; };
-		AB4CDB0F143385B800B6DD15 /* ArtOfRev6-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDADA143385B800B6DD15 /* ArtOfRev6-fpo.jpg */; };
-		AB4CDB10143385B800B6DD15 /* ArtOfRev7-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDADB143385B800B6DD15 /* ArtOfRev7-fpo.jpg */; };
-		AB4CDB11143385B800B6DD15 /* ArtOfRev8-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDADC143385B800B6DD15 /* ArtOfRev8-fpo.jpg */; };
-		AB4CDB12143385B800B6DD15 /* ArtOfRev9-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDADD143385B800B6DD15 /* ArtOfRev9-fpo.jpg */; };
+		AB4A63161436BA9000ABF9D8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB4A63151436BA9000ABF9D8 /* Security.framework */; };
 		AB4CDB13143385B800B6DD15 /* Ayush_h-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDADF143385B800B6DD15 /* Ayush_h-fpo.jpg */; };
 		AB4CDB14143385B800B6DD15 /* Ayush_h2-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDAE0143385B800B6DD15 /* Ayush_h2-fpo.jpg */; };
 		AB4CDB15143385B800B6DD15 /* Ayush_h3-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDAE1143385B800B6DD15 /* Ayush_h3-fpo.jpg */; };
@@ -48,12 +37,6 @@
 		AB4CDB2A143385B800B6DD15 /* Manifesto-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDAFA143385B800B6DD15 /* Manifesto-fpo.jpg */; };
 		AB4CDB2B143385B800B6DD15 /* Manifesto2-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDAFB143385B800B6DD15 /* Manifesto2-fpo.jpg */; };
 		AB4CDB2C143385B800B6DD15 /* MstHd-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDAFD143385B800B6DD15 /* MstHd-fpo.jpg */; };
-		AB4CDB2D143385B800B6DD15 /* Paki-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDAFF143385B800B6DD15 /* Paki-fpo.jpg */; };
-		AB4CDB2E143385B800B6DD15 /* Paki2-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDB00143385B800B6DD15 /* Paki2-fpo.jpg */; };
-		AB4CDB2F143385B800B6DD15 /* Paki3-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDB01143385B800B6DD15 /* Paki3-fpo.jpg */; };
-		AB4CDB30143385B800B6DD15 /* Paki4-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDB02143385B800B6DD15 /* Paki4-fpo.jpg */; };
-		AB4CDB31143385B800B6DD15 /* Paki5-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDB03143385B800B6DD15 /* Paki5-fpo.jpg */; };
-		AB4CDB32143385B800B6DD15 /* Paki6-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDB04143385B800B6DD15 /* Paki6-fpo.jpg */; };
 		AB4CDB33143385B800B6DD15 /* Tash-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDB06143385B800B6DD15 /* Tash-fpo.jpg */; };
 		AB4CDB34143385B800B6DD15 /* Tash2-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDB07143385B800B6DD15 /* Tash2-fpo.jpg */; };
 		AB4CDB36143385F100B6DD15 /* Content.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDB35143385F100B6DD15 /* Content.plist */; };
@@ -70,6 +53,7 @@
 		ABCBDFC0142150E400B39F2D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABCBDFC0142150E400B39F2C /* QuartzCore.framework */; };
 		ABE523C814320D00004E94A4 /* CodeSnippets.rtf in Resources */ = {isa = PBXBuildFile; fileRef = ABE523C714320CFF004E94A4 /* CodeSnippets.rtf */; };
 		ABE523CE1432184D004E94A4 /* PageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABE523CC1432184D004E94A4 /* PageViewController.xib */; };
+		ABF506EC1434CE4B00F72E69 /* PageData.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF506EB1434CE4B00F72E69 /* PageData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,19 +61,7 @@
 		AB46F7A2143219580049DFEC /* PageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageViewController.h; sourceTree = "<group>"; };
 		AB46F7A3143219580049DFEC /* PageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageViewController.m; sourceTree = "<group>"; };
 		AB46F7A4143219580049DFEC /* PageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PageViewController.xib; sourceTree = "<group>"; };
-		AB46F7A914321A4A0049DFEC /* PageData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageData.h; sourceTree = "<group>"; };
-		AB46F7AA14321A4A0049DFEC /* PageData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageData.m; sourceTree = "<group>"; };
-		AB4CDAD3143385B800B6DD15 /* ArtOfRev-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "ArtOfRev-fpo.jpg"; sourceTree = "<group>"; };
-		AB4CDAD4143385B800B6DD15 /* ArtOfRev10-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "ArtOfRev10-fpo.jpg"; sourceTree = "<group>"; };
-		AB4CDAD5143385B800B6DD15 /* ArtOfRev11-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "ArtOfRev11-fpo.jpg"; sourceTree = "<group>"; };
-		AB4CDAD6143385B800B6DD15 /* ArtOfRev2-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "ArtOfRev2-fpo.jpg"; sourceTree = "<group>"; };
-		AB4CDAD7143385B800B6DD15 /* ArtOfRev3-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "ArtOfRev3-fpo.jpg"; sourceTree = "<group>"; };
-		AB4CDAD8143385B800B6DD15 /* ArtOfRev4-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "ArtOfRev4-fpo.jpg"; sourceTree = "<group>"; };
-		AB4CDAD9143385B800B6DD15 /* ArtOfRev5-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "ArtOfRev5-fpo.jpg"; sourceTree = "<group>"; };
-		AB4CDADA143385B800B6DD15 /* ArtOfRev6-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "ArtOfRev6-fpo.jpg"; sourceTree = "<group>"; };
-		AB4CDADB143385B800B6DD15 /* ArtOfRev7-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "ArtOfRev7-fpo.jpg"; sourceTree = "<group>"; };
-		AB4CDADC143385B800B6DD15 /* ArtOfRev8-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "ArtOfRev8-fpo.jpg"; sourceTree = "<group>"; };
-		AB4CDADD143385B800B6DD15 /* ArtOfRev9-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "ArtOfRev9-fpo.jpg"; sourceTree = "<group>"; };
+		AB4A63151436BA9000ABF9D8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		AB4CDADF143385B800B6DD15 /* Ayush_h-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Ayush_h-fpo.jpg"; sourceTree = "<group>"; };
 		AB4CDAE0143385B800B6DD15 /* Ayush_h2-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Ayush_h2-fpo.jpg"; sourceTree = "<group>"; };
 		AB4CDAE1143385B800B6DD15 /* Ayush_h3-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Ayush_h3-fpo.jpg"; sourceTree = "<group>"; };
@@ -116,12 +88,6 @@
 		AB4CDAFA143385B800B6DD15 /* Manifesto-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Manifesto-fpo.jpg"; sourceTree = "<group>"; };
 		AB4CDAFB143385B800B6DD15 /* Manifesto2-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Manifesto2-fpo.jpg"; sourceTree = "<group>"; };
 		AB4CDAFD143385B800B6DD15 /* MstHd-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "MstHd-fpo.jpg"; sourceTree = "<group>"; };
-		AB4CDAFF143385B800B6DD15 /* Paki-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Paki-fpo.jpg"; sourceTree = "<group>"; };
-		AB4CDB00143385B800B6DD15 /* Paki2-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Paki2-fpo.jpg"; sourceTree = "<group>"; };
-		AB4CDB01143385B800B6DD15 /* Paki3-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Paki3-fpo.jpg"; sourceTree = "<group>"; };
-		AB4CDB02143385B800B6DD15 /* Paki4-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Paki4-fpo.jpg"; sourceTree = "<group>"; };
-		AB4CDB03143385B800B6DD15 /* Paki5-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Paki5-fpo.jpg"; sourceTree = "<group>"; };
-		AB4CDB04143385B800B6DD15 /* Paki6-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Paki6-fpo.jpg"; sourceTree = "<group>"; };
 		AB4CDB06143385B800B6DD15 /* Tash-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Tash-fpo.jpg"; sourceTree = "<group>"; };
 		AB4CDB07143385B800B6DD15 /* Tash2-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Tash2-fpo.jpg"; sourceTree = "<group>"; };
 		AB4CDB35143385F100B6DD15 /* Content.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Content.plist; sourceTree = "<group>"; };
@@ -144,6 +110,8 @@
 		ABCBDFC0142150E400B39F2C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		ABE523C714320CFF004E94A4 /* CodeSnippets.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = CodeSnippets.rtf; sourceTree = "<group>"; };
 		ABE523CC1432184D004E94A4 /* PageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PageViewController.xib; sourceTree = "<group>"; };
+		ABF506EA1434CE4B00F72E69 /* PageData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PageData.h; path = Defrag/PageData.h; sourceTree = "<group>"; };
+		ABF506EB1434CE4B00F72E69 /* PageData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PageData.m; path = Defrag/PageData.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +124,7 @@
 				AB6EEE2013B158CD00BBFB64 /* CoreGraphics.framework in Frameworks */,
 				AB0CE71D13B1615E004E9497 /* MediaPlayer.framework in Frameworks */,
 				ABCBDFC0142150E400B39F2D /* QuartzCore.framework in Frameworks */,
+				AB4A63161436BA9000ABF9D8 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,8 +145,8 @@
 		AB46F7AC14321A4F0049DFEC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AB46F7A914321A4A0049DFEC /* PageData.h */,
-				AB46F7AA14321A4A0049DFEC /* PageData.m */,
+				ABF506EA1434CE4B00F72E69 /* PageData.h */,
+				ABF506EB1434CE4B00F72E69 /* PageData.m */,
 			);
 			name = Model;
 			path = ..;
@@ -195,35 +164,15 @@
 			isa = PBXGroup;
 			children = (
 				AB4CDB35143385F100B6DD15 /* Content.plist */,
-				AB4CDAD2143385B800B6DD15 /* ArtOfRev */,
 				AB4CDADE143385B800B6DD15 /* Ayush */,
 				AB4CDAE7143385B800B6DD15 /* Cover */,
 				AB4CDAE9143385B800B6DD15 /* Hava */,
 				AB4CDAF3143385B800B6DD15 /* Julie */,
 				AB4CDAF9143385B800B6DD15 /* Manifesto */,
 				AB4CDAFC143385B800B6DD15 /* MastHd */,
-				AB4CDAFE143385B800B6DD15 /* Paki */,
 				AB4CDB05143385B800B6DD15 /* Tash */,
 			);
 			path = Content;
-			sourceTree = "<group>";
-		};
-		AB4CDAD2143385B800B6DD15 /* ArtOfRev */ = {
-			isa = PBXGroup;
-			children = (
-				AB4CDAD3143385B800B6DD15 /* ArtOfRev-fpo.jpg */,
-				AB4CDAD4143385B800B6DD15 /* ArtOfRev10-fpo.jpg */,
-				AB4CDAD5143385B800B6DD15 /* ArtOfRev11-fpo.jpg */,
-				AB4CDAD6143385B800B6DD15 /* ArtOfRev2-fpo.jpg */,
-				AB4CDAD7143385B800B6DD15 /* ArtOfRev3-fpo.jpg */,
-				AB4CDAD8143385B800B6DD15 /* ArtOfRev4-fpo.jpg */,
-				AB4CDAD9143385B800B6DD15 /* ArtOfRev5-fpo.jpg */,
-				AB4CDADA143385B800B6DD15 /* ArtOfRev6-fpo.jpg */,
-				AB4CDADB143385B800B6DD15 /* ArtOfRev7-fpo.jpg */,
-				AB4CDADC143385B800B6DD15 /* ArtOfRev8-fpo.jpg */,
-				AB4CDADD143385B800B6DD15 /* ArtOfRev9-fpo.jpg */,
-			);
-			path = ArtOfRev;
 			sourceTree = "<group>";
 		};
 		AB4CDADE143385B800B6DD15 /* Ayush */ = {
@@ -294,19 +243,6 @@
 			path = MastHd;
 			sourceTree = "<group>";
 		};
-		AB4CDAFE143385B800B6DD15 /* Paki */ = {
-			isa = PBXGroup;
-			children = (
-				AB4CDAFF143385B800B6DD15 /* Paki-fpo.jpg */,
-				AB4CDB00143385B800B6DD15 /* Paki2-fpo.jpg */,
-				AB4CDB01143385B800B6DD15 /* Paki3-fpo.jpg */,
-				AB4CDB02143385B800B6DD15 /* Paki4-fpo.jpg */,
-				AB4CDB03143385B800B6DD15 /* Paki5-fpo.jpg */,
-				AB4CDB04143385B800B6DD15 /* Paki6-fpo.jpg */,
-			);
-			path = Paki;
-			sourceTree = "<group>";
-		};
 		AB4CDB05143385B800B6DD15 /* Tash */ = {
 			isa = PBXGroup;
 			children = (
@@ -347,6 +283,7 @@
 		AB6EEE1A13B158CD00BBFB64 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AB4A63151436BA9000ABF9D8 /* Security.framework */,
 				ABCBDFC0142150E400B39F2C /* QuartzCore.framework */,
 				AB0CE71C13B1615E004E9497 /* MediaPlayer.framework */,
 				AB6EEE1B13B158CD00BBFB64 /* UIKit.framework */,
@@ -441,17 +378,6 @@
 				ABE523C814320D00004E94A4 /* CodeSnippets.rtf in Resources */,
 				ABE523CE1432184D004E94A4 /* PageViewController.xib in Resources */,
 				AB46F7A6143219580049DFEC /* PageViewController.xib in Resources */,
-				AB4CDB08143385B800B6DD15 /* ArtOfRev-fpo.jpg in Resources */,
-				AB4CDB09143385B800B6DD15 /* ArtOfRev10-fpo.jpg in Resources */,
-				AB4CDB0A143385B800B6DD15 /* ArtOfRev11-fpo.jpg in Resources */,
-				AB4CDB0B143385B800B6DD15 /* ArtOfRev2-fpo.jpg in Resources */,
-				AB4CDB0C143385B800B6DD15 /* ArtOfRev3-fpo.jpg in Resources */,
-				AB4CDB0D143385B800B6DD15 /* ArtOfRev4-fpo.jpg in Resources */,
-				AB4CDB0E143385B800B6DD15 /* ArtOfRev5-fpo.jpg in Resources */,
-				AB4CDB0F143385B800B6DD15 /* ArtOfRev6-fpo.jpg in Resources */,
-				AB4CDB10143385B800B6DD15 /* ArtOfRev7-fpo.jpg in Resources */,
-				AB4CDB11143385B800B6DD15 /* ArtOfRev8-fpo.jpg in Resources */,
-				AB4CDB12143385B800B6DD15 /* ArtOfRev9-fpo.jpg in Resources */,
 				AB4CDB13143385B800B6DD15 /* Ayush_h-fpo.jpg in Resources */,
 				AB4CDB14143385B800B6DD15 /* Ayush_h2-fpo.jpg in Resources */,
 				AB4CDB15143385B800B6DD15 /* Ayush_h3-fpo.jpg in Resources */,
@@ -478,12 +404,6 @@
 				AB4CDB2A143385B800B6DD15 /* Manifesto-fpo.jpg in Resources */,
 				AB4CDB2B143385B800B6DD15 /* Manifesto2-fpo.jpg in Resources */,
 				AB4CDB2C143385B800B6DD15 /* MstHd-fpo.jpg in Resources */,
-				AB4CDB2D143385B800B6DD15 /* Paki-fpo.jpg in Resources */,
-				AB4CDB2E143385B800B6DD15 /* Paki2-fpo.jpg in Resources */,
-				AB4CDB2F143385B800B6DD15 /* Paki3-fpo.jpg in Resources */,
-				AB4CDB30143385B800B6DD15 /* Paki4-fpo.jpg in Resources */,
-				AB4CDB31143385B800B6DD15 /* Paki5-fpo.jpg in Resources */,
-				AB4CDB32143385B800B6DD15 /* Paki6-fpo.jpg in Resources */,
 				AB4CDB33143385B800B6DD15 /* Tash-fpo.jpg in Resources */,
 				AB4CDB34143385B800B6DD15 /* Tash2-fpo.jpg in Resources */,
 				AB4CDB36143385F100B6DD15 /* Content.plist in Resources */,
@@ -502,7 +422,7 @@
 				AB6EEE3213B158CE00BBFB64 /* DefragViewController.m in Sources */,
 				ABA350A913C8EB7400A953FC /* Utils.m in Sources */,
 				AB46F7A5143219580049DFEC /* PageViewController.m in Sources */,
-				AB46F7AB14321A4A0049DFEC /* PageData.m in Sources */,
+				ABF506EC1434CE4B00F72E69 /* PageData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -549,7 +469,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -567,7 +487,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -586,7 +506,7 @@
 				GCC_PREFIX_HEADER = "Defrag/Defrag-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Defrag/Defrag-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -601,7 +521,7 @@
 				GCC_PREFIX_HEADER = "Defrag/Defrag-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Defrag/Defrag-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

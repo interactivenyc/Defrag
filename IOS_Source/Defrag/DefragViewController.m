@@ -13,30 +13,27 @@
 #define HORIZ_SWIPE_DRAG_MIN  12
 #define VERT_SWIPE_DRAG_MAX    4
 
+CGPoint startTouchPosition;
+
 @implementation DefragViewController
 
 @synthesize swipeRightRecognizer, swipeLeftRecognizer, swipeUpRecognizer, swipeDownRecognizer;
+@synthesize tapRecognizer;
 
 @synthesize contentDict;
 @synthesize currentPageView;
+//@synthesize navController;
+
+@synthesize tableOfContentsView;
+
 @synthesize moviePlayer;
+//@synthesize startTouchPosition;
 
 //Integers don't need to be dealloc'ed
 @synthesize pageIndex, articleIndex, articleCount, pageCount;
 
 
-- (void)dealloc {
-    [swipeRightRecognizer release];
-    [swipeLeftRecognizer release];
-    [swipeUpRecognizer release];
-    [swipeDownRecognizer release];
 
-    [moviePlayer release];
-    [contentDict release];
-    [currentPageView release];
-
-    [super dealloc];
-}
 
 //*****************************************
 #pragma mark - VIEW DID LOAD
@@ -50,8 +47,9 @@
 
     //NSLog(@"DefragViewController PARSE PLIST");
     contentDict = [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Content" ofType:@"plist"]];
-
-    articleCount = 8;
+    
+    articleCount = [[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] count];
+    
     articleIndex = 0;
     pageIndex = 0;
     [self calculatePageCount];
@@ -59,6 +57,8 @@
     [self setNavigationBarHidden:YES];    
     [self turnPage:1];
     NSLog(@"PAGE IS COVER - INIT");
+    
+    [self createTableOfContents];
 
 }
 
@@ -77,8 +77,9 @@
     
     switch (sender.direction) {
         case UISwipeGestureRecognizerDirectionLeft:
-            // NSLog(@"handleGesture Left");
-            if (articleIndex > (articleCount-1)) return;
+            NSLog(@"handleGesture Left");
+            
+            if (articleIndex >= (articleCount-1)) return;
             
             articleIndex = articleIndex + 1;
             pageIndex = 0;
@@ -162,24 +163,6 @@
 }
 
 
-- (void)logPageInfo {
-    //NSLog(@"Title: %@ Page: %i", [[[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:articleIndex] objectForKey:@"Title"], pageIndex);
-    
-    NSLog(@"logPageInfo");
-    NSLog(@"    mediaType:, %@", [currentPageView getMediaType]);
-    NSLog(@"    mediaPath:, %@", [currentPageView getMediaPath]);
-    
-}
-
-
-- (NSDictionary *)getMediaItem {
-    NSLog(@"getMediaItem: ");
-    //NSLog(@"    articleIndex: %i pageIndex: %i", articleIndex, pageIndex);
-    
-    return [[[[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:articleIndex] objectForKey:@"Media"] objectAtIndex:pageIndex];
-}
-
-
 
 
 
@@ -199,7 +182,10 @@
     
     CATransition *transition = [CATransition animation];
     [transition setType:kCATransitionPush];
-    
+    CALayer *layer;
+    layer = nextController.view.layer;
+    [transition setDuration:0.2f];
+
     
     switch (whichDirection)
     {
@@ -220,14 +206,9 @@
             
     }
     
-    [transition setDuration:0.2f];
-    
-    CALayer *layer;
-    layer = nextController.view.layer;
-    [layer addAnimation:transition forKey:@"Transition"];
+    [layer addAnimation:transition forKey:@"Transition"];    
     
     [self pushViewController:nextController animated:NO];
-    
     
     [nextView release];
     [nextImage release];
@@ -259,6 +240,9 @@
     [self.moviePlayer setContentURL:fileURL];
     [self.moviePlayer play];
 }
+
+
+
 
 
 -(void)playerPlaybackDidFinish:(NSNotification *)notification
@@ -302,11 +286,150 @@
     swipeDownRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
     swipeDownRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
     [self.view addGestureRecognizer:swipeDownRecognizer];
+    
+    tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    [self.view addGestureRecognizer:tapRecognizer];
 }
 
 
 
+//*****************************************
+#pragma mark - TOUCH GESTURE HANDLING
+//*****************************************
 
+
+- (void)handleTap:(UITapGestureRecognizer *)sender {
+    NSLog(@"handleTap");
+    
+    //navController = [[PageNavController alloc] init];
+    //[self pushViewController:navController animated:YES];
+    
+    [self displayTableOfContents];
+
+}
+
+
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    /*
+    NSLog(@"touchesBegan");
+    
+    UITouch *touch = [touches anyObject];
+    startTouchPosition = [touch locationInView:self.view];
+    NSLog(@"CGPoint: %@", NSStringFromCGPoint(startTouchPosition));
+     */
+    
+    
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    /*
+    NSLog(@"touchesEnded");
+    
+    UITouch *touch = [touches anyObject];
+    CGPoint currentTouchPosition = [touch locationInView:self.view];
+    NSLog(@"CGPoint: %@", NSStringFromCGPoint(currentTouchPosition));
+    
+    startTouchPosition = CGPointZero;
+    
+    for (UITouch *touch in touches) {
+        if (touch.tapCount >= 2) {
+            NSLog(@"A DOUBLE TAP OCCURRED");
+            
+        }
+    }
+     */
+    
+}
+
+
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    /*
+    UITouch *touch = [touches anyObject];
+    CGPoint currentTouchPosition = [touch locationInView:self.view];
+    NSLog(@"CGPoint: %@", NSStringFromCGPoint(currentTouchPosition));
+    */
+    
+    /*
+    // To be a swipe, direction of touch must be horizontal and long enough.
+    if (fabsf(startTouchPosition.x - currentTouchPosition.x) >= HORIZ_SWIPE_DRAG_MIN &&
+        fabsf(startTouchPosition.y - currentTouchPosition.y) <= VERT_SWIPE_DRAG_MAX)
+    {
+        // It appears to be a swipe.
+        if (startTouchPosition.x < currentTouchPosition.x)
+            [self myProcessRightSwipe:touches withEvent:event];
+        else
+            [self myProcessLeftSwipe:touches withEvent:event];
+    }
+     */
+    
+    //[touch release];
+}
+
+
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    NSLog(@"touchesCancelled");
+          
+    startTouchPosition = CGPointZero;
+}
+
+
+
+//*****************************************
+#pragma mark - TABLE OF CONTENTS
+//*****************************************
+
+
+-(void)createTableOfContents{
+    tableOfContentsView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0, 250.0f, 768.0f)];
+    tableOfContentsView.backgroundColor = [UIColor orangeColor];
+       
+    //[self.view insertSubview:tableOfContentsView atIndex:0];
+}
+
+
+- (void)displayTableOfContents
+{
+    
+    CATransition *transition = [CATransition animation];
+    [transition setType:kCATransitionPush];
+    CALayer *layer;
+    layer = tableOfContentsView.layer;
+    [transition setDuration:0.2f];
+    [transition setSubtype:kCATransitionFromLeft];    
+    [layer addAnimation:transition forKey:@"Transition"];  
+    
+    [self.view addSubview:tableOfContentsView];
+    [UIView commitAnimations];
+    
+}
+
+//*****************************************
+#pragma mark - UTILITIES
+//*****************************************
+
+
+
+- (void)logPageInfo {
+    //NSLog(@"Title: %@ Page: %i", [[[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:articleIndex] objectForKey:@"Title"], pageIndex);
+    
+    NSLog(@"logPageInfo");
+    NSLog(@"    mediaType:, %@", [currentPageView getMediaType]);
+    NSLog(@"    mediaPath:, %@", [currentPageView getMediaPath]);
+    
+}
+
+
+- (NSDictionary *)getMediaItem {
+    NSLog(@"getMediaItem: ");
+    //NSLog(@"    articleIndex: %i pageIndex: %i", articleIndex, pageIndex);
+    
+    return [[[[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:articleIndex] objectForKey:@"Media"] objectAtIndex:pageIndex];
+}
 
 
 
@@ -314,7 +437,18 @@
 #pragma mark - MEMORY CLEANUP
 //*****************************************
 
-
+- (void)dealloc {
+    [swipeRightRecognizer release];
+    [swipeLeftRecognizer release];
+    [swipeUpRecognizer release];
+    [swipeDownRecognizer release];
+    
+    [moviePlayer release];
+    [contentDict release];
+    [currentPageView release];
+    
+    [super dealloc];
+}
 
 - (void)viewDidUnload {
     [super viewDidUnload];

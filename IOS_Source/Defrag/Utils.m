@@ -39,7 +39,7 @@
     {
         result = [result stringByAppendingString:first];
         va_start(alist, first);
-        while (eachArg = va_arg(alist, id)) 
+        while (eachArg == va_arg(alist, id)) 
 			result = [result stringByAppendingString:eachArg];
         va_end(alist);
     }
