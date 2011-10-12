@@ -2,29 +2,23 @@
 //  PageViewController.h
 //  Defrag
 //
-//  Created by Steve Warren on 9/27/11.
+//  Created by Steve Warren on 10/11/11.
 //  Copyright (c) 2011 Funny Garbage. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import <MediaPlayer/MediaPlayer.h>
 #import "PageData.h"
+
 
 @interface PageViewController : UIViewController
 {
-
     PageData *pageData;
-    
 }
-
-//*********************************************************
-#pragma mark - INTERNAL PROPERTIES AND METHODS
-//*********************************************************
 
 @property (nonatomic, retain) PageData *pageData;
 
--(void)setPageDataWithDictionary:(NSDictionary *)pageDict;
--(NSString *)getMediaType;
--(NSString *)getMediaPath;
+-(void)initWithPageData:(PageData *)data;
+-(void)displayPage;
 
 @end
-

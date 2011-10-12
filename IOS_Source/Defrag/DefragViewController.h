@@ -11,8 +11,17 @@
 #import <QuartzCore/CoreAnimation.h>
 #import "PageViewController.h"
 
+#import "DefragAppDelegate.h"
+#import "ImagePVC.h"
+#import "MoviePVC.h"
+
 @interface DefragViewController : UINavigationController <UIGestureRecognizerDelegate>
 {	    
+    int articleCount;
+    int articleIndex;
+    int pageCount;
+    int pageIndex;
+    
 	UISwipeGestureRecognizer *swipeRightRecognizer;
 	UISwipeGestureRecognizer *swipeLeftRecognizer;   
 	UISwipeGestureRecognizer *swipeUpRecognizer;
@@ -21,28 +30,29 @@
     UITapGestureRecognizer *tapRecognizer;
     
     NSDictionary *contentDict;
+    
     PageViewController *currentPageView;
     
+    UIPopoverController *popoverViewController;
+    UIViewController *tableOfContentsViewController;
     UIView *tableOfContentsView;
-    
-    
-    int articleCount;
-    int articleIndex;
-    int pageCount;
-    int pageIndex;
-
-    MPMoviePlayerController *moviePlayer;
-    
-    //CGPoint startTouchPosition;
-    
     
 }
 
 
 //*********************************************************
-	#pragma mark - INTERNAL PROPERTIES
+#pragma mark - INTERNAL PROPERTIES
 //*********************************************************
 
+//NAVIGATION PROPERTIES
+@property int articleCount;
+@property int articleIndex;
+@property int pageIndex;
+@property int pageCount;
+
+
+
+//GESTURE RECOGNIZERS
 @property (nonatomic, retain) UISwipeGestureRecognizer *swipeRightRecognizer;
 @property (nonatomic, retain) UISwipeGestureRecognizer *swipeLeftRecognizer;
 @property (nonatomic, retain) UISwipeGestureRecognizer *swipeUpRecognizer;
@@ -50,41 +60,40 @@
 
 @property (nonatomic, retain) UITapGestureRecognizer *tapRecognizer;
 
+//CONTENT DATA
 @property (nonatomic, retain) NSDictionary *contentDict;
 
+//PAGE VIEW CONTROLLER
 @property (nonatomic, retain) PageViewController *currentPageView;
 
+//TABLE OF CONTENTS POPOVER
+@property (nonatomic, retain) UIPopoverController *popoverViewController;
+@property (nonatomic, retain) UIViewController *tableOfContentsViewController;
 @property (nonatomic, retain) UIView *tableOfContentsView;
 
-@property int articleCount;
-@property int articleIndex;
-@property int pageIndex;
-@property int pageCount;
 
-//@property CGPoint startTouchPosition;
-
-@property (nonatomic, retain) MPMoviePlayerController *moviePlayer;
 
 //*********************************************************
 #pragma mark - INTERNAL METHODS
 //*********************************************************
 
--(void)setupGestureRecognizer;
 
--(void)logPageInfo;
--(NSDictionary *)getMediaItem;
-
+//GESTURE SUPPORT
+-(void)setupGestureRecognizers;
 -(void)handleGesture: (UIGestureRecognizer *)sender;
 -(void)handleTap: (UITapGestureRecognizer *)sender;
 
+//ON SWIPE - PAGE NAVIGATION
+-(void)createPage;
+-(void)displayPage:(int)direction;
 
+//ON TAP - POPOVER HANDLING
 -(void)createTableOfContents;
 -(void)displayTableOfContents;
 
+//UTILITIES
+-(void)logPageInfo;
+-(NSDictionary *)getMediaItem;
 -(void)calculatePageCount;
--(void)turnPage: (char)whichDirection;
--(void)displayJPG:(int)whichDirection;
--(void)displayMOV:(int)whichDirection;
--(void)playerPlaybackDidFinish:(NSNotification *)notification;
 
 @end

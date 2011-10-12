@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MediaPlayer/MediaPlayer.h>
+#import <QuartzCore/CoreAnimation.h>
 
 @class DefragViewController;
 

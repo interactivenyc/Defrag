@@ -1,17 +1,15 @@
 //
-//  PageViewController.m
+//  ImagePVC.m
 //  Defrag
 //
-//  Created by Steve Warren on 10/11/11.
+//  Created by Steve Warren on 10/9/11.
 //  Copyright (c) 2011 Funny Garbage. All rights reserved.
 //
 
-#import "PageViewController.h"
+#import "ImagePVC.h"
 
-@implementation PageViewController
 
-@synthesize pageData;
-
+@implementation ImagePVC
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -23,18 +21,26 @@
 }
 
 
--(void)initWithPageData:(PageData *)data
-{
-    NSLog(@"PageViewController initWithPageData");
-    pageData = data;
-    
-}
-
 -(void)displayPage
 {
-    NSLog(@"PVC displayPage");
+    [super displayPage];
+     NSLog(@"ImagePVC displayPage");
     //THIS METHOD MUST BE OVERRIDEN IN IMPLEMENTATION CLASSES
+    
+    NSLog(@"MEDIA TYPE: JPG");
+    
+    UIImage *myImage;
+    UIView *myView;
+    
+    myImage = [UIImage imageNamed:[pageData getMediaPath]];
+    myView = [[UIImageView alloc] initWithImage:myImage];
+    self.view = myView;
+    
+    [myImage release];
+    [myView release];
 }
+
+
 
 
 - (void)didReceiveMemoryWarning
@@ -47,27 +53,27 @@
 
 #pragma mark - View lifecycle
 
-/*
+
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
 {
+    NSLog(@"ImagePVC loadView");
 }
-*/
 
-/*
+
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"ImagePVC viewDidLoad");
+    
 }
-*/
+
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    
-    NSLog(@"PVC viewDidUnload");
-    
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }

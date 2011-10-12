@@ -10,13 +10,17 @@
 
 @interface PageData : NSObject
 {
-    NSDictionary *data;
+    NSDictionary *pageDictionary;
 }
+
+@property (nonatomic,retain) NSDictionary *pageDictionary;
+
+-(NSString *)getMediaType;
+-(NSString *)getMediaPath;
 
 //*********************************************************
 #pragma mark - INTERNAL PROPERTIES AND METHODS
 //*********************************************************
 
-@property (nonatomic, retain) NSDictionary *data;
 
 @end

@@ -7,6 +7,7 @@
 
 #import "DefragAppDelegate.h"
 #import "DefragViewController.h"
+#import "PageViewController.h"
 
 @implementation DefragAppDelegate
 

@@ -8,8 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		AB0CE71D13B1615E004E9497 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB0CE71C13B1615E004E9497 /* MediaPlayer.framework */; };
-		AB46F7A5143219580049DFEC /* PageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB46F7A3143219580049DFEC /* PageViewController.m */; };
-		AB46F7A6143219580049DFEC /* PageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB46F7A4143219580049DFEC /* PageViewController.xib */; };
+		AB44F399144542F1004F3D37 /* ImagePVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AB44F396144542F1004F3D37 /* ImagePVC.m */; };
+		AB44F39A144542F1004F3D37 /* MoviePVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AB44F398144542F1004F3D37 /* MoviePVC.m */; };
+		AB44F39D144542FB004F3D37 /* PageData.m in Sources */ = {isa = PBXBuildFile; fileRef = AB44F39C144542FB004F3D37 /* PageData.m */; };
 		AB4A63161436BA9000ABF9D8 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB4A63151436BA9000ABF9D8 /* Security.framework */; };
 		AB4CDB13143385B800B6DD15 /* Ayush_h-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDADF143385B800B6DD15 /* Ayush_h-fpo.jpg */; };
 		AB4CDB14143385B800B6DD15 /* Ayush_h2-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB4CDAE0143385B800B6DD15 /* Ayush_h2-fpo.jpg */; };
@@ -48,19 +49,20 @@
 		AB6EEE2C13B158CD00BBFB64 /* DefragAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6EEE2B13B158CD00BBFB64 /* DefragAppDelegate.m */; };
 		AB6EEE2F13B158CD00BBFB64 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB6EEE2D13B158CD00BBFB64 /* MainWindow.xib */; };
 		AB6EEE3213B158CE00BBFB64 /* DefragViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6EEE3113B158CE00BBFB64 /* DefragViewController.m */; };
-		AB6EEE3513B158CE00BBFB64 /* DefragViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB6EEE3313B158CE00BBFB64 /* DefragViewController.xib */; };
 		ABA350A913C8EB7400A953FC /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = ABA350A813C8EB7400A953FC /* Utils.m */; };
+		ABAB904F1444A53800345C35 /* PageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABAB904E1444A53800345C35 /* PageViewController.m */; };
 		ABCBDFC0142150E400B39F2D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABCBDFC0142150E400B39F2C /* QuartzCore.framework */; };
 		ABE523C814320D00004E94A4 /* CodeSnippets.rtf in Resources */ = {isa = PBXBuildFile; fileRef = ABE523C714320CFF004E94A4 /* CodeSnippets.rtf */; };
-		ABE523CE1432184D004E94A4 /* PageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABE523CC1432184D004E94A4 /* PageViewController.xib */; };
-		ABF506EC1434CE4B00F72E69 /* PageData.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF506EB1434CE4B00F72E69 /* PageData.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AB0CE71C13B1615E004E9497 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		AB46F7A2143219580049DFEC /* PageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageViewController.h; sourceTree = "<group>"; };
-		AB46F7A3143219580049DFEC /* PageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageViewController.m; sourceTree = "<group>"; };
-		AB46F7A4143219580049DFEC /* PageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PageViewController.xib; sourceTree = "<group>"; };
+		AB44F395144542F1004F3D37 /* ImagePVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePVC.h; sourceTree = "<group>"; };
+		AB44F396144542F1004F3D37 /* ImagePVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePVC.m; sourceTree = "<group>"; };
+		AB44F397144542F1004F3D37 /* MoviePVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoviePVC.h; sourceTree = "<group>"; };
+		AB44F398144542F1004F3D37 /* MoviePVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoviePVC.m; sourceTree = "<group>"; };
+		AB44F39B144542FB004F3D37 /* PageData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PageData.h; path = Defrag/PageData.h; sourceTree = "<group>"; };
+		AB44F39C144542FB004F3D37 /* PageData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PageData.m; path = Defrag/PageData.m; sourceTree = "<group>"; };
 		AB4A63151436BA9000ABF9D8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		AB4CDADF143385B800B6DD15 /* Ayush_h-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Ayush_h-fpo.jpg"; sourceTree = "<group>"; };
 		AB4CDAE0143385B800B6DD15 /* Ayush_h2-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Ayush_h2-fpo.jpg"; sourceTree = "<group>"; };
@@ -104,14 +106,12 @@
 		AB6EEE2E13B158CD00BBFB64 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		AB6EEE3013B158CE00BBFB64 /* DefragViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefragViewController.h; sourceTree = "<group>"; };
 		AB6EEE3113B158CE00BBFB64 /* DefragViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DefragViewController.m; sourceTree = "<group>"; };
-		AB6EEE3413B158CE00BBFB64 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DefragViewController.xib; sourceTree = "<group>"; };
 		ABA350A713C8EB7400A953FC /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		ABA350A813C8EB7400A953FC /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		ABAB904D1444A53800345C35 /* PageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageViewController.h; sourceTree = "<group>"; };
+		ABAB904E1444A53800345C35 /* PageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageViewController.m; sourceTree = "<group>"; };
 		ABCBDFC0142150E400B39F2C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		ABE523C714320CFF004E94A4 /* CodeSnippets.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = CodeSnippets.rtf; sourceTree = "<group>"; };
-		ABE523CC1432184D004E94A4 /* PageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PageViewController.xib; sourceTree = "<group>"; };
-		ABF506EA1434CE4B00F72E69 /* PageData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PageData.h; path = Defrag/PageData.h; sourceTree = "<group>"; };
-		ABF506EB1434CE4B00F72E69 /* PageData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PageData.m; path = Defrag/PageData.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,8 +136,12 @@
 			children = (
 				AB6EEE3013B158CE00BBFB64 /* DefragViewController.h */,
 				AB6EEE3113B158CE00BBFB64 /* DefragViewController.m */,
-				AB46F7A2143219580049DFEC /* PageViewController.h */,
-				AB46F7A3143219580049DFEC /* PageViewController.m */,
+				ABAB904D1444A53800345C35 /* PageViewController.h */,
+				ABAB904E1444A53800345C35 /* PageViewController.m */,
+				AB44F395144542F1004F3D37 /* ImagePVC.h */,
+				AB44F396144542F1004F3D37 /* ImagePVC.m */,
+				AB44F397144542F1004F3D37 /* MoviePVC.h */,
+				AB44F398144542F1004F3D37 /* MoviePVC.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -145,8 +149,8 @@
 		AB46F7AC14321A4F0049DFEC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				ABF506EA1434CE4B00F72E69 /* PageData.h */,
-				ABF506EB1434CE4B00F72E69 /* PageData.m */,
+				AB44F39B144542FB004F3D37 /* PageData.h */,
+				AB44F39C144542FB004F3D37 /* PageData.m */,
 			);
 			name = Model;
 			path = ..;
@@ -255,10 +259,7 @@
 		AB4FC3CB14195331005C48DD /* XIB files */ = {
 			isa = PBXGroup;
 			children = (
-				ABE523CC1432184D004E94A4 /* PageViewController.xib */,
 				AB6EEE2D13B158CD00BBFB64 /* MainWindow.xib */,
-				AB6EEE3313B158CE00BBFB64 /* DefragViewController.xib */,
-				AB46F7A4143219580049DFEC /* PageViewController.xib */,
 			);
 			name = "XIB files";
 			sourceTree = "<group>";
@@ -374,10 +375,7 @@
 			files = (
 				AB6EEE2613B158CD00BBFB64 /* InfoPlist.strings in Resources */,
 				AB6EEE2F13B158CD00BBFB64 /* MainWindow.xib in Resources */,
-				AB6EEE3513B158CE00BBFB64 /* DefragViewController.xib in Resources */,
 				ABE523C814320D00004E94A4 /* CodeSnippets.rtf in Resources */,
-				ABE523CE1432184D004E94A4 /* PageViewController.xib in Resources */,
-				AB46F7A6143219580049DFEC /* PageViewController.xib in Resources */,
 				AB4CDB13143385B800B6DD15 /* Ayush_h-fpo.jpg in Resources */,
 				AB4CDB14143385B800B6DD15 /* Ayush_h2-fpo.jpg in Resources */,
 				AB4CDB15143385B800B6DD15 /* Ayush_h3-fpo.jpg in Resources */,
@@ -421,8 +419,10 @@
 				AB6EEE2C13B158CD00BBFB64 /* DefragAppDelegate.m in Sources */,
 				AB6EEE3213B158CE00BBFB64 /* DefragViewController.m in Sources */,
 				ABA350A913C8EB7400A953FC /* Utils.m in Sources */,
-				AB46F7A5143219580049DFEC /* PageViewController.m in Sources */,
-				ABF506EC1434CE4B00F72E69 /* PageData.m in Sources */,
+				ABAB904F1444A53800345C35 /* PageViewController.m in Sources */,
+				AB44F399144542F1004F3D37 /* ImagePVC.m in Sources */,
+				AB44F39A144542F1004F3D37 /* MoviePVC.m in Sources */,
+				AB44F39D144542FB004F3D37 /* PageData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,14 +445,6 @@
 			name = MainWindow.xib;
 			sourceTree = "<group>";
 		};
-		AB6EEE3313B158CE00BBFB64 /* DefragViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AB6EEE3413B158CE00BBFB64 /* en */,
-			);
-			name = DefragViewController.xib;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -466,7 +458,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -484,7 +476,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;

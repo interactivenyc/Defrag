@@ -10,7 +10,18 @@
 
 @implementation PageData
 
-@synthesize data;
+@synthesize pageDictionary;
+
+-(NSString *)getMediaType
+{
+    return [pageDictionary objectForKey:@"Type"];
+}
+
+-(NSString *)getMediaPath
+{
+    return [pageDictionary objectForKey:@"Media"];
+}
+    
 
 
 @end
