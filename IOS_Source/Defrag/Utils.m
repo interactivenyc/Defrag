@@ -30,21 +30,6 @@
 
 
 
-+ (NSString *) append:(id) first, ...
-{
-    NSString * result = @"";
-    id eachArg;
-    va_list alist;
-    if(first)
-    {
-        result = [result stringByAppendingString:first];
-        va_start(alist, first);
-        while (eachArg == va_arg(alist, id)) 
-			result = [result stringByAppendingString:eachArg];
-        va_end(alist);
-    }
-    return result;
-}
 
 
 

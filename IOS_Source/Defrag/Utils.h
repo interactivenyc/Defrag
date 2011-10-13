@@ -16,8 +16,6 @@
 
 + (void)test;
 
-+ (NSString *) append:(id) first, ...;
-
 + (void)log;
 
 @end

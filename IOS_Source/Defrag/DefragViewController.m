@@ -12,11 +12,13 @@
 
 //Integers don't need to be dealloc'ed
 @synthesize pageIndex, articleIndex, articleCount, pageCount;
+@synthesize direction;
 
 @synthesize swipeRightRecognizer, swipeLeftRecognizer, swipeUpRecognizer, swipeDownRecognizer;
 @synthesize tapRecognizer;
 
 @synthesize currentPageView;
+@synthesize moviePlayerViewController;
 @synthesize contentDict;
 
 @synthesize popoverViewController;
@@ -54,7 +56,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"DefragViewController viewDidLoad");
-    NSLog(@"PAGE IS COVER - INIT");
+    NSLog(@"DVC PAGE IS COVER - INIT");
     
     //NSLog(@"DefragViewController PARSE PLIST");
     contentDict = [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Content" ofType:@"plist"]];
@@ -63,6 +65,7 @@
     
     articleIndex = 0;
     pageIndex = 0;
+    direction = 1;
     
     [self calculatePageCount];
     [self setupGestureRecognizers];
@@ -70,7 +73,7 @@
     [self setNavigationBarHidden:YES];    
     
     [self createPage];
-    [self displayPage:1];
+    //[self displayPage];
     
     //[self createTableOfContents];
     
@@ -112,12 +115,12 @@
     NSLog(@"handleGesture");
     NSLog(@"***************************");
     
-    char direction;
     
+    //articleIndex and pageIndex get set in this routine, then the new page is created
     
     switch (sender.direction) {
         case UISwipeGestureRecognizerDirectionLeft:
-            NSLog(@"handleGesture Left");
+            NSLog(@"DVC handleGesture Left");
             
             if (articleIndex >= (articleCount-1)) return;
             
@@ -129,7 +132,7 @@
             break;
             
         case UISwipeGestureRecognizerDirectionRight:
-            // NSLog(@"handleGesture Right");
+            NSLog(@"DVC handleGesture Right");
             
             if (articleIndex == 0) return;
             
@@ -141,26 +144,22 @@
             break;
             
         case UISwipeGestureRecognizerDirectionUp:
-            NSLog(@"handleGesture Up");
-            
-            NSLog(@"length: %i", [[[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:articleIndex] count] -1);
-            
+            NSLog(@"DVC handleGesture Up");
             
             if (pageIndex == (pageCount -1))
             {
-                NSLog(@"LAST PAGE");
+                NSLog(@"DVC LAST PAGE");
                 return;
             }else{
                 pageIndex = pageIndex + 1; 
             }
             
-            ;
             direction = 3;
             
             break;
             
         case UISwipeGestureRecognizerDirectionDown:
-            NSLog(@"handleGesture Down");
+            NSLog(@"DVC handleGesture Down");
             
             if (pageIndex == 0) return;
             pageIndex = pageIndex - 1;
@@ -172,21 +171,15 @@
             break;
     }
     
-    NSLog(@"handleGesture sets articleIndex: %i pageIndex: %i", articleIndex, pageIndex);
-    
     [self createPage];
-    [self displayPage:direction];
+
 }
 
 
-
-
-- (void)handleTap:(UITapGestureRecognizer *)sender {
-    NSLog(@"handleTap");
-    
-    
+- (void)handleTap:(UITapGestureRecognizer *)sender 
+{
+    NSLog(@"DVC handleTap");
     [self displayTableOfContents];
-    
 }
 
 
@@ -199,66 +192,50 @@
 
 -(void)createPage
 {
-    NSLog(@"createPage");
-    
-    //NSDictionary *pageDictionary = [self getMediaItem];
-    
-   // NSLog(@"initWithDictionary: %@", pageDictionary);
-    
-    
-    //*****************************************
-    #pragma mark - THIS IS WHERE WE'RE CURRENTLY BREAKING
-    //*****************************************
-    
-    //PageData *pageData = [[PageData alloc] init ];
-                           
-                           //]initWithDictionary:[self getMediaItem]];
+    NSLog(@"DVC createPage");
     
     PageData *pageData = [[PageData alloc] init ];
     pageData.pageDictionary = [self getMediaItem];
-    
-                           
                            
     NSString *mediaType = [pageData getMediaType];
-    NSLog(@"mediaType: %@", mediaType);
+    NSLog(@"DVC mediaType: %@", mediaType);
     
     if ([mediaType isEqualToString:@"jpg"]){
         currentPageView = [[ImagePVC alloc] init ];
     }else if ([mediaType isEqualToString:@"mov"]){
         currentPageView = [[MoviePVC alloc] init ];
-        
     }
-    
-    NSLog(@"page allocated: %@", currentPageView);
     
     [currentPageView initWithPageData:pageData];
     [currentPageView displayPage];
     
-    
-    /*
-     if ([[currentPageView getMediaType] isEqualToString:@"jpg"]){
-     [self displayJPG:whichDirection];
-     
-     } else if ([[currentPageView getMediaType] isEqualToString:@"mov"]){
-     [self displayMOV:whichDirection];
-     }
-     */
-    
+    [self displayPage];
     
     [pageData release];
     [mediaType release];
-    //[pageDictionary release];
+}
+
+-(void)playerPlaybackDidFinish:(NSNotification *)notification
+{
+    NSLog(@"DVC playerPlaybackDidFinish");
     
+    [[NSNotificationCenter defaultCenter]
+     removeObserver: self
+     name: MPMoviePlayerPlaybackDidFinishNotification
+     object: moviePlayerViewController];
+    
+    
+    // Release the movie instance created in playMovieAtURL:
+    [moviePlayerViewController release];
+    moviePlayerViewController = nil;
     
 }
 
 
 
-
-
--(void)displayPage:(int)direction
+-(void)displayPage
 {
-    NSLog(@"displayPage");
+    NSLog(@"DVC displayPage");
     
     CATransition *transition = [CATransition animation];
     [transition setType:kCATransitionPush];
@@ -282,12 +259,13 @@
             break;
         default:
             [transition setSubtype:kCATransitionFromRight];
-            
     }
     
     [layer addAnimation:transition forKey:@"Transition"];  
     
     //handle cleanup of page controllers
+    NSLog(@"DVC pushViewController [STOP PUSHING VIEWCONTROLLERS - MANAGE WITH AN ARRAY]");
+    
     [self pushViewController:currentPageView animated:NO];
     
 }
@@ -302,7 +280,7 @@
 
 
 -(void)createTableOfContents{
-    NSLog(@"createTableOfContents");
+    NSLog(@"DVC createTableOfContents");
     tableOfContentsView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0, 250.0f, 250.0f)];
     tableOfContentsView.backgroundColor = [UIColor orangeColor];
     
@@ -315,7 +293,7 @@
 
 
 - (void)displayTableOfContents{
-    NSLog(@"displayTableOfContents");
+    NSLog(@"DVC displayTableOfContents");
     
     
     if (popoverViewController != nil) {
@@ -338,9 +316,9 @@
 - (void)logPageInfo {
     //NSLog(@"Title: %@ Page: %i", [[[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:articleIndex] objectForKey:@"Title"], pageIndex);
     
-    NSLog(@"logPageInfo");
-    NSLog(@"    mediaType:, %@", [currentPageView.pageData getMediaType]);
-    NSLog(@"    mediaPath:, %@", [currentPageView.pageData getMediaPath]);
+    NSLog(@"DVC logPageInfo");
+    NSLog(@"DVC     mediaType:, %@", [currentPageView.pageData getMediaType]);
+    NSLog(@"DVC     mediaPath:, %@", [currentPageView.pageData getMediaPath]);
     
 }
 
@@ -348,12 +326,12 @@
 -(void)calculatePageCount
 {
     pageCount = [[[[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:articleIndex] objectForKey:@"Media"] count];
-    NSLog(@"pageCount: %i", pageCount);
+    NSLog(@"DVC pageCount: %i", pageCount);
 }
 
 
 - (NSDictionary *)getMediaItem {
-    NSLog(@"getMediaItem: ");
+    NSLog(@"DVC getMediaItem: ");
     //NSLog(@"    articleIndex: %i pageIndex: %i", articleIndex, pageIndex);
     //NSLog(@"debug:  %@", [[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:articleIndex]);
     
@@ -382,7 +360,7 @@
 }
 
 - (void)didReceiveMemoryWarning {
-    NSLog(@"didReceiveMemoryWarning");
+    NSLog(@"DVC didReceiveMemoryWarning");
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     

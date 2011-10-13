@@ -25,7 +25,7 @@
 
 -(void)initWithPageData:(PageData *)data
 {
-    NSLog(@"PageViewController initWithPageData");
+    NSLog(@"PVC initWithPageData");
     pageData = data;
     
 }
@@ -47,20 +47,21 @@
 
 #pragma mark - View lifecycle
 
-/*
+
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
 {
+    
 }
-*/
 
-/*
+
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 }
-*/
+
 
 - (void)viewDidUnload
 {

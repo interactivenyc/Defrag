@@ -22,6 +22,8 @@
     int pageCount;
     int pageIndex;
     
+    char direction;
+    
 	UISwipeGestureRecognizer *swipeRightRecognizer;
 	UISwipeGestureRecognizer *swipeLeftRecognizer;   
 	UISwipeGestureRecognizer *swipeUpRecognizer;
@@ -32,6 +34,7 @@
     NSDictionary *contentDict;
     
     PageViewController *currentPageView;
+    MPMoviePlayerViewController *moviePlayerViewController;
     
     UIPopoverController *popoverViewController;
     UIViewController *tableOfContentsViewController;
@@ -50,6 +53,7 @@
 @property int pageIndex;
 @property int pageCount;
 
+@property char direction;
 
 
 //GESTURE RECOGNIZERS
@@ -65,6 +69,9 @@
 
 //PAGE VIEW CONTROLLER
 @property (nonatomic, retain) PageViewController *currentPageView;
+
+//MOVIE PLAYER VIEW CONTROLLER
+@property (nonatomic, retain) MPMoviePlayerViewController *moviePlayerViewController;
 
 //TABLE OF CONTENTS POPOVER
 @property (nonatomic, retain) UIPopoverController *popoverViewController;
@@ -85,7 +92,8 @@
 
 //ON SWIPE - PAGE NAVIGATION
 -(void)createPage;
--(void)displayPage:(int)direction;
+-(void)displayPage;
+-(void)playerPlaybackDidFinish:(NSNotification *)notification;
 
 //ON TAP - POPOVER HANDLING
 -(void)createTableOfContents;

@@ -27,7 +27,7 @@
      NSLog(@"ImagePVC displayPage");
     //THIS METHOD MUST BE OVERRIDEN IN IMPLEMENTATION CLASSES
     
-    NSLog(@"MEDIA TYPE: JPG");
+    NSLog(@"ImagePVC MEDIA TYPE: JPG");
     
     UIImage *myImage;
     UIView *myView;

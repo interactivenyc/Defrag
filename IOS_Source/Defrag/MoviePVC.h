@@ -10,10 +10,10 @@
 
 @interface MoviePVC : PageViewController
 {
-    MPMoviePlayerController *moviePlayer;
+    MPMoviePlayerViewController *moviePlayerViewController;
 }
 
-@property (nonatomic, retain) MPMoviePlayerController *moviePlayer;
+@property (nonatomic, retain) MPMoviePlayerViewController *moviePlayerViewController;
 
 -(void)displayPage;
 

@@ -10,7 +10,7 @@
 
 @implementation MoviePVC
 
-@synthesize moviePlayer;
+@synthesize moviePlayerViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -25,28 +25,19 @@
 -(void)displayPage
 {
     [super displayPage];
-     NSLog(@"MoviePVC displayPage");
+    NSLog(@"MoviePVC displayPage");
     //THIS METHOD MUST BE OVERRIDEN IN IMPLEMENTATION CLASSES
-    NSLog(@"MEDIA TYPE: MOV");
-    NSLog(@"createMoviePlayer");
-    
-    MPMoviePlayerController *player = [[MPMoviePlayerController alloc] init];
-    [player.view setFrame: self.view.bounds];  // player's frame must match parent's
-    [self.view addSubview: player.view];
-    
-    self.moviePlayer = player;
-    [player release];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerPlaybackDidFinish:) name:MPMoviePlayerPlaybackDidFinishNotification object:self.moviePlayer];
-    
-    NSLog(@"initAndPlayMovie: %@", [pageData getMediaPath]);
+    NSLog(@"MoviePVC MEDIA TYPE: MOV");
     
     NSString *rootPath = [[NSBundle mainBundle] resourcePath];
     NSString *filePath = [rootPath stringByAppendingPathComponent: [pageData getMediaPath]];
     NSURL *fileURL = [NSURL fileURLWithPath:filePath isDirectory:NO];
     
-    [self.moviePlayer setContentURL:fileURL];
-    [self.moviePlayer play];
+    moviePlayerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:fileURL];
+    
+    [self presentMoviePlayerViewControllerAnimated:moviePlayerViewController];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerPlaybackDidFinish:) name:MPMoviePlayerPlaybackDidFinishNotification object:self.moviePlayerViewController];
     
     [rootPath release];
     [filePath release];
@@ -56,17 +47,17 @@
 
 -(void)playerPlaybackDidFinish:(NSNotification *)notification
 {
-    NSLog(@"playerPlaybackDidFinish");
-    
+    NSLog(@"MoviePVC playerPlaybackDidFinish");
+
     [[NSNotificationCenter defaultCenter]
-     removeObserver: self
-     name: MPMoviePlayerPlaybackDidFinishNotification
-     object: moviePlayer];
+    removeObserver: self
+    name: MPMoviePlayerPlaybackDidFinishNotification
+    object: moviePlayerViewController];
     
-    [moviePlayer.view removeFromSuperview];
+    [moviePlayerViewController.view removeFromSuperview];
     
     // Release the movie instance created in playMovieAtURL:
-    [moviePlayer release];
+    [moviePlayerViewController release];
     
 }
 
@@ -87,6 +78,7 @@
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
 {
+    [super loadView];
     NSLog(@"MoviePVC loadView");
 }
 
@@ -103,7 +95,7 @@
 {
     [super viewDidUnload];
     
-    [moviePlayer dealloc];
+    [moviePlayerViewController dealloc];
         
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
