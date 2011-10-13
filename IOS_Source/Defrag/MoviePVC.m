@@ -11,7 +11,7 @@
 @implementation MoviePVC
 
 @synthesize moviePlayerViewController;
-@synthesize mpc;
+//@synthesize mpc;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -23,18 +23,23 @@
 }
 
 
+- (void)dealloc {
+    [moviePlayerViewController dealloc];    
+    [super dealloc];
+}
+
+
 -(void)displayPage
 {
     [super displayPage];
     NSLog(@"MoviePVC displayPage");
-    //THIS METHOD MUST BE OVERRIDEN IN IMPLEMENTATION CLASSES
     NSLog(@"MoviePVC MEDIA TYPE: MOV");
     
     NSString *rootPath = [[NSBundle mainBundle] resourcePath];
     NSString *filePath = [rootPath stringByAppendingPathComponent: [pageData getMediaPath]];
     NSURL *fileURL = [NSURL fileURLWithPath:filePath isDirectory:NO];
     
-    self.moviePlayerViewController = [[[MPMoviePlayerViewController alloc] initWithContentURL:fileURL] retain];
+    self.moviePlayerViewController = [[[MPMoviePlayerViewController alloc] initWithContentURL:fileURL] autorelease];
     
     [self.view setBackgroundColor:[UIColor redColor]];
     
@@ -89,7 +94,7 @@
 - (void)loadView
 {
     [super loadView];
-    NSLog(@"MoviePVC loadView");
+    //NSLog(@"MoviePVC loadView");
 }
 
 
@@ -105,7 +110,7 @@
 {
     [super viewDidUnload];
     
-    [mpc dealloc];
+    //[mpc dealloc];
         
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
