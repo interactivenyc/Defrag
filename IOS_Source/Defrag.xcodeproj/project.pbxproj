@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AB0CE71D13B1615E004E9497 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB0CE71C13B1615E004E9497 /* MediaPlayer.framework */; };
+		AB2626F21446AC0A001C53E1 /* DeFragCvr2 H.mov in Resources */ = {isa = PBXBuildFile; fileRef = AB2626F11446AC0A001C53E1 /* DeFragCvr2 H.mov */; };
 		AB44F399144542F1004F3D37 /* ImagePVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AB44F396144542F1004F3D37 /* ImagePVC.m */; };
 		AB44F39A144542F1004F3D37 /* MoviePVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AB44F398144542F1004F3D37 /* MoviePVC.m */; };
 		AB44F39D144542FB004F3D37 /* PageData.m in Sources */ = {isa = PBXBuildFile; fileRef = AB44F39C144542FB004F3D37 /* PageData.m */; };
@@ -57,6 +58,7 @@
 
 /* Begin PBXFileReference section */
 		AB0CE71C13B1615E004E9497 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		AB2626F11446AC0A001C53E1 /* DeFragCvr2 H.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "DeFragCvr2 H.mov"; sourceTree = "<group>"; };
 		AB44F395144542F1004F3D37 /* ImagePVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePVC.h; sourceTree = "<group>"; };
 		AB44F396144542F1004F3D37 /* ImagePVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePVC.m; sourceTree = "<group>"; };
 		AB44F397144542F1004F3D37 /* MoviePVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoviePVC.h; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				AB4CDAE8143385B800B6DD15 /* Cover-fpo.jpg */,
+				AB2626F11446AC0A001C53E1 /* DeFragCvr2 H.mov */,
 			);
 			path = Cover;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				AB4CDB33143385B800B6DD15 /* Tash-fpo.jpg in Resources */,
 				AB4CDB34143385B800B6DD15 /* Tash2-fpo.jpg in Resources */,
 				AB4CDB36143385F100B6DD15 /* Content.plist in Resources */,
+				AB2626F21446AC0A001C53E1 /* DeFragCvr2 H.mov in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

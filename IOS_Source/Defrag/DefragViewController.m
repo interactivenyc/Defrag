@@ -206,13 +206,14 @@
         currentPageView = [[MoviePVC alloc] init ];
     }
     
+    [self displayPage];
+
     [currentPageView initWithPageData:pageData];
     [currentPageView displayPage];
     
-    [self displayPage];
     
     [pageData release];
-    [mediaType release];
+    //[mediaType release];
 }
 
 -(void)playerPlaybackDidFinish:(NSNotification *)notification

@@ -11,6 +11,7 @@
 @implementation MoviePVC
 
 @synthesize moviePlayerViewController;
+@synthesize mpc;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,16 +34,27 @@
     NSString *filePath = [rootPath stringByAppendingPathComponent: [pageData getMediaPath]];
     NSURL *fileURL = [NSURL fileURLWithPath:filePath isDirectory:NO];
     
-    moviePlayerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:fileURL];
+    self.moviePlayerViewController = [[[MPMoviePlayerViewController alloc] initWithContentURL:fileURL] retain];
+    
+    [self.view setBackgroundColor:[UIColor redColor]];
+    
+    [[moviePlayerViewController view] setFrame:[self.view bounds]]; // size to fit parent view exactly    
     
     [self presentMoviePlayerViewControllerAnimated:moviePlayerViewController];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerPlaybackDidFinish:) name:MPMoviePlayerPlaybackDidFinishNotification object:self.moviePlayerViewController];
+    moviePlayerViewController.moviePlayer.movieSourceType = MPMovieSourceTypeFile;
+    [moviePlayerViewController.moviePlayer setFullscreen:YES];
+    [moviePlayerViewController.moviePlayer setControlStyle:MPMovieControlStyleFullscreen];
+    [moviePlayerViewController.moviePlayer play];
     
-    [rootPath release];
-    [filePath release];
-    [fileURL release];
-
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerPlaybackDidFinish:) name:MPMoviePlayerPlaybackDidFinishNotification object:moviePlayerViewController];
+    
+    // [rootPath release];
+    // [filePath release];
+    // [fileURL release];
+    
 }
 
 -(void)playerPlaybackDidFinish:(NSNotification *)notification
@@ -55,8 +67,6 @@
     object: moviePlayerViewController];
     
     [moviePlayerViewController.view removeFromSuperview];
-    
-    // Release the movie instance created in playMovieAtURL:
     [moviePlayerViewController release];
     
 }
@@ -95,7 +105,7 @@
 {
     [super viewDidUnload];
     
-    [moviePlayerViewController dealloc];
+    [mpc dealloc];
         
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

@@ -36,7 +36,7 @@
     myView = [[UIImageView alloc] initWithImage:myImage];
     self.view = myView;
     
-    [myImage release];
+    //[myImage release];
     [myView release];
 }
 
