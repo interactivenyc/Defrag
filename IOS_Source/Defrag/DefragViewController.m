@@ -202,16 +202,23 @@
     
     if ([mediaType isEqualToString:@"jpg"]){
         currentPageView = [[ImagePVC alloc] init ];
+        
+        [currentPageView initWithPageData:pageData];
+        [currentPageView displayPage];
+        
+        [self displayPage];
+        
     }else if ([mediaType isEqualToString:@"mov"]){
         currentPageView = [[MoviePVC alloc] init ];
+        
+        [self displayPage];
+        
+        [currentPageView initWithPageData:pageData];
+        [currentPageView displayPage];
     }
     
-    [self displayPage];
 
-    [currentPageView initWithPageData:pageData];
-    [currentPageView displayPage];
-    
-    
+        
     [pageData release];
     //[mediaType release];
 }

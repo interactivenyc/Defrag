@@ -31,7 +31,7 @@
 
 -(void)displayPage
 {
-    [super displayPage];
+    //[super displayPage];
     NSLog(@"MoviePVC displayPage");
     NSLog(@"MoviePVC MEDIA TYPE: MOV");
     
@@ -39,9 +39,9 @@
     NSString *filePath = [rootPath stringByAppendingPathComponent: [pageData getMediaPath]];
     NSURL *fileURL = [NSURL fileURLWithPath:filePath isDirectory:NO];
     
-    self.moviePlayerViewController = [[[MPMoviePlayerViewController alloc] initWithContentURL:fileURL] autorelease];
+    moviePlayerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:fileURL];
     
-    [self.view setBackgroundColor:[UIColor redColor]];
+    //[self.view setBackgroundColor:[UIColor redColor]];
     
     [[moviePlayerViewController view] setFrame:[self.view bounds]]; // size to fit parent view exactly    
     
@@ -52,13 +52,7 @@
     [moviePlayerViewController.moviePlayer setControlStyle:MPMovieControlStyleFullscreen];
     [moviePlayerViewController.moviePlayer play];
     
-    
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerPlaybackDidFinish:) name:MPMoviePlayerPlaybackDidFinishNotification object:moviePlayerViewController];
-    
-    // [rootPath release];
-    // [filePath release];
-    // [fileURL release];
     
 }
 
