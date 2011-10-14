@@ -29,7 +29,7 @@
 }
 
 
--(void)displayPage
+-(void)pageWillDisplay
 {
     //[super displayPage];
     NSLog(@"MoviePVC displayPage");
@@ -43,6 +43,24 @@
     
     //[self.view setBackgroundColor:[UIColor redColor]];
     
+        
+    //trying to restrict orientation of moviePlayer
+        /*
+        if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight) {
+            [moviePlayerViewController shouldAutorotateToInterfaceOrientation:YES];
+        }else{
+            [moviePlayerViewController shouldAutorotateToInterfaceOrientation:NO];
+        }
+         */
+    
+    //
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerPlaybackDidFinish:) name:MPMoviePlayerPlaybackDidFinishNotification object:moviePlayerViewController.moviePlayer];
+    
+}
+
+-(void)pageDidDisplay
+{
     [[moviePlayerViewController view] setFrame:[self.view bounds]]; // size to fit parent view exactly    
     
     [self presentMoviePlayerViewControllerAnimated:moviePlayerViewController];
@@ -50,10 +68,8 @@
     moviePlayerViewController.moviePlayer.movieSourceType = MPMovieSourceTypeFile;
     [moviePlayerViewController.moviePlayer setFullscreen:YES];
     [moviePlayerViewController.moviePlayer setControlStyle:MPMovieControlStyleFullscreen];
+    
     [moviePlayerViewController.moviePlayer play];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerPlaybackDidFinish:) name:MPMoviePlayerPlaybackDidFinishNotification object:moviePlayerViewController];
-    
 }
 
 -(void)playerPlaybackDidFinish:(NSNotification *)notification
@@ -65,8 +81,8 @@
     name: MPMoviePlayerPlaybackDidFinishNotification
     object: moviePlayerViewController];
     
-    [moviePlayerViewController.view removeFromSuperview];
-    [moviePlayerViewController release];
+    //[moviePlayerViewController.view removeFromSuperview];
+    //[moviePlayerViewController release];
     
 }
 

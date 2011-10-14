@@ -15,6 +15,5 @@
 
 @property (nonatomic, retain) MPMoviePlayerViewController *moviePlayerViewController;
 
--(void)displayPage;
 
 @end

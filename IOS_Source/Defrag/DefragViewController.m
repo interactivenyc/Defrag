@@ -73,9 +73,7 @@
     [self setNavigationBarHidden:YES];    
     
     [self createPage];
-    //[self displayPage];
     
-    //[self createTableOfContents];
     
 }
 
@@ -202,42 +200,19 @@
     
     if ([mediaType isEqualToString:@"jpg"]){
         currentPageView = [[ImagePVC alloc] init ];
-        
-        [currentPageView initWithPageData:pageData];
-        [currentPageView displayPage];
-        
-        [self displayPage];
-        
     }else if ([mediaType isEqualToString:@"mov"]){
         currentPageView = [[MoviePVC alloc] init ];
-        
-        [self displayPage];
-        
-        [currentPageView initWithPageData:pageData];
-        [currentPageView displayPage];
     }
     
-
+    [currentPageView initWithPageData:pageData];
+    [currentPageView pageWillDisplay];
+    [self displayPage];
+    [currentPageView pageDidDisplay];
         
     [pageData release];
-    //[mediaType release];
 }
 
--(void)playerPlaybackDidFinish:(NSNotification *)notification
-{
-    NSLog(@"DVC playerPlaybackDidFinish");
-    
-    [[NSNotificationCenter defaultCenter]
-     removeObserver: self
-     name: MPMoviePlayerPlaybackDidFinishNotification
-     object: moviePlayerViewController];
-    
-    
-    // Release the movie instance created in playMovieAtURL:
-    [moviePlayerViewController release];
-    moviePlayerViewController = nil;
-    
-}
+
 
 
 
@@ -275,10 +250,9 @@
     NSLog(@"DVC pushViewController [STOP PUSHING VIEWCONTROLLERS - MANAGE WITH AN ARRAY]");
     
     [self pushViewController:currentPageView animated:NO];
+    //[self.view addSubview:currentPageView.view];
     
 }
-
-
 
 
 
@@ -303,15 +277,11 @@
 - (void)displayTableOfContents{
     NSLog(@"DVC displayTableOfContents");
     
-    
     if (popoverViewController != nil) {
         [popoverViewController dismissPopoverAnimated:YES];
     }
     
-    
     [popoverViewController presentPopoverFromRect:CGRectMake(0.0f, 0.0, 250.0f, 768.0f) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-    
-    
     
 }
 

@@ -93,7 +93,6 @@
 //ON SWIPE - PAGE NAVIGATION
 -(void)createPage;
 -(void)displayPage;
--(void)playerPlaybackDidFinish:(NSNotification *)notification;
 
 //ON TAP - POPOVER HANDLING
 -(void)createTableOfContents;

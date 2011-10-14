@@ -21,9 +21,8 @@
 }
 
 
--(void)displayPage
+-(void)pageWillDisplay
 {
-    [super displayPage];
      NSLog(@"ImagePVC displayPage");
     //THIS METHOD MUST BE OVERRIDEN IN IMPLEMENTATION CLASSES
     

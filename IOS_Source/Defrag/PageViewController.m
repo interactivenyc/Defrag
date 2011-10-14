@@ -30,9 +30,15 @@
     
 }
 
--(void)displayPage
+-(void)pageWillDisplay
 {
-    NSLog(@"PVC displayPage");
+    //NSLog(@"PVC pageWillDisplay");
+    //THIS METHOD MUST BE OVERRIDEN IN IMPLEMENTATION CLASSES
+}
+
+-(void)pageDidDisplay
+{
+    //NSLog(@"PVC pageDidDisplay");
     //THIS METHOD MUST BE OVERRIDEN IN IMPLEMENTATION CLASSES
 }
 

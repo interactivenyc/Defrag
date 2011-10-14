@@ -15,6 +15,5 @@
 }
 
 
--(void)displayPage;
 
 @end

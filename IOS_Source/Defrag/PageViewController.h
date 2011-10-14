@@ -19,6 +19,7 @@
 @property (nonatomic, retain) PageData *pageData;
 
 -(void)initWithPageData:(PageData *)data;
--(void)displayPage;
+-(void)pageWillDisplay;
+-(void)pageDidDisplay;
 
 @end
