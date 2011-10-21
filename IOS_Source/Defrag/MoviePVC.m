@@ -7,11 +7,13 @@
 //
 
 #import "MoviePVC.h"
+#import "DefragAppDelegate.h"
 
 @implementation MoviePVC
 
 @synthesize moviePlayerViewController;
-//@synthesize mpc;
+@synthesize moviePlayerController;
+@synthesize tapRecognizer;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,11 +41,11 @@
     NSString *filePath = [rootPath stringByAppendingPathComponent: [pageData getMediaPath]];
     NSURL *fileURL = [NSURL fileURLWithPath:filePath isDirectory:NO];
     
-    moviePlayerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:fileURL];
+    moviePlayerController = [[MPMoviePlayerController alloc] initWithContentURL:fileURL];
     
-    //[self.view setBackgroundColor:[UIColor redColor]];
+    [self setupGestureRecognizers];
     
-        
+    
     //trying to restrict orientation of moviePlayer
         /*
         if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight) {
@@ -59,30 +61,80 @@
     
 }
 
+
+
+/*-(void)displayMOV:(int)whichDirection
+ {
+ NSLog(@"MEDIA TYPE: MOV");
+ NSLog(@"createMoviePlayer");
+ 
+ MPMoviePlayerController *player = [[MPMoviePlayerController alloc] init];
+ [player.view setFrame: self.view.bounds];  // player's frame must match parent's
+ [self.view addSubview: player.view];
+ 
+ self.moviePlayer = player;
+ [player release];
+ 
+ [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerPlaybackDidFinish:) name:MPMoviePlayerPlaybackDidFinishNotification object:self.moviePlayer];
+ 
+ NSLog(@"initAndPlayMovie: %@", [[self getMediaItem] objectForKey:@"Media"]);
+ 
+ NSString *rootPath = [[NSBundle mainBundle] resourcePath];
+ NSString *filePath = [rootPath stringByAppendingPathComponent:[[self getMediaItem] objectForKey:@"Media"]];
+ NSURL *fileURL = [NSURL fileURLWithPath:filePath isDirectory:NO];
+ 
+ [self.moviePlayer setContentURL:fileURL];
+ [self.moviePlayer play];
+ }
+ */
+
 -(void)pageDidDisplay
 {
-    [[moviePlayerViewController view] setFrame:[self.view bounds]]; // size to fit parent view exactly    
+    moviePlayerController.movieSourceType = MPMovieSourceTypeFile;
+    [moviePlayerController setFullscreen:YES];
+    [moviePlayerController setControlStyle:MPMovieControlStyleFullscreen];
     
-    [self presentMoviePlayerViewControllerAnimated:moviePlayerViewController];
-    
-    moviePlayerViewController.moviePlayer.movieSourceType = MPMovieSourceTypeFile;
-    [moviePlayerViewController.moviePlayer setFullscreen:YES];
-    [moviePlayerViewController.moviePlayer setControlStyle:MPMovieControlStyleFullscreen];
-    
-    [moviePlayerViewController.moviePlayer play];
+    [moviePlayerController.view setFrame: self.view.bounds];
+    [self.view addSubview:moviePlayerController.view];
+    [moviePlayerController play];
 }
+
+
 
 -(void)playerPlaybackDidFinish:(NSNotification *)notification
 {
     NSLog(@"MoviePVC playerPlaybackDidFinish");
 
     [[NSNotificationCenter defaultCenter]
-    removeObserver: self
-    name: MPMoviePlayerPlaybackDidFinishNotification
-    object: moviePlayerViewController];
+        removeObserver: self
+        name: MPMoviePlayerPlaybackDidFinishNotification
+        object: moviePlayerViewController];
     
-    //[moviePlayerViewController.view removeFromSuperview];
-    //[moviePlayerViewController release];
+}
+
+
+//GESTURE SUPPORT
+-(void)setupGestureRecognizers
+{
+    NSLog(@"MoviePVC setupGestureRecognizers");
+    
+    tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    [moviePlayerViewController.moviePlayer.view addGestureRecognizer:tapRecognizer];
+}
+
+
+-(void)handleGesture: (UIGestureRecognizer *)sender
+{
+    NSLog(@"***************************");
+    NSLog(@"handleGesture");
+    NSLog(@"***************************");
+    
+}
+-(void)handleTap: (UITapGestureRecognizer *)sender
+{
+    NSLog(@"***************************");
+    NSLog(@"MoviePVC handleTap");
+    NSLog(@"***************************");
     
 }
 

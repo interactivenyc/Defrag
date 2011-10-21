@@ -109,9 +109,9 @@
 
 
 - (void)handleGesture:(UISwipeGestureRecognizer *)sender {
-    NSLog(@"***************************");
-    NSLog(@"handleGesture");
-    NSLog(@"***************************");
+    NSLog(@"DVC ***************************");
+    NSLog(@"DVC handleGesture");
+    NSLog(@"DVC ***************************");
     
     
     //articleIndex and pageIndex get set in this routine, then the new page is created
@@ -208,7 +208,7 @@
     [currentPageView pageWillDisplay];
     [self displayPage];
     [currentPageView pageDidDisplay];
-        
+    
     [pageData release];
 }
 
@@ -251,8 +251,11 @@
     
     [self pushViewController:currentPageView animated:NO];
     //[self.view addSubview:currentPageView.view];
+    //currentPageView.view.userInteractionEnabled = NO;
     
 }
+
+
 
 
 
