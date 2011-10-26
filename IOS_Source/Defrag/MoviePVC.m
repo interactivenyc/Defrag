@@ -7,13 +7,11 @@
 //
 
 #import "MoviePVC.h"
-#import "DefragAppDelegate.h"
 
 @implementation MoviePVC
 
 @synthesize moviePlayerViewController;
-@synthesize moviePlayerController;
-@synthesize tapRecognizer;
+//@synthesize mpc;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,19 +39,19 @@
     NSString *filePath = [rootPath stringByAppendingPathComponent: [pageData getMediaPath]];
     NSURL *fileURL = [NSURL fileURLWithPath:filePath isDirectory:NO];
     
-    moviePlayerController = [[MPMoviePlayerController alloc] initWithContentURL:fileURL];
+    moviePlayerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:fileURL];
     
-    [self setupGestureRecognizers];
+    //[self.view setBackgroundColor:[UIColor redColor]];
     
     
     //trying to restrict orientation of moviePlayer
-        /*
-        if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight) {
-            [moviePlayerViewController shouldAutorotateToInterfaceOrientation:YES];
-        }else{
-            [moviePlayerViewController shouldAutorotateToInterfaceOrientation:NO];
-        }
-         */
+    /*
+     if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight) {
+     [moviePlayerViewController shouldAutorotateToInterfaceOrientation:YES];
+     }else{
+     [moviePlayerViewController shouldAutorotateToInterfaceOrientation:NO];
+     }
+     */
     
     //
     
@@ -61,54 +59,30 @@
     
 }
 
-
-
-/*-(void)displayMOV:(int)whichDirection
- {
- NSLog(@"MEDIA TYPE: MOV");
- NSLog(@"createMoviePlayer");
- 
- MPMoviePlayerController *player = [[MPMoviePlayerController alloc] init];
- [player.view setFrame: self.view.bounds];  // player's frame must match parent's
- [self.view addSubview: player.view];
- 
- self.moviePlayer = player;
- [player release];
- 
- [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerPlaybackDidFinish:) name:MPMoviePlayerPlaybackDidFinishNotification object:self.moviePlayer];
- 
- NSLog(@"initAndPlayMovie: %@", [[self getMediaItem] objectForKey:@"Media"]);
- 
- NSString *rootPath = [[NSBundle mainBundle] resourcePath];
- NSString *filePath = [rootPath stringByAppendingPathComponent:[[self getMediaItem] objectForKey:@"Media"]];
- NSURL *fileURL = [NSURL fileURLWithPath:filePath isDirectory:NO];
- 
- [self.moviePlayer setContentURL:fileURL];
- [self.moviePlayer play];
- }
- */
-
 -(void)pageDidDisplay
 {
-    moviePlayerController.movieSourceType = MPMovieSourceTypeFile;
-    [moviePlayerController setFullscreen:YES];
-    [moviePlayerController setControlStyle:MPMovieControlStyleFullscreen];
+    [[moviePlayerViewController view] setFrame:[self.view bounds]]; // size to fit parent view exactly    
     
-    [moviePlayerController.view setFrame: self.view.bounds];
-    [self.view addSubview:moviePlayerController.view];
-    [moviePlayerController play];
+    [self presentMoviePlayerViewControllerAnimated:moviePlayerViewController];
+    
+    moviePlayerViewController.moviePlayer.movieSourceType = MPMovieSourceTypeFile;
+    [moviePlayerViewController.moviePlayer setFullscreen:YES];
+    [moviePlayerViewController.moviePlayer setControlStyle:MPMovieControlStyleFullscreen];
+    
+    [moviePlayerViewController.moviePlayer play];
 }
-
-
 
 -(void)playerPlaybackDidFinish:(NSNotification *)notification
 {
     NSLog(@"MoviePVC playerPlaybackDidFinish");
-
+    
     [[NSNotificationCenter defaultCenter]
-        removeObserver: self
-        name: MPMoviePlayerPlaybackDidFinishNotification
-        object: moviePlayerViewController];
+     removeObserver: self
+     name: MPMoviePlayerPlaybackDidFinishNotification
+     object: moviePlayerViewController];
+    
+    //[moviePlayerViewController.view removeFromSuperview];
+    //[moviePlayerViewController release];
     
 }
 
@@ -118,8 +92,13 @@
 {
     NSLog(@"MoviePVC setupGestureRecognizers");
     
+    UIView *gestureCaptureView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0, 1024.0f, 768.0f)];
+    [moviePlayerViewController.moviePlayer.view addSubview:gestureCaptureView];
+    
     tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    [moviePlayerViewController.moviePlayer.view addGestureRecognizer:tapRecognizer];
+    [gestureCaptureView addGestureRecognizer:tapRecognizer];
+    
+    [gestureCaptureView release];
 }
 
 
@@ -137,6 +116,7 @@
     NSLog(@"***************************");
     
 }
+
 
 
 
@@ -161,19 +141,19 @@
 
 
 /*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-*/
+ // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+ - (void)viewDidLoad
+ {
+ [super viewDidLoad];
+ }
+ */
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     
     //[mpc dealloc];
-        
+    
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
