@@ -11,11 +11,22 @@
 @interface MoviePVC : PageViewController
 {
     MPMoviePlayerViewController *moviePlayerViewController;
+    
+    UISwipeGestureRecognizer *swipeRightRecognizer;
+	UISwipeGestureRecognizer *swipeLeftRecognizer;   
+	UISwipeGestureRecognizer *swipeUpRecognizer;
+	UISwipeGestureRecognizer *swipeDownRecognizer; 
+    
     UITapGestureRecognizer *tapRecognizer;
 }
 
 @property (nonatomic, retain) MPMoviePlayerViewController *moviePlayerViewController;
-@property (nonatomic, retain) MPMoviePlayerController *moviePlayerController;
+
+@property (nonatomic, retain) UISwipeGestureRecognizer *swipeRightRecognizer;
+@property (nonatomic, retain) UISwipeGestureRecognizer *swipeLeftRecognizer;   
+@property (nonatomic, retain) UISwipeGestureRecognizer *swipeUpRecognizer;
+@property (nonatomic, retain) UISwipeGestureRecognizer *swipeDownRecognizer; 
+
 @property (nonatomic, retain) UITapGestureRecognizer *tapRecognizer;
 
 //GESTURE SUPPORT

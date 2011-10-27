@@ -11,7 +11,8 @@
 @implementation MoviePVC
 
 @synthesize moviePlayerViewController;
-//@synthesize mpc;
+@synthesize swipeLeftRecognizer, swipeRightRecognizer, swipeUpRecognizer, swipeDownRecognizer;
+@synthesize tapRecognizer;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,20 +42,6 @@
     
     moviePlayerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:fileURL];
     
-    //[self.view setBackgroundColor:[UIColor redColor]];
-    
-    
-    //trying to restrict orientation of moviePlayer
-    /*
-     if (self.interfaceOrientation == UIInterfaceOrientationLandscapeLeft || self.interfaceOrientation == UIInterfaceOrientationLandscapeRight) {
-     [moviePlayerViewController shouldAutorotateToInterfaceOrientation:YES];
-     }else{
-     [moviePlayerViewController shouldAutorotateToInterfaceOrientation:NO];
-     }
-     */
-    
-    //
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerPlaybackDidFinish:) name:MPMoviePlayerPlaybackDidFinishNotification object:moviePlayerViewController.moviePlayer];
     
 }
@@ -70,6 +57,8 @@
     [moviePlayerViewController.moviePlayer setControlStyle:MPMovieControlStyleFullscreen];
     
     [moviePlayerViewController.moviePlayer play];
+    
+    [self setupGestureRecognizers];
 }
 
 -(void)playerPlaybackDidFinish:(NSNotification *)notification
@@ -80,9 +69,6 @@
      removeObserver: self
      name: MPMoviePlayerPlaybackDidFinishNotification
      object: moviePlayerViewController];
-    
-    //[moviePlayerViewController.view removeFromSuperview];
-    //[moviePlayerViewController release];
     
 }
 
@@ -95,6 +81,22 @@
     UIView *gestureCaptureView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0, 1024.0f, 768.0f)];
     [moviePlayerViewController.moviePlayer.view addSubview:gestureCaptureView];
     
+    swipeRightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+    swipeRightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    [gestureCaptureView addGestureRecognizer:swipeRightRecognizer];
+    
+    swipeLeftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+    swipeLeftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+    [gestureCaptureView addGestureRecognizer:swipeLeftRecognizer];
+    
+    swipeUpRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+    swipeUpRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
+    [gestureCaptureView addGestureRecognizer:swipeUpRecognizer];
+    
+    swipeDownRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+    swipeDownRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
+    [gestureCaptureView addGestureRecognizer:swipeDownRecognizer];
+    
     tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [gestureCaptureView addGestureRecognizer:tapRecognizer];
     
@@ -102,13 +104,38 @@
 }
 
 
--(void)handleGesture: (UIGestureRecognizer *)sender
+-(void)handleGesture: (UISwipeGestureRecognizer *)sender
 {
     NSLog(@"***************************");
-    NSLog(@"handleGesture");
+    
+    
+    switch (sender.direction) {
+        case UISwipeGestureRecognizerDirectionLeft:
+            NSLog(@"MoviePVC handleGesture Left");
+            break;
+            
+        case UISwipeGestureRecognizerDirectionRight:
+            NSLog(@"MoviePVC handleGesture Right");
+            break;
+            
+        case UISwipeGestureRecognizerDirectionUp:
+            NSLog(@"MoviePVC handleGesture Up");
+            break;
+            
+        case UISwipeGestureRecognizerDirectionDown:
+            NSLog(@"MoviePVC handleGesture Down");
+            break;
+            
+        default:
+            break;
+    }
+    
+    
     NSLog(@"***************************");
     
 }
+    
+    
 -(void)handleTap: (UITapGestureRecognizer *)sender
 {
     NSLog(@"***************************");
