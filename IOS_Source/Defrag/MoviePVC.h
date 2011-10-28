@@ -33,5 +33,6 @@
 -(void)setupGestureRecognizers;
 -(void)handleGesture: (UIGestureRecognizer *)sender;
 -(void)handleTap: (UITapGestureRecognizer *)sender;
+-(void)stopPlaying;
 
 @end

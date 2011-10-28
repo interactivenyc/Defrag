@@ -7,6 +7,7 @@
 //
 
 #import "MoviePVC.h"
+#import "DefragAppDelegate.h"
 
 @implementation MoviePVC
 
@@ -133,6 +134,9 @@
     
     NSLog(@"***************************");
     
+    [self stopPlaying];
+    [[AppDelegate viewController] handleGesture:sender];
+    
 }
     
     
@@ -142,10 +146,23 @@
     NSLog(@"MoviePVC handleTap");
     NSLog(@"***************************");
     
+    /*
+    if ([moviePlayerViewController.moviePlayer currentPlaybackRate] == 0.0F){
+        [moviePlayerViewController.moviePlayer setCurrentPlaybackRate:0.0F];
+    }else{
+        [moviePlayerViewController.moviePlayer setCurrentPlaybackRate:30.0F];
+    }
+     */
+    
+    [[AppDelegate viewController] handleTap:sender];
+    
 }
 
 
+-(void)stopPlaying{
+    [moviePlayerViewController.moviePlayer stop];
 
+}
 
 
 - (void)didReceiveMemoryWarning

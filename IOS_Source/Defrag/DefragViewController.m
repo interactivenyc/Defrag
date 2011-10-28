@@ -110,7 +110,7 @@
 
 - (void)handleGesture:(UISwipeGestureRecognizer *)sender {
     NSLog(@"DVC ***************************");
-    NSLog(@"DVC handleGesture");
+    NSLog(@"DVC handleGesture sender.direction:%i", sender.direction);
     NSLog(@"DVC ***************************");
     
     
@@ -166,6 +166,7 @@
             break;
             
         default:
+            NSLog(@"DVC handleGesture NOT BEING IDENTIFIED CORRECTLY");
             break;
     }
     

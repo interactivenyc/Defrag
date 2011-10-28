@@ -10,6 +10,8 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import <QuartzCore/CoreAnimation.h>
 
+#define AppDelegate (DefragAppDelegate *)[[UIApplication sharedApplication] delegate]
+
 @class DefragViewController;
 
 @interface DefragAppDelegate : NSObject <UIApplicationDelegate> {
