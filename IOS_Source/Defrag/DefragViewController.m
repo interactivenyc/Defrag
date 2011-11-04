@@ -7,6 +7,7 @@
 //
 
 #import "DefragViewController.h"
+#import "TableOfContents.h"
 
 @implementation DefragViewController
 
@@ -73,6 +74,8 @@
     [self setNavigationBarHidden:YES];    
     
     [self createPage];
+    
+    [self createTableOfContents];
     
     
 }
@@ -267,13 +270,27 @@
 
 -(void)createTableOfContents{
     NSLog(@"DVC createTableOfContents");
+    
+    /*
     tableOfContentsView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0, 250.0f, 250.0f)];
-    tableOfContentsView.backgroundColor = [UIColor orangeColor];
+    tableOfContentsView.backgroundColor = [UIColor yellowColor];
     
     tableOfContentsViewController = [[UIViewController alloc] init];
     tableOfContentsViewController.view = tableOfContentsView;
     
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(10.0f, 10.0, 230.0f, 230.0f)];
+    scrollView.backgroundColor = [UIColor orangeColor];
+    
+    [tableOfContentsView addSubview:scrollView];
+    
     popoverViewController = [[UIPopoverController alloc] initWithContentViewController:tableOfContentsViewController];
+     
+     */
+    
+     tableOfContentsViewController = [[TableOfContents alloc] init];
+    
+    popoverViewController = [[UIPopoverController alloc] initWithContentViewController:tableOfContentsViewController];
+    popoverViewController.popoverContentSize = CGSizeMake(200.0f, 768.0f);
     
 }
 
@@ -285,7 +302,7 @@
         [popoverViewController dismissPopoverAnimated:YES];
     }
     
-    [popoverViewController presentPopoverFromRect:CGRectMake(0.0f, 0.0, 250.0f, 768.0f) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    [popoverViewController presentPopoverFromRect:CGRectMake(0.0f, 0.0, 0.0f, 0.0f) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     
 }
 
