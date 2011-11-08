@@ -282,18 +282,16 @@
     scrollView.layer.cornerRadius = 20.0f;
     scrollView.layer.borderWidth = 3.0f;
     scrollView.layer.borderColor = [[UIColor blackColor] CGColor];
-
     
     [tableOfContentsView addSubview:scrollView];
     
-    
-    NSString *media;
+    NSDictionary *media;
     UIView *nextView;
-    float thumbWidth = 160.0f;
-    float thumbHeight = 120.0f;
-    float thumbY;
-    float yOrigin = 20.0;
-    float cellPadding = 20.0f;
+    int thumbWidth = 160.0f;
+    int thumbHeight = 120.0f;
+    int thumbY;
+    int yOrigin = 20.0;
+    int cellPadding = 20.0f;
     
     for (int i=0; i<articleCount; i++) {
         NSLog(@"loop:%i", i);
@@ -302,23 +300,18 @@
         
         thumbY = ((thumbHeight + cellPadding) * i);
         
-        NSLog(@"    media:%@", media);
-        NSLog(@"    thumbY:%f", thumbY);
+        NSLog(@"    Media:%@", [media objectForKey:@"Media"]);
+        NSLog(@"    thumbY:%i", thumbY);
         
         nextView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, thumbY+yOrigin, thumbWidth, thumbHeight)];
         nextView.backgroundColor = [UIColor greenColor];
         
         [scrollView addSubview:nextView];
         
-        
-        
         [nextView release];
     }
     
     [scrollView release];
-    
-    
-
     
 }
 
