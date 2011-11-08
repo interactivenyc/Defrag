@@ -36,8 +36,8 @@
     PageViewController *currentPageView;
     MPMoviePlayerViewController *moviePlayerViewController;
     
-    UIPopoverController *popoverViewController;
-    UIViewController *tableOfContentsViewController;
+    //UIPopoverController *popoverViewController;
+    //UIViewController *tableOfContentsViewController;
     UIView *tableOfContentsView;
     
 }
@@ -74,8 +74,8 @@
 @property (nonatomic, retain) MPMoviePlayerViewController *moviePlayerViewController;
 
 //TABLE OF CONTENTS POPOVER
-@property (nonatomic, retain) UIPopoverController *popoverViewController;
-@property (nonatomic, retain) UIViewController *tableOfContentsViewController;
+//@property (nonatomic, retain) UIPopoverController *popoverViewController;
+//@property (nonatomic, retain) UIViewController *tableOfContentsViewController;
 @property (nonatomic, retain) UIView *tableOfContentsView;
 
 

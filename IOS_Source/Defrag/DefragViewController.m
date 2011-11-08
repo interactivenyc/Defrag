@@ -22,8 +22,8 @@
 @synthesize moviePlayerViewController;
 @synthesize contentDict;
 
-@synthesize popoverViewController;
-@synthesize tableOfContentsViewController;
+//@synthesize popoverViewController;
+//@synthesize tableOfContentsViewController;
 @synthesize tableOfContentsView;
 
 
@@ -41,9 +41,9 @@
     [contentDict release];
     [currentPageView release];
     
-    [popoverViewController release];
+    ///[popoverViewController release];
+    //[tableOfContentsViewController release];
     [tableOfContentsView release];
-    [tableOfContentsViewController release];
     
     [super dealloc];
 }
@@ -271,26 +271,54 @@
 -(void)createTableOfContents{
     NSLog(@"DVC createTableOfContents");
     
-    /*
-    tableOfContentsView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0, 250.0f, 250.0f)];
-    tableOfContentsView.backgroundColor = [UIColor yellowColor];
+    tableOfContentsView = [[UIView alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 200.0f, 748.0f)];
+    tableOfContentsView.backgroundColor = [UIColor orangeColor];
+    tableOfContentsView.layer.cornerRadius = 20.0f;
+    tableOfContentsView.layer.borderWidth = 3.0f;
+    tableOfContentsView.layer.borderColor = [[UIColor blueColor] CGColor];
     
-    tableOfContentsViewController = [[UIViewController alloc] init];
-    tableOfContentsViewController.view = tableOfContentsView;
-    
-    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(10.0f, 10.0, 230.0f, 230.0f)];
-    scrollView.backgroundColor = [UIColor orangeColor];
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 150.0f, 728.0f)];
+    scrollView.backgroundColor = [UIColor yellowColor];
+    scrollView.layer.cornerRadius = 20.0f;
+    scrollView.layer.borderWidth = 3.0f;
+    scrollView.layer.borderColor = [[UIColor blackColor] CGColor];
+
     
     [tableOfContentsView addSubview:scrollView];
     
-    popoverViewController = [[UIPopoverController alloc] initWithContentViewController:tableOfContentsViewController];
-     
-     */
     
-     tableOfContentsViewController = [[TableOfContents alloc] init];
+    NSString *media;
+    UIView *nextView;
+    float thumbWidth = 160.0f;
+    float thumbHeight = 120.0f;
+    float thumbY;
+    float yOrigin = 20.0;
+    float cellPadding = 20.0f;
     
-    popoverViewController = [[UIPopoverController alloc] initWithContentViewController:tableOfContentsViewController];
-    popoverViewController.popoverContentSize = CGSizeMake(200.0f, 768.0f);
+    for (int i=0; i<articleCount; i++) {
+        NSLog(@"loop:%i", i);
+        
+        media = [[[[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:i] objectForKey:@"Media"] objectAtIndex:0];
+        
+        thumbY = ((thumbHeight + cellPadding) * i);
+        
+        NSLog(@"    media:%@", media);
+        NSLog(@"    thumbY:%f", thumbY);
+        
+        nextView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, thumbY+yOrigin, thumbWidth, thumbHeight)];
+        nextView.backgroundColor = [UIColor greenColor];
+        
+        [scrollView addSubview:nextView];
+        
+        
+        
+        [nextView release];
+    }
+    
+    [scrollView release];
+    
+    
+
     
 }
 
@@ -298,11 +326,9 @@
 - (void)displayTableOfContents{
     NSLog(@"DVC displayTableOfContents");
     
-    if (popoverViewController != nil) {
-        [popoverViewController dismissPopoverAnimated:YES];
-    }
+    [self.view addSubview:tableOfContentsView];
     
-    [popoverViewController presentPopoverFromRect:CGRectMake(0.0f, 0.0, 0.0f, 0.0f) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    
     
 }
 
