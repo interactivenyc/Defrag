@@ -15,8 +15,11 @@
 }
 
 + (void)test;
-
 + (void)log;
+
+void doLog(int level, id formatstring,...);
++ (void) explode: (id) aView level: (int) level;
++ (void) showViews;
 
 @end
 

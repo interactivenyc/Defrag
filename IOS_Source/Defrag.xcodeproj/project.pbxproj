@@ -434,13 +434,13 @@
 			children = (
 				AB6EEE2A13B158CD00BBFB64 /* DefragAppDelegate.h */,
 				AB6EEE2B13B158CD00BBFB64 /* DefragAppDelegate.m */,
+				ABA350A713C8EB7400A953FC /* Utils.h */,
+				ABA350A813C8EB7400A953FC /* Utils.m */,
 				AB46F7AC14321A4F0049DFEC /* Model */,
 				AB46F7A814321A170049DFEC /* View Controllers */,
 				AB4CDAD0143385B800B6DD15 /* Resources */,
 				AB4FC3CB14195331005C48DD /* XIB files */,
 				AB6EEE2213B158CD00BBFB64 /* Supporting Files */,
-				ABA350A713C8EB7400A953FC /* Utils.h */,
-				ABA350A813C8EB7400A953FC /* Utils.m */,
 				ABE523C714320CFF004E94A4 /* CodeSnippets.rtf */,
 			);
 			path = Defrag;

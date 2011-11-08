@@ -8,6 +8,7 @@
 
 #import "DefragViewController.h"
 #import "TableOfContents.h"
+#import "Utils.h"
 
 @implementation DefragViewController
 
@@ -320,6 +321,9 @@
     NSLog(@"DVC displayTableOfContents");
     
     [self.view addSubview:tableOfContentsView];
+    
+    
+    [Utils showViews];
     
     
     
