@@ -286,8 +286,12 @@
     
     [tableOfContentsView addSubview:scrollView];
     
-    NSDictionary *media;
+    NSObject *media;
+    NSString *thumbPath;
     UIView *nextView;
+    UIImage *myImage;
+    UIImageView *imageView;
+    
     int thumbWidth = 120.0f;
     int thumbHeight = 90.0f;
     int thumbY;
@@ -297,19 +301,26 @@
     for (int i=0; i<articleCount; i++) {
         NSLog(@"loop:%i", i);
         
-        media = [[[[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:i] objectForKey:@"Media"] objectAtIndex:0];
-        
+        media = [[[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:i] objectForKey:@"MediaPath"];
+
+        thumbPath = [[[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:i] objectForKey:@"Thumb"];
+
         thumbY = ((thumbHeight + cellPadding) * i);
         
-        NSLog(@"    Media:%@", [media objectForKey:@"Media"]);
-        NSLog(@"    thumbY:%i", thumbY);
+        NSLog(@"    media:%@", media);
+        NSLog(@"    thumbPath:%@", thumbPath);
+        
+        myImage = [UIImage imageNamed:thumbPath];
+        imageView = [[UIImageView alloc] initWithImage:myImage];
         
         nextView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, thumbY+yOrigin, thumbWidth, thumbHeight)];
-        nextView.backgroundColor = [UIColor greenColor];
         
+        nextView.backgroundColor = [UIColor greenColor];
+        [nextView addSubview:imageView];
         [scrollView addSubview:nextView];
         
         [nextView release];
+        [imageView release];
     }
     
     [scrollView release];
@@ -323,7 +334,7 @@
     [self.view addSubview:tableOfContentsView];
     
     
-    [Utils showViews];
+    //[Utils showViews];
     
     
     
