@@ -76,7 +76,7 @@
     
     [self createPage];
     
-    [self createTableOfContents];
+    //[self createTableOfContents];
     
     
 }
@@ -269,72 +269,18 @@
 //*****************************************
 
 
--(void)createTableOfContents{
-    NSLog(@"DVC createTableOfContents");
-    
-    tableOfContentsView = [[UIView alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 200.0f, 748.0f)];
-    tableOfContentsView.backgroundColor = [UIColor orangeColor];
-    tableOfContentsView.layer.cornerRadius = 20.0f;
-    tableOfContentsView.layer.borderWidth = 3.0f;
-    tableOfContentsView.layer.borderColor = [[UIColor blueColor] CGColor];
-    
-    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 150.0f, 728.0f)];
-    scrollView.backgroundColor = [UIColor yellowColor];
-    scrollView.layer.cornerRadius = 20.0f;
-    scrollView.layer.borderWidth = 3.0f;
-    scrollView.layer.borderColor = [[UIColor blackColor] CGColor];
-    
-    [tableOfContentsView addSubview:scrollView];
-    
-    NSObject *media;
-    NSString *thumbPath;
-    UIView *nextView;
-    UIImage *myImage;
-    UIImageView *imageView;
-    
-    int thumbWidth = 120.0f;
-    int thumbHeight = 90.0f;
-    int thumbY;
-    int yOrigin = 20.0;
-    int cellPadding = 20.0f;
-    
-    for (int i=0; i<articleCount; i++) {
-        NSLog(@"loop:%i", i);
-        
-        media = [[[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:i] objectForKey:@"MediaPath"];
-
-        thumbPath = [[[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:i] objectForKey:@"Thumb"];
-
-        thumbY = ((thumbHeight + cellPadding) * i);
-        
-        NSLog(@"    media:%@", media);
-        NSLog(@"    thumbPath:%@", thumbPath);
-        
-        myImage = [UIImage imageNamed:thumbPath];
-        imageView = [[UIImageView alloc] initWithImage:myImage];
-        
-        nextView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, thumbY+yOrigin, thumbWidth, thumbHeight)];
-        
-        nextView.backgroundColor = [UIColor greenColor];
-        [nextView addSubview:imageView];
-        [scrollView addSubview:nextView];
-        
-        [nextView release];
-        [imageView release];
-    }
-    
-    [scrollView release];
-    
-}
 
 
 - (void)displayTableOfContents{
     NSLog(@"DVC displayTableOfContents");
     
+    tableOfContentsView = [[TableOfContents alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 200.0f, 748.0f)];
+    [tableOfContentsView createTableOfContents:contentDict];
+    
+    
     [self.view addSubview:tableOfContentsView];
     
     
-    //[Utils showViews];
     
     
     

@@ -14,6 +14,7 @@
 #import "DefragAppDelegate.h"
 #import "ImagePVC.h"
 #import "MoviePVC.h"
+#import "TableOfContents.h"
 
 @interface DefragViewController : UINavigationController <UIGestureRecognizerDelegate>
 {	    
@@ -38,7 +39,7 @@
     
     //UIPopoverController *popoverViewController;
     //UIViewController *tableOfContentsViewController;
-    UIView *tableOfContentsView;
+    TableOfContents *tableOfContentsView;
     
 }
 
@@ -76,7 +77,7 @@
 //TABLE OF CONTENTS POPOVER
 //@property (nonatomic, retain) UIPopoverController *popoverViewController;
 //@property (nonatomic, retain) UIViewController *tableOfContentsViewController;
-@property (nonatomic, retain) UIView *tableOfContentsView;
+@property (nonatomic, retain) TableOfContents *tableOfContentsView;
 
 
 
@@ -95,7 +96,6 @@
 -(void)displayPage;
 
 //ON TAP - POPOVER HANDLING
--(void)createTableOfContents;
 -(void)displayTableOfContents;
 
 //UTILITIES
