@@ -288,8 +288,8 @@
     
     NSDictionary *media;
     UIView *nextView;
-    int thumbWidth = 160.0f;
-    int thumbHeight = 120.0f;
+    int thumbWidth = 120.0f;
+    int thumbHeight = 90.0f;
     int thumbY;
     int yOrigin = 20.0;
     int cellPadding = 20.0f;
