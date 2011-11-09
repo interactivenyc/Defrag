@@ -11,16 +11,18 @@
 				<string>Cover</string>
 				<key>MediaPath</key>
 				<string>/Cover</string>
+				<key>Thumb</key>
+				<string>Cover_thumb.jpg</string>
 				<key>Media</key>
 				<array>
-                    <dict>
-                        <key>Media</key>
-                        <string>Cover-fpo.jpg</string>
-                        <key>Type</key>
-                        <string>jpg</string>
-                    </dict>
-                    <dict>
-                        <key>Media</key>
+					<dict>
+						<key>Media</key>
+						<string>Cover-fpo.jpg</string>
+						<key>Type</key>
+						<string>jpg</string>
+					</dict>
+					<dict>
+						<key>Media</key>
 						<string>DeFragCvr2 H.mov</string>
 						<key>Type</key>
 						<string>mov</string>
@@ -32,6 +34,8 @@
 				<string>Masthead</string>
 				<key>MediaPath</key>
 				<string>/MastHd</string>
+				<key>Thumb</key>
+				<string>MstHd_thumb.jpg</string>
 				<key>Media</key>
 				<array>
 					<dict>
@@ -47,6 +51,8 @@
 				<string>Manifesto</string>
 				<key>MediaPath</key>
 				<string>/Manifesto</string>
+				<key>Thumb</key>
+				<string>Manifesto_thumb.jpg</string>
 				<key>Media</key>
 				<array>
 					<dict>
@@ -68,6 +74,8 @@
 				<string>Julie</string>
 				<key>MediaPath</key>
 				<string>/Julie</string>
+				<key>Thumb</key>
+				<string>Julie_thumb.jpg</string>
 				<key>Media</key>
 				<array>
 					<dict>
@@ -107,6 +115,8 @@
 				<string>Ayush</string>
 				<key>MediaPath</key>
 				<string>/Ayush</string>
+				<key>Thumb</key>
+				<string>Ayush_h_thumb.jpg</string>
 				<key>Media</key>
 				<array>
 					<dict>
@@ -164,6 +174,8 @@
 				<string>Hava</string>
 				<key>MediaPath</key>
 				<string>/Hava</string>
+				<key>Thumb</key>
+				<string>Hava_thumb.jpg</string>
 				<key>Media</key>
 				<array>
 					<dict>
@@ -227,6 +239,8 @@
 				<string>Tash</string>
 				<key>MediaPath</key>
 				<string>/Tash</string>
+				<key>Thumb</key>
+				<string>Tash_thumb.jpg</string>
 				<key>Media</key>
 				<array>
 					<dict>
