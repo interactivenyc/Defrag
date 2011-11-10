@@ -97,6 +97,8 @@
 
 //ON TAP - POPOVER HANDLING
 -(void)displayTableOfContents;
+-(void)tableOfContentsHasAppeared;
+-(void)removeTableOfContentsView;
 
 //UTILITIES
 -(void)logPageInfo;

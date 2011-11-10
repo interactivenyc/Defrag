@@ -273,28 +273,53 @@
 
 - (void)displayTableOfContents{
     
-    
     if (!tableOfContentsView)
     {
         NSLog(@"DVC displayTableOfContents");
         
-        tableOfContentsView = [[TableOfContents alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 200.0f, 748.0f)];
+        tableOfContentsView = [[TableOfContents alloc] initWithFrame:CGRectMake(-200.0f, 10.0f, 200.0f, 748.0f)];
         [tableOfContentsView createTableOfContents:contentDict];
+        
         [self.view addSubview:tableOfContentsView];
+        
+        [UIView beginAnimations:nil context:nil];  
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+        
+        [UIView animateWithDuration:0.2
+                         animations:^{tableOfContentsView.frame = CGRectMake(10.0f, 10.0f, 200.0f, 748.0f);}
+                         completion:^(BOOL finished){ [self tableOfContentsHasAppeared]; }];
+        
+        [UIView commitAnimations];
     }
     else
     {
         NSLog(@"DVC displayTableOfContents DELETE");
         
-        [tableOfContentsView removeFromSuperview];
-        [tableOfContentsView release];
-        tableOfContentsView = nil;
+        [UIView beginAnimations:nil context:nil];  
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+        
+        [UIView animateWithDuration:0.2
+                         animations:^{tableOfContentsView.frame = CGRectMake(-200.0f, 10.0f, 200.0f, 748.0f);}
+                         completion:^(BOOL finished){ [self removeTableOfContentsView]; }];
+        
+        [UIView commitAnimations];
+        
     }
     
-    
-    
-    
-    
+}
+
+
+-(void)tableOfContentsHasAppeared
+{
+    NSLog(@"DVC tableOfContentsHasAppeared");
+}
+
+
+-(void)removeTableOfContentsView
+{
+    [tableOfContentsView removeFromSuperview];
+    [tableOfContentsView release];
+    tableOfContentsView = nil;
 }
 
 //*****************************************
