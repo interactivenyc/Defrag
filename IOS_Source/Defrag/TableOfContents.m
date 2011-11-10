@@ -24,10 +24,10 @@
 -(void)createTableOfContents: (NSDictionary *)contentDict{
     NSLog(@"DVC createTableOfContents");
     
-    UIView *tableOfContentsView = [[UIView alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 200.0f, 748.0f)];
+    UIView *tableOfContentsView = [[UIView alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 200.0f, 738.0f)];
     
     
-    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 20.0f, 140.0f, 728.0f)];
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 20.0f, 140.0f, 718.0f)];
     scrollView.backgroundColor = [UIColor grayColor];
     scrollView.layer.cornerRadius = 10.0f;
     scrollView.layer.borderWidth = 2.0f;
@@ -54,7 +54,7 @@
     int TOCHeight = 10;
     
     for (int i=0; i<articleCount; i++) {
-        NSLog(@"loop:%i", i);
+        //NSLog(@"loop:%i", i);
         
         thumbPath = [[[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:i] objectForKey:@"Thumb"];
         thumbY = ((thumbHeight + cellPadding) * i);
@@ -71,7 +71,7 @@
         [scrollView addSubview:nextView];
         
         TOCHeight += (nextView.frame.size.height + cellPadding);
-        NSLog(@"    TOCHeight:%f", TOCHeight);
+        //NSLog(@"    TOCHeight:%i", TOCHeight);
         
         [nextView release];
         [imageView release];
