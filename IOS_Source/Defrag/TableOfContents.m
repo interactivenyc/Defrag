@@ -7,6 +7,7 @@
 //
 
 #import "TableOfContents.h"
+#import "ThumbView.h"
 
 @implementation TableOfContents
 
@@ -22,7 +23,7 @@
 
 
 -(void)createTableOfContents: (NSDictionary *)contentDict{
-    NSLog(@"DVC createTableOfContents");
+    NSLog(@"TOC createTableOfContents");
     
     UIView *tableOfContentsView = [[UIView alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 200.0f, 738.0f)];
     
@@ -41,7 +42,7 @@
     int articleCount = [[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] count];
     
     NSString *thumbPath;
-    UIView *nextView;
+    ThumbView *thumbView;
     UIImage *myImage;
     UIImageView *imageView;
     
@@ -52,46 +53,58 @@
     int cellPadding = 20.0f;
     
     int TOCHeight = 10;
-    
+      
     for (int i=0; i<articleCount; i++) {
         //NSLog(@"loop:%i", i);
         
         thumbPath = [[[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:i] objectForKey:@"Thumb"];
         thumbY = ((thumbHeight + cellPadding) * i);
         
-        //NSLog(@"    thumbPath:%@", thumbPath);
-        
         myImage = [UIImage imageNamed:thumbPath];
         imageView = [[UIImageView alloc] initWithImage:myImage];
         
-        nextView = [[UIView alloc] initWithFrame:CGRectMake(10.0f, thumbY+yOrigin, thumbWidth, thumbHeight)];
-        nextView.backgroundColor = [UIColor greenColor];
-        [nextView addSubview:imageView];
+        thumbView = [[ThumbView alloc] initWithFrame:CGRectMake(10.0f, thumbY+yOrigin, thumbWidth, thumbHeight)];
+        thumbView.articleData = [[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:i];
+        thumbView.thumbIndex = i;
+        thumbView.backgroundColor = [UIColor greenColor];
+        [thumbView addSubview:imageView];
         
-        [scrollView addSubview:nextView];
+        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(thumbnailClicked:)];  
+        [thumbView addGestureRecognizer:tapRecognizer];
         
-        TOCHeight += (nextView.frame.size.height + cellPadding);
+        [scrollView addSubview:thumbView];
+        
+        TOCHeight += (thumbView.frame.size.height + cellPadding);
         //NSLog(@"    TOCHeight:%i", TOCHeight);
         
-        [nextView release];
+        [thumbView release];
         [imageView release];
+        [tapRecognizer release];
     }
     
     [scrollView setScrollEnabled:YES];
     [scrollView setContentSize:CGSizeMake(140, TOCHeight)];
+   
     
-    [scrollView release];
     
-
     [self addSubview:tableOfContentsView];
     
+    [scrollView release];
     [tableOfContentsView release];
     
 }
 
 
 
-
+- (void)thumbnailClicked:(UITapGestureRecognizer *)sender {
+    
+    ThumbView *thumbView = (ThumbView *)sender.view;
+    
+    NSLog(@"TOC ***************************");
+    NSLog(@"TOC thumbnailClicked index:%i Title:%@", thumbView.thumbIndex, [thumbView.articleData objectForKey:@"Title"]);
+    NSLog(@"TOC ***************************");
+    
+}
 
 
 

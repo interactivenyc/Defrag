@@ -50,6 +50,7 @@
 		AB590D79146B753100F985F7 /* Tash-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB590D54146B753100F985F7 /* Tash-fpo.jpg */; };
 		AB590D7A146B753100F985F7 /* Tash2-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB590D55146B753100F985F7 /* Tash2-fpo.jpg */; };
 		AB590D7B146B753100F985F7 /* Tash_thumb.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB590D56146B753100F985F7 /* Tash_thumb.jpg */; };
+		AB590D7F146B8B9F00F985F7 /* ThumbView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB590D7E146B8B9F00F985F7 /* ThumbView.m */; };
 		AB6EEE1C13B158CD00BBFB64 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6EEE1B13B158CD00BBFB64 /* UIKit.framework */; };
 		AB6EEE1E13B158CD00BBFB64 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6EEE1D13B158CD00BBFB64 /* Foundation.framework */; };
 		AB6EEE2013B158CD00BBFB64 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6EEE1F13B158CD00BBFB64 /* CoreGraphics.framework */; };
@@ -112,6 +113,8 @@
 		AB590D54146B753100F985F7 /* Tash-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Tash-fpo.jpg"; sourceTree = "<group>"; };
 		AB590D55146B753100F985F7 /* Tash2-fpo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Tash2-fpo.jpg"; sourceTree = "<group>"; };
 		AB590D56146B753100F985F7 /* Tash_thumb.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Tash_thumb.jpg; sourceTree = "<group>"; };
+		AB590D7D146B8B9F00F985F7 /* ThumbView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbView.h; sourceTree = "<group>"; };
+		AB590D7E146B8B9F00F985F7 /* ThumbView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbView.m; sourceTree = "<group>"; };
 		AB6EEE1713B158CD00BBFB64 /* Defrag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Defrag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB6EEE1B13B158CD00BBFB64 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AB6EEE1D13B158CD00BBFB64 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -155,8 +158,6 @@
 			children = (
 				AB6EEE3013B158CE00BBFB64 /* DefragViewController.h */,
 				AB6EEE3113B158CE00BBFB64 /* DefragViewController.m */,
-				AB5067DC1463AB80003BB020 /* TableOfContents.h */,
-				AB5067DD1463AB80003BB020 /* TableOfContents.m */,
 				ABAB904D1444A53800345C35 /* PageViewController.h */,
 				ABAB904E1444A53800345C35 /* PageViewController.m */,
 				AB44F395144542F1004F3D37 /* ImagePVC.h */,
@@ -293,6 +294,17 @@
 			path = Tash;
 			sourceTree = "<group>";
 		};
+		AB590D7C146B8B2200F985F7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AB5067DC1463AB80003BB020 /* TableOfContents.h */,
+				AB5067DD1463AB80003BB020 /* TableOfContents.m */,
+				AB590D7D146B8B9F00F985F7 /* ThumbView.h */,
+				AB590D7E146B8B9F00F985F7 /* ThumbView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		AB6EEE0C13B158CD00BBFB64 = {
 			isa = PBXGroup;
 			children = (
@@ -326,6 +338,7 @@
 		AB6EEE2113B158CD00BBFB64 /* Defrag */ = {
 			isa = PBXGroup;
 			children = (
+				AB590D7C146B8B2200F985F7 /* Views */,
 				AB6EEE2A13B158CD00BBFB64 /* DefragAppDelegate.h */,
 				AB6EEE2B13B158CD00BBFB64 /* DefragAppDelegate.m */,
 				ABA350A713C8EB7400A953FC /* Utils.h */,
@@ -461,6 +474,7 @@
 				AB44F39A144542F1004F3D37 /* MoviePVC.m in Sources */,
 				AB44F39D144542FB004F3D37 /* PageData.m in Sources */,
 				AB5067DF1463AB80003BB020 /* TableOfContents.m in Sources */,
+				AB590D7F146B8B9F00F985F7 /* ThumbView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
