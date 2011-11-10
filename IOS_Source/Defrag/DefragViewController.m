@@ -272,13 +272,24 @@
 
 
 - (void)displayTableOfContents{
-    NSLog(@"DVC displayTableOfContents");
-    
-    tableOfContentsView = [[TableOfContents alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 200.0f, 748.0f)];
-    [tableOfContentsView createTableOfContents:contentDict];
     
     
-    [self.view addSubview:tableOfContentsView];
+    if (!tableOfContentsView)
+    {
+        NSLog(@"DVC displayTableOfContents");
+        
+        tableOfContentsView = [[TableOfContents alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 200.0f, 748.0f)];
+        [tableOfContentsView createTableOfContents:contentDict];
+        [self.view addSubview:tableOfContentsView];
+    }
+    else
+    {
+        NSLog(@"DVC displayTableOfContents DELETE");
+        
+        [tableOfContentsView removeFromSuperview];
+        [tableOfContentsView release];
+        tableOfContentsView = nil;
+    }
     
     
     

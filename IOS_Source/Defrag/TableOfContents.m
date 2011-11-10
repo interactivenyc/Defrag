@@ -33,6 +33,9 @@
     scrollView.layer.borderWidth = 2.0f;
     scrollView.layer.borderColor = [[UIColor blackColor] CGColor];
     
+    
+    
+    
     [tableOfContentsView addSubview:scrollView];
     
     int articleCount = [[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] count];
@@ -48,13 +51,15 @@
     int yOrigin = 20.0;
     int cellPadding = 20.0f;
     
+    int TOCHeight = 10;
+    
     for (int i=0; i<articleCount; i++) {
         NSLog(@"loop:%i", i);
         
         thumbPath = [[[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:i] objectForKey:@"Thumb"];
         thumbY = ((thumbHeight + cellPadding) * i);
         
-        NSLog(@"    thumbPath:%@", thumbPath);
+        //NSLog(@"    thumbPath:%@", thumbPath);
         
         myImage = [UIImage imageNamed:thumbPath];
         imageView = [[UIImageView alloc] initWithImage:myImage];
@@ -65,9 +70,15 @@
         
         [scrollView addSubview:nextView];
         
+        TOCHeight += (nextView.frame.size.height + cellPadding);
+        NSLog(@"    TOCHeight:%f", TOCHeight);
+        
         [nextView release];
         [imageView release];
     }
+    
+    [scrollView setScrollEnabled:YES];
+    [scrollView setContentSize:CGSizeMake(140, TOCHeight)];
     
     [scrollView release];
     
