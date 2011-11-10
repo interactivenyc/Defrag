@@ -17,6 +17,6 @@
 @property (nonatomic, retain) NSDictionary *articleData;
 @property int thumbIndex;
 
-
+-(void)initWithArticleData:(NSObject *)data;
 
 @end

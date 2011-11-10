@@ -22,7 +22,27 @@
     return self;
 }
 
-
+-(void)initWithArticleData:(NSDictionary *)data
+{
+    NSLog(@"TV initWithArticleData");
+    articleData = data;
+    
+    UIImage *myImage;
+    UIImageView *imageView;
+    
+    myImage = [UIImage imageNamed:[articleData objectForKey:@"Thumb"]];
+    imageView = [[UIImageView alloc] initWithImage:myImage];
+    
+    [self addSubview:imageView];
+    
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, 90, 120, 24)];
+    title.backgroundColor = [UIColor clearColor];
+    [title setText:[articleData objectForKey:@"Title"]];
+    [self addSubview:title];
+    
+    [imageView release];
+    
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.
