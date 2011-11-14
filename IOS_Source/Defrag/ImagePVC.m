@@ -11,6 +11,12 @@
 
 @implementation ImagePVC
 
+-(void)dealloc
+{
+    [super dealloc];
+    NSLog(@"ImagePVC dealloc");
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -26,7 +32,7 @@
      NSLog(@"ImagePVC displayPage");
     //THIS METHOD MUST BE OVERRIDEN IN IMPLEMENTATION CLASSES
     
-    NSLog(@"ImagePVC MEDIA TYPE: JPG");
+    
     
     UIImage *myImage;
     UIView *myView;

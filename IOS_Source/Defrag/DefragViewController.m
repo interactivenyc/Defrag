@@ -16,15 +16,9 @@
 @synthesize pageIndex, articleIndex, articleCount, pageCount;
 @synthesize direction;
 
-@synthesize swipeRightRecognizer, swipeLeftRecognizer, swipeUpRecognizer, swipeDownRecognizer;
-@synthesize tapRecognizer;
-
-@synthesize currentPageView;
-@synthesize moviePlayerViewController;
+@synthesize currentPageViewController;
 @synthesize contentDict;
 
-//@synthesize popoverViewController;
-//@synthesize tableOfContentsViewController;
 @synthesize tableOfContentsView;
 
 
@@ -33,17 +27,10 @@
 //*****************************************
 
 - (void)dealloc {
-    [swipeRightRecognizer release];
-    [swipeLeftRecognizer release];
-    [swipeUpRecognizer release];
-    [swipeDownRecognizer release];
-    [tapRecognizer release];
     
     [contentDict release];
-    [currentPageView release];
+    [currentPageViewController release];
     
-    ///[popoverViewController release];
-    //[tableOfContentsViewController release];
     [tableOfContentsView release];
     
     [super dealloc];
@@ -91,24 +78,33 @@
     
     //NSLog(@"setupGestureRecognizer NEW");
     
-    swipeRightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
-    swipeRightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
-    [self.view addGestureRecognizer:swipeRightRecognizer];
+    UISwipeGestureRecognizer *swipeRecognizer;
     
-    swipeLeftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
-    swipeLeftRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
-    [self.view addGestureRecognizer:swipeLeftRecognizer];
+    swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+    swipeRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:swipeRecognizer];
+    [swipeRecognizer release];
     
-    swipeUpRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
-    swipeUpRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
-    [self.view addGestureRecognizer:swipeUpRecognizer];
+    swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+    swipeRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:swipeRecognizer];
+    [swipeRecognizer release];
     
-    swipeDownRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
-    swipeDownRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
-    [self.view addGestureRecognizer:swipeDownRecognizer];
+    swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+    swipeRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
+    [self.view addGestureRecognizer:swipeRecognizer];
+    [swipeRecognizer release];
+    
+    swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+    swipeRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
+    [self.view addGestureRecognizer:swipeRecognizer];
+    [swipeRecognizer release];
+    
+    UITapGestureRecognizer *tapRecognizer;
     
     tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.view addGestureRecognizer:tapRecognizer];
+    [tapRecognizer release];
 }
 
 
@@ -199,20 +195,20 @@
     
     PageData *pageData = [[PageData alloc] init ];
     pageData.pageDictionary = [self getMediaItem];
-                           
+    
     NSString *mediaType = [pageData getMediaType];
     NSLog(@"DVC mediaType: %@", mediaType);
     
     if ([mediaType isEqualToString:@"jpg"]){
-        currentPageView = [[ImagePVC alloc] init ];
+        currentPageViewController = [[ImagePVC alloc] init ];
     }else if ([mediaType isEqualToString:@"mov"]){
-        currentPageView = [[MoviePVC alloc] init ];
+        currentPageViewController = [[MoviePVC alloc] init ];
     }
     
-    [currentPageView initWithPageData:pageData];
-    [currentPageView pageWillDisplay];
+    [currentPageViewController initWithPageData:pageData];
+    [currentPageViewController pageWillDisplay];
     [self displayPage];
-    [currentPageView pageDidDisplay];
+    [currentPageViewController pageDidDisplay];
     
     [pageData release];
 }
@@ -228,8 +224,10 @@
     CATransition *transition = [CATransition animation];
     [transition setType:kCATransitionPush];
     CALayer *layer;
-    layer = currentPageView.view.layer;
+    layer = currentPageViewController.view.layer;
     [transition setDuration:0.2f];
+    
+    transition.delegate = self;
     
     switch (direction)
     {
@@ -254,14 +252,40 @@
     //handle cleanup of page controllers
     NSLog(@"DVC pushViewController [STOP PUSHING VIEWCONTROLLERS - MANAGE WITH AN ARRAY]");
     
-    [self pushViewController:currentPageView animated:NO];
+    [self pushViewController:currentPageViewController animated:NO];
     //[self.view addSubview:currentPageView.view];
     //currentPageView.view.userInteractionEnabled = NO;
     
 }
 
+- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
+{
+    NSLog(@"DVC animationDidStop");
+    
+    [self pageHasDisplayed];
+}
 
 
+-(void)pageHasDisplayed
+{
+    int numControllers = [self.viewControllers count];
+    NSLog(@"numViewControllers:%i", numControllers);
+    
+    PageViewController *pageInstance;
+    //PageData *pageData;
+    for (int i=0; i<numControllers-1; i++) {
+        NSLog(@"i:%i", i);
+        pageInstance = (PageViewController *)[self.viewControllers objectAtIndex:i];
+        //pageData = pageInstance.pageData;
+        [pageInstance logLifetime];
+        
+        [pageInstance removeFromParentViewController];
+        [pageInstance release];
+    }
+    
+    numControllers = [self.viewControllers count];
+    NSLog(@"numViewControllers after release:%i", numControllers);
+}
 
 
 //*****************************************
@@ -332,8 +356,8 @@
     //NSLog(@"Title: %@ Page: %i", [[[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:articleIndex] objectForKey:@"Title"], pageIndex);
     
     NSLog(@"DVC logPageInfo");
-    NSLog(@"DVC     mediaType:, %@", [currentPageView.pageData getMediaType]);
-    NSLog(@"DVC     mediaPath:, %@", [currentPageView.pageData getMediaPath]);
+    NSLog(@"DVC     mediaType:, %@", [currentPageViewController.pageData getMediaType]);
+    NSLog(@"DVC     mediaPath:, %@", [currentPageViewController.pageData getMediaPath]);
     
 }
 

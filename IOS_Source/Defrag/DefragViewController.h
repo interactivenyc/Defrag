@@ -25,20 +25,9 @@
     
     char direction;
     
-	UISwipeGestureRecognizer *swipeRightRecognizer;
-	UISwipeGestureRecognizer *swipeLeftRecognizer;   
-	UISwipeGestureRecognizer *swipeUpRecognizer;
-	UISwipeGestureRecognizer *swipeDownRecognizer;   
-    
-    UITapGestureRecognizer *tapRecognizer;
-    
     NSDictionary *contentDict;
     
-    PageViewController *currentPageView;
-    MPMoviePlayerViewController *moviePlayerViewController;
-    
-    //UIPopoverController *popoverViewController;
-    //UIViewController *tableOfContentsViewController;
+    PageViewController *currentPageViewController;
     TableOfContents *tableOfContentsView;
     
 }
@@ -51,32 +40,16 @@
 //NAVIGATION PROPERTIES
 @property int articleCount;
 @property int articleIndex;
-@property int pageIndex;
 @property int pageCount;
+@property int pageIndex;
 
 @property char direction;
-
-
-//GESTURE RECOGNIZERS
-@property (nonatomic, retain) UISwipeGestureRecognizer *swipeRightRecognizer;
-@property (nonatomic, retain) UISwipeGestureRecognizer *swipeLeftRecognizer;
-@property (nonatomic, retain) UISwipeGestureRecognizer *swipeUpRecognizer;
-@property (nonatomic, retain) UISwipeGestureRecognizer *swipeDownRecognizer;
-
-@property (nonatomic, retain) UITapGestureRecognizer *tapRecognizer;
 
 //CONTENT DATA
 @property (nonatomic, retain) NSDictionary *contentDict;
 
-//PAGE VIEW CONTROLLER
-@property (nonatomic, retain) PageViewController *currentPageView;
-
-//MOVIE PLAYER VIEW CONTROLLER
-@property (nonatomic, retain) MPMoviePlayerViewController *moviePlayerViewController;
-
-//TABLE OF CONTENTS POPOVER
-//@property (nonatomic, retain) UIPopoverController *popoverViewController;
-//@property (nonatomic, retain) UIViewController *tableOfContentsViewController;
+//VIEW CONTROLLERS
+@property (nonatomic, retain) PageViewController *currentPageViewController;
 @property (nonatomic, retain) TableOfContents *tableOfContentsView;
 
 
@@ -94,8 +67,9 @@
 //ON SWIPE - PAGE NAVIGATION
 -(void)createPage;
 -(void)displayPage;
+-(void)pageHasDisplayed;
 
-//ON TAP - POPOVER HANDLING
+//TABLE OF CONTENTS
 -(void)displayTableOfContents;
 -(void)tableOfContentsHasAppeared;
 -(void)removeTableOfContentsView;

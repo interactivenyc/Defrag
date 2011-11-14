@@ -14,12 +14,16 @@
 @interface PageViewController : UIViewController
 {
     PageData *pageData;
+    NSDate *timeCreated;
 }
 
 @property (nonatomic, retain) PageData *pageData;
+@property (nonatomic, retain) NSDate *timeCreated;
 
 -(void)initWithPageData:(PageData *)data;
 -(void)pageWillDisplay;
 -(void)pageDidDisplay;
+
+-(void)logLifetime;
 
 @end

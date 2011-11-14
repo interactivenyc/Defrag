@@ -41,6 +41,7 @@
     [self addSubview:title];
     
     [imageView release];
+    [title release];
     
 }
 

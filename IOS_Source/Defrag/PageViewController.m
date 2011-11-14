@@ -11,7 +11,20 @@
 @implementation PageViewController
 
 @synthesize pageData;
+@synthesize timeCreated;
 
+
+-(void)dealloc
+{
+    NSLog(@"PVC dealloc");
+    
+    pageData = nil;
+    [pageData release];
+    //NSLog(@"released pageData");
+    
+    [timeCreated release];
+    //NSLog(@"released timeCreated");
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -25,9 +38,17 @@
 
 -(void)initWithPageData:(PageData *)data
 {
-    NSLog(@"PVC initWithPageData");
+    //NSLog(@"PVC initWithPageData");
     pageData = data;
+    timeCreated = [[NSDate alloc] init];
     
+}
+
+
+-(void)logLifetime
+{
+    NSDate *now = [[NSDate alloc] init];
+    NSLog(@"PVC logLifetime:%f", fabs([now timeIntervalSinceDate:timeCreated]));
 }
 
 -(void)pageWillDisplay

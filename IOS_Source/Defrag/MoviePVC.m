@@ -15,6 +15,15 @@
 @synthesize swipeLeftRecognizer, swipeRightRecognizer, swipeUpRecognizer, swipeDownRecognizer;
 @synthesize tapRecognizer;
 
+-(void)dealloc
+{
+    [super dealloc];
+    NSLog(@"MoviePVC dealloc");
+    
+    moviePlayerViewController = nil;
+    [moviePlayerViewController dealloc];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -25,10 +34,7 @@
 }
 
 
-- (void)dealloc {
-    [moviePlayerViewController dealloc];    
-    [super dealloc];
-}
+
 
 
 -(void)pageWillDisplay
