@@ -65,6 +65,7 @@
 -(void)handleTap: (UITapGestureRecognizer *)sender;
 
 //ON SWIPE - PAGE NAVIGATION
+-(void)setArticleByIndex:(int)newIndex;
 -(void)createPage;
 -(void)displayPage;
 -(void)pageHasDisplayed;

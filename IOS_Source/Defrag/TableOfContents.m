@@ -8,6 +8,7 @@
 
 #import "TableOfContents.h"
 #import "ThumbView.h"
+#import "DefragAppDelegate.h"
 
 @implementation TableOfContents
 
@@ -25,14 +26,19 @@
 -(void)createTableOfContents: (NSDictionary *)contentDict{
     NSLog(@"TOC createTableOfContents");
     
-    UIView *tableOfContentsView = [[UIView alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 200.0f, 738.0f)];
+    UIView *tableOfContentsView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 350.0f, 758.0f)];
     
-    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 20.0f, 140.0f, 718.0f)];
-    scrollView.backgroundColor = [UIColor grayColor];
-    scrollView.layer.cornerRadius = 10.0f;
-    scrollView.layer.borderWidth = 2.0f;
-    scrollView.layer.borderColor = [[UIColor blackColor] CGColor];
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 350.0f, 758.0f)];
+    scrollView.backgroundColor = [UIColor clearColor];
+    //scrollView.layer.cornerRadius = 10.0f;
+    //scrollView.layer.borderWidth = 2.0f;
+    //scrollView.layer.borderColor = [[UIColor blackColor] CGColor];
     
+    UIView *transparentBG = [[UIView alloc] initWithFrame:CGRectMake(-10.0f, 0.0f, 350.0f, 758.0f)];
+    transparentBG.backgroundColor = [UIColor blackColor];
+    transparentBG.alpha = .50;
+    
+    [tableOfContentsView addSubview:transparentBG];
     [tableOfContentsView addSubview:scrollView];
     
     int articleCount = [[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] count];
@@ -72,6 +78,7 @@
     [self addSubview:tableOfContentsView];
     
     [scrollView release];
+    [transparentBG release];
     [tableOfContentsView release];
     
 }
@@ -85,6 +92,9 @@
     NSLog(@"TOC ***************************");
     NSLog(@"TOC thumbnailClicked index:%i Title:%@", thumbView.thumbIndex, [thumbView.articleData objectForKey:@"Title"]);
     NSLog(@"TOC ***************************");
+    
+    DefragAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate.viewController setArticleByIndex:thumbView.thumbIndex];
     
 }
 

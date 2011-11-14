@@ -21,6 +21,8 @@
 
 @synthesize tableOfContentsView;
 
+int TOC_WIDTH = 200;
+
 
 //*****************************************
 #pragma mark - DEALLOC
@@ -188,6 +190,17 @@
 #pragma mark - PAGE NAVIGATION
 //*****************************************
 
+-(void)setArticleByIndex:(int)newIndex
+{
+    NSLog(@"DVC setArticleByIndex:%i",newIndex);
+    
+    direction = 1;
+    pageIndex = 0;
+    articleIndex = newIndex;
+    [self calculatePageCount];
+    [self createPage];
+    [self displayTableOfContents];
+}
 
 -(void)createPage
 {
@@ -212,6 +225,8 @@
     
     [pageData release];
 }
+
+
 
 
 
@@ -301,16 +316,19 @@
     {
         NSLog(@"DVC displayTableOfContents");
         
-        tableOfContentsView = [[TableOfContents alloc] initWithFrame:CGRectMake(-200.0f, 10.0f, 200.0f, 748.0f)];
+        tableOfContentsView = [[TableOfContents alloc] initWithFrame:CGRectMake(-TOC_WIDTH, 10.0f, TOC_WIDTH, 758.0f)];
         [tableOfContentsView createTableOfContents:contentDict];
         
         [self.view addSubview:tableOfContentsView];
         
         [UIView beginAnimations:nil context:nil];  
+        
+        //find nice bouncy easing
+        //reference: http://stackoverflow.com/questions/5161465/how-to-create-custom-easing-function-with-core-animation
         [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
         
         [UIView animateWithDuration:0.2
-                         animations:^{tableOfContentsView.frame = CGRectMake(10.0f, 10.0f, 200.0f, 748.0f);}
+                         animations:^{tableOfContentsView.frame = CGRectMake(10.0f, 10.0f, TOC_WIDTH, 758.0f);}
                          completion:^(BOOL finished){ [self tableOfContentsHasAppeared]; }];
         
         [UIView commitAnimations];
@@ -323,7 +341,7 @@
         [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
         
         [UIView animateWithDuration:0.2
-                         animations:^{tableOfContentsView.frame = CGRectMake(-200.0f, 10.0f, 200.0f, 748.0f);}
+                         animations:^{tableOfContentsView.frame = CGRectMake(-TOC_WIDTH, 10.0f, TOC_WIDTH, 758.0f);}
                          completion:^(BOOL finished){ [self removeTableOfContentsView]; }];
         
         [UIView commitAnimations];
