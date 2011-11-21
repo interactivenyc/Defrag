@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreText/CoreText.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import <QuartzCore/CoreAnimation.h>
 #import "PageViewController.h"

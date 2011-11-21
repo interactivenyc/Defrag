@@ -21,7 +21,9 @@
 
 @synthesize tableOfContentsView;
 
-int TOC_WIDTH = 200;
+int TOC_WIDTH = 332;
+int TOC_HEIGHT = 758;
+
 
 
 //*****************************************
@@ -316,7 +318,7 @@ int TOC_WIDTH = 200;
     {
         NSLog(@"DVC displayTableOfContents");
         
-        tableOfContentsView = [[TableOfContents alloc] initWithFrame:CGRectMake(-TOC_WIDTH, 10.0f, TOC_WIDTH, 758.0f)];
+        tableOfContentsView = [[TableOfContents alloc] initWithFrame:CGRectMake(-TOC_WIDTH, 10.0f, TOC_WIDTH, TOC_HEIGHT)];
         [tableOfContentsView createTableOfContents:contentDict];
         
         [self.view addSubview:tableOfContentsView];
@@ -328,7 +330,7 @@ int TOC_WIDTH = 200;
         [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
         
         [UIView animateWithDuration:0.2
-                         animations:^{tableOfContentsView.frame = CGRectMake(10.0f, 10.0f, TOC_WIDTH, 758.0f);}
+                         animations:^{tableOfContentsView.frame = CGRectMake(0, 10.0f, TOC_WIDTH, TOC_HEIGHT);}
                          completion:^(BOOL finished){ [self tableOfContentsHasAppeared]; }];
         
         [UIView commitAnimations];
@@ -341,7 +343,7 @@ int TOC_WIDTH = 200;
         [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
         
         [UIView animateWithDuration:0.2
-                         animations:^{tableOfContentsView.frame = CGRectMake(-TOC_WIDTH, 10.0f, TOC_WIDTH, 758.0f);}
+                         animations:^{tableOfContentsView.frame = CGRectMake(-TOC_WIDTH, 10.0f, TOC_WIDTH, TOC_HEIGHT);}
                          completion:^(BOOL finished){ [self removeTableOfContentsView]; }];
         
         [UIView commitAnimations];

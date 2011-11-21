@@ -12,6 +12,7 @@
 
 @implementation TableOfContents
 
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -26,15 +27,15 @@
 -(void)createTableOfContents: (NSDictionary *)contentDict{
     NSLog(@"TOC createTableOfContents");
     
-    UIView *tableOfContentsView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 350.0f, 758.0f)];
+    UIView *tableOfContentsView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 332, 758.0f)];
     
-    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 350.0f, 758.0f)];
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 332, 758.0f)];
     scrollView.backgroundColor = [UIColor clearColor];
     //scrollView.layer.cornerRadius = 10.0f;
     //scrollView.layer.borderWidth = 2.0f;
     //scrollView.layer.borderColor = [[UIColor blackColor] CGColor];
     
-    UIView *transparentBG = [[UIView alloc] initWithFrame:CGRectMake(-10.0f, 0.0f, 350.0f, 758.0f)];
+    UIView *transparentBG = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 332.0f, 758.0f)];
     transparentBG.backgroundColor = [UIColor blackColor];
     transparentBG.alpha = .50;
     
@@ -42,10 +43,10 @@
     [tableOfContentsView addSubview:scrollView];
     
     int articleCount = [[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] count];
-    int thumbWidth = 120.0f;
-    int thumbHeight = 90.0f;
+    int thumbWidth = 325;
+    int thumbHeight = 87;
     int thumbY;
-    int yOrigin = 20.0;
+    int yOrigin = 18.0;
     int cellPadding = 50.0f;
     int TOCHeight = 10;
     
@@ -56,10 +57,10 @@
         
         thumbY = ((thumbHeight + cellPadding) * i);
         
-        thumbView = [[ThumbView alloc] initWithFrame:CGRectMake(10.0f, thumbY+yOrigin, thumbWidth, thumbHeight)];
+        thumbView = [[ThumbView alloc] initWithFrame:CGRectMake(3.0f, thumbY+yOrigin, thumbWidth, thumbHeight)];
         [thumbView initWithArticleData:[[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:i]];
         thumbView.thumbIndex = i;
-        thumbView.backgroundColor = [UIColor greenColor];
+        //thumbView.backgroundColor = [UIColor greenColor];
         
         UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(thumbnailClicked:)];  
         [thumbView addGestureRecognizer:tapRecognizer];

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB0A5AFE147AB44100F18536 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB0A5AFD147AB44100F18536 /* CoreText.framework */; };
 		AB0CE71D13B1615E004E9497 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB0CE71C13B1615E004E9497 /* MediaPlayer.framework */; };
 		AB44F399144542F1004F3D37 /* ImagePVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AB44F396144542F1004F3D37 /* ImagePVC.m */; };
 		AB44F39A144542F1004F3D37 /* MoviePVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AB44F398144542F1004F3D37 /* MoviePVC.m */; };
@@ -102,6 +103,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB0A5AFD147AB44100F18536 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		AB0CE71C13B1615E004E9497 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		AB44F395144542F1004F3D37 /* ImagePVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePVC.h; sourceTree = "<group>"; };
 		AB44F396144542F1004F3D37 /* ImagePVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePVC.m; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				AB0CE71D13B1615E004E9497 /* MediaPlayer.framework in Frameworks */,
 				ABCBDFC0142150E400B39F2D /* QuartzCore.framework in Frameworks */,
 				AB4A63161436BA9000ABF9D8 /* Security.framework in Frameworks */,
+				AB0A5AFE147AB44100F18536 /* CoreText.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,6 +461,7 @@
 		AB6EEE1A13B158CD00BBFB64 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AB0A5AFD147AB44100F18536 /* CoreText.framework */,
 				AB4A63151436BA9000ABF9D8 /* Security.framework */,
 				ABCBDFC0142150E400B39F2C /* QuartzCore.framework */,
 				AB0CE71C13B1615E004E9497 /* MediaPlayer.framework */,
