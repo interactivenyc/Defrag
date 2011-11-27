@@ -19,7 +19,7 @@
 @synthesize currentPageViewController;
 @synthesize contentDict;
 
-@synthesize tableOfContentsView;
+@synthesize tableOfContentsView, menuPanel;
 
 int TOC_WIDTH = 332;
 int TOC_HEIGHT = 758;
@@ -183,6 +183,7 @@ int TOC_HEIGHT = 758;
 {
     NSLog(@"DVC handleTap");
     [self displayTableOfContents];
+    
 }
 
 
@@ -313,6 +314,7 @@ int TOC_HEIGHT = 758;
 
 
 - (void)displayTableOfContents{
+    [self displayMenuPanel];
     
     if (!tableOfContentsView)
     {
@@ -364,6 +366,60 @@ int TOC_HEIGHT = 758;
     [tableOfContentsView removeFromSuperview];
     [tableOfContentsView release];
     tableOfContentsView = nil;
+}
+
+
+- (void)displayMenuPanel{
+    
+    if (!menuPanel)
+    {
+        NSLog(@"DVC displayMenuPanel");
+        
+        menuPanel = [[MenuPanel alloc] initWithFrame:CGRectMake(1224, 10.0f, 200, 48)];
+        [menuPanel createMenuPanel];
+        
+        [self.view addSubview:menuPanel];
+        
+        [UIView beginAnimations:nil context:nil];  
+        
+        //find nice bouncy easing
+        //reference: http://stackoverflow.com/questions/5161465/how-to-create-custom-easing-function-with-core-animation
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+        
+        [UIView animateWithDuration:0.2
+                         animations:^{menuPanel.frame = CGRectMake(824, 10.0f, 200, 48);}
+                         completion:^(BOOL finished){ [self menuPanelHasAppeared]; }];
+        
+        [UIView commitAnimations];
+    }
+    else
+    {
+        NSLog(@"DVC displayMenuPanel DELETE");
+        
+        [UIView beginAnimations:nil context:nil];  
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+        
+        [UIView animateWithDuration:0.2
+                         animations:^{menuPanel.frame = CGRectMake(1224, 10.0f, 200, 48);}
+                         completion:^(BOOL finished){ [self removeMenuPanelView]; }];
+        
+        [UIView commitAnimations];
+        
+    }
+    
+}
+
+-(void)menuPanelHasAppeared
+{
+    NSLog(@"DVC menuPanelHasAppeared");
+}
+
+
+-(void)removeMenuPanelView
+{
+    [menuPanel removeFromSuperview];
+    [menuPanel release];
+    menuPanel = nil;
 }
 
 //*****************************************

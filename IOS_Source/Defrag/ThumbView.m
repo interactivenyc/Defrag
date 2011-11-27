@@ -27,9 +27,10 @@
     NSLog(@"TV initWithArticleData");
     articleData = data;
 
-    UIView *transparentBG = [[UIView alloc] initWithFrame:CGRectMake(-0.0f, -5.0f, 325.0f, 135.0f)];
+    UIButton *transparentBG = [[UIButton alloc] initWithFrame:CGRectMake(-0.0f, -5.0f, 325.0f, 135.0f)];
     transparentBG.backgroundColor = [UIColor blackColor];
     transparentBG.alpha = .5;
+    //transparentBG.interactiveEnabled = true;
     
     [self addSubview:transparentBG];
     
@@ -58,6 +59,7 @@
     description.backgroundColor = [UIColor clearColor];
     description.textColor = [UIColor whiteColor];
     description.font = [UIFont fontWithName:@"Helvetica-Oblique" size:12];
+    description.editable = false;
     [description setText:[articleData objectForKey:@"Description"]];
     
     [self addSubview:description];

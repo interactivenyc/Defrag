@@ -16,6 +16,7 @@
 #import "ImagePVC.h"
 #import "MoviePVC.h"
 #import "TableOfContents.h"
+#import "MenuPanel.h"
 
 @interface DefragViewController : UINavigationController <UIGestureRecognizerDelegate>
 {	    
@@ -30,6 +31,7 @@
     
     PageViewController *currentPageViewController;
     TableOfContents *tableOfContentsView;
+    MenuPanel *menuPanel;
     
 }
 
@@ -53,6 +55,8 @@
 @property (nonatomic, retain) PageViewController *currentPageViewController;
 @property (nonatomic, retain) TableOfContents *tableOfContentsView;
 
+@property (nonatomic, retain) MenuPanel *menuPanel;
+
 
 
 //*********************************************************
@@ -75,6 +79,10 @@
 -(void)displayTableOfContents;
 -(void)tableOfContentsHasAppeared;
 -(void)removeTableOfContentsView;
+
+- (void)displayMenuPanel;
+-(void)menuPanelHasAppeared;
+-(void)removeMenuPanelView;
 
 //UTILITIES
 -(void)logPageInfo;
