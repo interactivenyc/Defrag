@@ -13,5 +13,7 @@
 }
 
 -(void)createMenuPanel;
+-(void) addButton:(NSString *)imageName xPos:(int)xPos yPos:(int)yPos;
+-(void)buttonClicked:(UITapGestureRecognizer *)sender;
 
 @end

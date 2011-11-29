@@ -182,7 +182,7 @@ int TOC_HEIGHT = 758;
 - (void)handleTap:(UITapGestureRecognizer *)sender 
 {
     NSLog(@"DVC handleTap");
-    [self displayTableOfContents];
+    [self displayMenuPanel];
     
 }
 
@@ -314,7 +314,7 @@ int TOC_HEIGHT = 758;
 
 
 - (void)displayTableOfContents{
-    [self displayMenuPanel];
+    
     
     if (!tableOfContentsView)
     {
@@ -375,8 +375,9 @@ int TOC_HEIGHT = 758;
     {
         NSLog(@"DVC displayMenuPanel");
         
-        menuPanel = [[MenuPanel alloc] initWithFrame:CGRectMake(1224, 10.0f, 200, 48)];
+        menuPanel = [[MenuPanel alloc] initWithFrame:CGRectMake(0, 0, 1024, 768)];
         [menuPanel createMenuPanel];
+        menuPanel.alpha = 0;
         
         [self.view addSubview:menuPanel];
         
@@ -386,8 +387,8 @@ int TOC_HEIGHT = 758;
         //reference: http://stackoverflow.com/questions/5161465/how-to-create-custom-easing-function-with-core-animation
         [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
         
-        [UIView animateWithDuration:0.2
-                         animations:^{menuPanel.frame = CGRectMake(824, 10.0f, 200, 48);}
+        [UIView animateWithDuration:5.0
+                         animations:^{menuPanel.alpha = 1;}
                          completion:^(BOOL finished){ [self menuPanelHasAppeared]; }];
         
         [UIView commitAnimations];
@@ -399,8 +400,8 @@ int TOC_HEIGHT = 758;
         [UIView beginAnimations:nil context:nil];  
         [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
         
-        [UIView animateWithDuration:0.2
-                         animations:^{menuPanel.frame = CGRectMake(1224, 10.0f, 200, 48);}
+        [UIView animateWithDuration:5.0
+                         animations:^{menuPanel.alpha = 0;}
                          completion:^(BOOL finished){ [self removeMenuPanelView]; }];
         
         [UIView commitAnimations];

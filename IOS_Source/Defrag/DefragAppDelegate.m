@@ -20,6 +20,8 @@
     // Override point for customization after application launch.
     
     NSLog(@"DefragAppDelegate didFinishLaunchingWithOptions");
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
 
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
