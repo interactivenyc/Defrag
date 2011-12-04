@@ -271,13 +271,8 @@ int TOC_HEIGHT = 758;
     }
     
     [layer addAnimation:transition forKey:@"Transition"];  
-    
-    //handle cleanup of page controllers
-    NSLog(@"DVC pushViewController [STOP PUSHING VIEWCONTROLLERS - MANAGE WITH AN ARRAY]");
-    
+
     [self pushViewController:currentPageViewController animated:NO];
-    //[self.view addSubview:currentPageView.view];
-    //currentPageView.view.userInteractionEnabled = NO;
     
 }
 
@@ -315,10 +310,7 @@ int TOC_HEIGHT = 758;
 //*****************************************
 
 
-
-
 - (void)displayTableOfContents{
-    
     
     if (!tableOfContentsView)
     {

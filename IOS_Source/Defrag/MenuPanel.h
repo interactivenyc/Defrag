@@ -10,7 +10,7 @@
 
 //extern NSString *BUTTON_CLICKED;
 
-@interface MenuPanel : UIView{
+@interface MenuPanel : UIView <UINavigationBarDelegate>{
    // NSDictionary *buttonDict;
     UIToolbar *toolbar;
 }
@@ -18,11 +18,7 @@
 @property(nonatomic, retain) UIToolbar *toolbar;
 
 -(void)createMenuPanel;
-
-- (void)createToolbarItems;
-
-
--(void)addButton:(NSString *)imageName xPos:(int)xPos yPos:(int)yPos;
--(void)buttonClicked:(UITapGestureRecognizer *)sender;
+-(void)createToolbarItems;
+-(void)buttonClicked:(id *)sender;
 
 @end
