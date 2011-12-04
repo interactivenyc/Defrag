@@ -49,6 +49,7 @@
 {
     NSDate *now = [[NSDate alloc] init];
     NSLog(@"PVC logLifetime:%f", fabs([now timeIntervalSinceDate:timeCreated]));
+    [now release];
 }
 
 -(void)pageWillDisplay

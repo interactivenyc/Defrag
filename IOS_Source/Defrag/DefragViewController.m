@@ -10,6 +10,10 @@
 #import "TableOfContents.h"
 #import "Utils.h"
 
+NSString *BUTTON_HOME = @"BUTTON_HOME";
+
+
+
 @implementation DefragViewController
 
 //Integers don't need to be dealloc'ed
@@ -23,7 +27,6 @@
 
 int TOC_WIDTH = 332;
 int TOC_HEIGHT = 758;
-
 
 
 //*****************************************
@@ -67,8 +70,10 @@ int TOC_HEIGHT = 758;
     
     [self createPage];
     
-    //[self createTableOfContents];
+    //ADD EVENT LISTENERS
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEvent:) name:BUTTON_HOME object:nil];
     
+     
     
 }
 
@@ -298,7 +303,6 @@ int TOC_HEIGHT = 758;
         [pageInstance logLifetime];
         
         [pageInstance removeFromParentViewController];
-        [pageInstance release];
     }
     
     numControllers = [self.viewControllers count];
@@ -421,6 +425,19 @@ int TOC_HEIGHT = 758;
     [menuPanel removeFromSuperview];
     [menuPanel release];
     menuPanel = nil;
+}
+
+
+//*****************************************
+#pragma mark - EVENTS
+//*****************************************
+
+-(void)handleEvent:(NSNotification *)aNotification {
+    NSLog(@"DVC handleEvent %@", aNotification);
+}
+
+-(void)showHome {
+    
 }
 
 //*****************************************

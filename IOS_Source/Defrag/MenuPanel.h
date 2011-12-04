@@ -8,12 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+//extern NSString *BUTTON_CLICKED;
+
 @interface MenuPanel : UIView{
-    
+   // NSDictionary *buttonDict;
+    UIToolbar *toolbar;
 }
 
+@property(nonatomic, retain) UIToolbar *toolbar;
+
 -(void)createMenuPanel;
--(void) addButton:(NSString *)imageName xPos:(int)xPos yPos:(int)yPos;
+
+- (void)createToolbarItems;
+
+
+-(void)addButton:(NSString *)imageName xPos:(int)xPos yPos:(int)yPos;
 -(void)buttonClicked:(UITapGestureRecognizer *)sender;
 
 @end

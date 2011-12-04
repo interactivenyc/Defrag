@@ -18,6 +18,8 @@
 #import "TableOfContents.h"
 #import "MenuPanel.h"
 
+extern NSString *BUTTON_HOME;
+
 @interface DefragViewController : UINavigationController <UIGestureRecognizerDelegate>
 {	    
     int articleCount;
@@ -32,6 +34,9 @@
     PageViewController *currentPageViewController;
     TableOfContents *tableOfContentsView;
     MenuPanel *menuPanel;
+    
+    
+
     
 }
 
@@ -83,6 +88,10 @@
 - (void)displayMenuPanel;
 -(void)menuPanelHasAppeared;
 -(void)removeMenuPanelView;
+
+//EVENTS
+-(void)handleEvent:(NSNotification *)aNotification;
+-(void)showHome;
 
 //UTILITIES
 -(void)logPageInfo;

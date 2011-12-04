@@ -33,6 +33,8 @@
     //transparentBG.interactiveEnabled = true;
     
     [self addSubview:transparentBG];
+    [transparentBG release];
+
     
     UIImage *myImage;
     UIImageView *imageView;
@@ -47,6 +49,8 @@
     imageView.frame = imageFrame;
     
     [self addSubview:imageView];
+    [imageView release];
+
     
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(136, 0, 180, 24)];
     title.backgroundColor = [UIColor clearColor];
@@ -54,7 +58,8 @@
     title.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
     [title setText:[articleData objectForKey:@"Title"]];
     [self addSubview:title];
-    
+    [title release];
+
     UITextView *description = [[UITextView alloc] initWithFrame:CGRectMake(126, 16, 180, 100)];
     description.backgroundColor = [UIColor clearColor];
     description.textColor = [UIColor whiteColor];
@@ -63,9 +68,6 @@
     [description setText:[articleData objectForKey:@"Description"]];
     
     [self addSubview:description];
-    
-    [imageView release];
-    [title release];
     [description release];
     
 }

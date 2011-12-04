@@ -9,6 +9,7 @@
 #import "TableOfContents.h"
 #import "ThumbView.h"
 #import "DefragAppDelegate.h"
+#import "DefragViewController.h"
 
 @implementation TableOfContents
 
