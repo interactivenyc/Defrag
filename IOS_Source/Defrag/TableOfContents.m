@@ -47,7 +47,7 @@
     int thumbWidth = 325;
     int thumbHeight = 87;
     int thumbY;
-    int yOrigin = 18.0;
+    int yOrigin = 10;
     int cellPadding = 50.0f;
     int TOCHeight = 10;
     

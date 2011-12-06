@@ -27,7 +27,7 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
 @synthesize tableOfContentsView, menuPanel;
 
 int TOC_WIDTH = 332;
-int TOC_HEIGHT = 758;
+int TOC_HEIGHT = 726;
 
 
 //*****************************************
@@ -223,6 +223,10 @@ int TOC_HEIGHT = 758;
     [self calculatePageCount];
     [self createPage];
     [self displayTableOfContents];
+    
+    if (menuPanel != nil){
+        [self displayMenuPanel];
+    }
 }
 
 -(void)createPage
@@ -331,7 +335,7 @@ int TOC_HEIGHT = 758;
     {
         NSLog(@"DVC displayTableOfContents");
         
-        tableOfContentsView = [[TableOfContents alloc] initWithFrame:CGRectMake(-TOC_WIDTH, 10.0f, TOC_WIDTH, TOC_HEIGHT)];
+        tableOfContentsView = [[TableOfContents alloc] initWithFrame:CGRectMake(-TOC_WIDTH, 42, TOC_WIDTH, TOC_HEIGHT)];
         [tableOfContentsView createTableOfContents:contentDict];
         
         [self.view addSubview:tableOfContentsView];
@@ -343,7 +347,7 @@ int TOC_HEIGHT = 758;
         [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
         
         [UIView animateWithDuration:0.2
-                         animations:^{tableOfContentsView.frame = CGRectMake(0, 10.0f, TOC_WIDTH, TOC_HEIGHT);}
+                         animations:^{tableOfContentsView.frame = CGRectMake(0, 42, TOC_WIDTH, TOC_HEIGHT);}
                          completion:^(BOOL finished){ [self tableOfContentsHasAppeared]; }];
         
         [UIView commitAnimations];
@@ -356,7 +360,7 @@ int TOC_HEIGHT = 758;
         [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
         
         [UIView animateWithDuration:0.2
-                         animations:^{tableOfContentsView.frame = CGRectMake(-TOC_WIDTH, 10.0f, TOC_WIDTH, TOC_HEIGHT);}
+                         animations:^{tableOfContentsView.frame = CGRectMake(-TOC_WIDTH, 42, TOC_WIDTH, TOC_HEIGHT);}
                          completion:^(BOOL finished){ [self removeTableOfContentsView]; }];
         
         [UIView commitAnimations];
@@ -417,6 +421,9 @@ int TOC_HEIGHT = 758;
         
         [UIView commitAnimations];
         
+        if (tableOfContentsView != nil){
+            [self displayTableOfContents];
+        }
     }
     
 }
@@ -446,11 +453,16 @@ int TOC_HEIGHT = 758;
     
     if ([buttonName isEqualToString:@"menuButton"]) {
         NSLog(@"MENU BUTTON CLICKED");
+        [self displayTableOfContents];
+    }else if ([buttonName isEqualToString:@"homeButton"]){
+        NSLog(@"OTHER BUTTON CLICKED");
+        [self setArticleByIndex:0];
     }else{
         NSLog(@"OTHER BUTTON CLICKED");
+        [self displayMenuPanel];
     }
     
-    [self displayMenuPanel];
+    
 }
 
 -(void)showHome {
