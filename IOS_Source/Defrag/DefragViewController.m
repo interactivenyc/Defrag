@@ -10,7 +10,7 @@
 #import "TableOfContents.h"
 #import "Utils.h"
 
-NSString *BUTTON_HOME = @"BUTTON_HOME";
+NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
 
 
 
@@ -19,6 +19,7 @@ NSString *BUTTON_HOME = @"BUTTON_HOME";
 //Integers don't need to be dealloc'ed
 @synthesize pageIndex, articleIndex, articleCount, pageCount;
 @synthesize direction;
+@synthesize tapRecognizer;
 
 @synthesize currentPageViewController;
 @synthesize contentDict;
@@ -64,14 +65,17 @@ int TOC_HEIGHT = 758;
     direction = 1;
     
     [self calculatePageCount];
+    
+    
     [self setupGestureRecognizers];
+    //[self displayMenuPanel];
     
     [self setNavigationBarHidden:YES];    
     
     [self createPage];
     
     //ADD EVENT LISTENERS
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEvent:) name:BUTTON_HOME object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEvent:) name:BUTTON_CLICKED object:nil];
     
      
     
@@ -109,10 +113,9 @@ int TOC_HEIGHT = 758;
     [self.view addGestureRecognizer:swipeRecognizer];
     [swipeRecognizer release];
     
-    UITapGestureRecognizer *tapRecognizer;
-    
     tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.view addGestureRecognizer:tapRecognizer];
+    tapRecognizer.delegate = self;
     [tapRecognizer release];
 }
 
@@ -186,9 +189,21 @@ int TOC_HEIGHT = 758;
 
 - (void)handleTap:(UITapGestureRecognizer *)sender 
 {
-    NSLog(@"DVC handleTap");
+    NSLog(@"DVC handleTap %@", sender);
     [self displayMenuPanel];
     
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+    
+    //ignore any touches from a UIToolbar
+    
+    if ([touch.view.superview isKindOfClass:[UIToolbar class]]) {      //change it to your condition
+        NSLog(@"DVC handleTap gestureRecognizer TEST NO");
+        return NO;
+    }
+    NSLog(@"DVC handleTap gestureRecognizer TEST YES");
+    return YES;
 }
 
 
@@ -425,7 +440,17 @@ int TOC_HEIGHT = 758;
 //*****************************************
 
 -(void)handleEvent:(NSNotification *)aNotification {
-    NSLog(@"DVC handleEvent %@", aNotification);
+    NSLog(@"DVC handleEvent name: %@ object: %@ ", aNotification.name, aNotification.object);
+    
+    NSString *buttonName = (NSString *)[aNotification object];
+    
+    if ([buttonName isEqualToString:@"menuButton"]) {
+        NSLog(@"MENU BUTTON CLICKED");
+    }else{
+        NSLog(@"OTHER BUTTON CLICKED");
+    }
+    
+    [self displayMenuPanel];
 }
 
 -(void)showHome {

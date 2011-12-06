@@ -11,14 +11,15 @@
 //extern NSString *BUTTON_CLICKED;
 
 @interface MenuPanel : UIView <UINavigationBarDelegate>{
-   // NSDictionary *buttonDict;
+    NSDictionary *buttonDict;
     UIToolbar *toolbar;
 }
 
+@property(nonatomic, retain) NSDictionary *buttonDict;
 @property(nonatomic, retain) UIToolbar *toolbar;
 
 -(void)createMenuPanel;
 -(void)createToolbarItems;
--(void)buttonClicked:(id *)sender;
+-(void)buttonClicked:(id)sender;
 
 @end

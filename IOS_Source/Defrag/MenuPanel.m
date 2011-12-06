@@ -12,6 +12,7 @@
 
 @implementation MenuPanel
 
+@synthesize buttonDict;
 @synthesize toolbar;
 
 - (id)initWithFrame:(CGRect)frame
@@ -39,31 +40,42 @@
 
 - (void)createToolbarItems
 {	
-    UIBarButtonItem *homeItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"home.png"] style:UIBarButtonItemStylePlain target:self action:@selector(buttonClicked:)];
-    UIBarButtonItem *menuItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu.png"] style:UIBarButtonItemStylePlain target:self action:@selector(buttonClicked:)];
+    UIBarButtonItem *homeButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"home.png"] style:UIBarButtonItemStylePlain target:self action:@selector(buttonClicked:)];
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu.png"] style:UIBarButtonItemStylePlain target:self action:@selector(buttonClicked:)];
     UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-	UIBarButtonItem *infoItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"info.png"] style:UIBarButtonItemStylePlain target:self action:@selector(buttonClicked:)];
-    UIBarButtonItem *prefsItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"prefs.png"] style:UIBarButtonItemStylePlain target:self action:@selector(buttonClicked:)];
+	UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"info.png"] style:UIBarButtonItemStylePlain target:self action:@selector(buttonClicked:)];
+    UIBarButtonItem *prefsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"prefs.png"] style:UIBarButtonItemStylePlain target:self action:@selector(buttonClicked:)];
+    
+	NSArray *items = [NSArray arrayWithObjects: homeButton, menuButton, flexItem, infoButton,  prefsButton, nil];
+    NSArray *itemKeys = [NSArray arrayWithObjects: @"homeButton", @"menuButton", @"flexItem", @"infoButton",  @"prefsButton", nil];
 
-	NSArray *items = [NSArray arrayWithObjects: homeItem, menuItem, flexItem, infoItem,  prefsItem, nil];
 	[self.toolbar setItems:items animated:NO];
+        
+    buttonDict = [[NSDictionary alloc] initWithObjects:items forKeys:itemKeys];
 
-	[homeItem release];
-	[menuItem release];
+	[homeButton release];
+	[menuButton release];
     [flexItem release];
-	[infoItem release];
-	[prefsItem release];
+	[infoButton release];
+	[prefsButton release];
 }
 
 
--(void)buttonClicked:(id *)sender {
+-(void)buttonClicked:(id)sender {
         
-    NSLog(@"MenuPanel ***************************");
-    NSLog(@"MenuPanel buttonClicked %@", sender);
-    NSLog(@"MenuPanel ***************************");
+    NSString *buttonName = [[buttonDict allKeysForObject:sender] objectAtIndex:0];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:BUTTON_HOME object:self];
+    NSLog(@"MenuPanel ***************************");
+    NSLog(@"MenuPanel buttonClicked %@", buttonName);
+    NSLog(@"MenuPanel ***************************");  
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:BUTTON_CLICKED object:buttonName];
+    
+}
+
+- (void)action:(id)sender
+{
+	NSLog(@"UIBarButtonItem clicked %@", sender);
 }
 
 

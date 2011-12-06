@@ -18,7 +18,7 @@
 #import "TableOfContents.h"
 #import "MenuPanel.h"
 
-extern NSString *BUTTON_HOME;
+extern NSString *BUTTON_CLICKED;
 
 @interface DefragViewController : UINavigationController <UIGestureRecognizerDelegate>
 {	    
@@ -28,6 +28,8 @@ extern NSString *BUTTON_HOME;
     int pageIndex;
     
     char direction;
+    
+    UITapGestureRecognizer *tapRecognizer;
     
     NSDictionary *contentDict;
     
@@ -52,6 +54,8 @@ extern NSString *BUTTON_HOME;
 @property int pageIndex;
 
 @property char direction;
+
+@property (nonatomic, retain) UITapGestureRecognizer *tapRecognizer;
 
 //CONTENT DATA
 @property (nonatomic, retain) NSDictionary *contentDict;
