@@ -53,10 +53,11 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
     direction = 1;
     
     [self calculatePageCount];
-    
-    
     [self setupGestureRecognizers];    
-    [self setNavigationBarHidden:YES];    
+    [self setNavigationBarHidden:YES];   
+    
+    //ADD EVENT LISTENERS
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(buttonClicked:) name:BUTTON_CLICKED object:nil];
     
     [self createPage];
     
@@ -339,14 +340,14 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
 #pragma mark - EVENTS
 //*****************************************
 
--(void)handleEvent:(NSNotification *)aNotification {
-    NSLog(@"DVC handleEvent name: %@ object: %@ ", aNotification.name, aNotification.object);
+-(void)buttonClicked:(NSNotification *)aNotification {
+    NSLog(@"DVC buttonClicked name: %@ object: %@ ", aNotification.name, aNotification.object);
     
     NSString *buttonName = (NSString *)[aNotification object];
     
-    if ([buttonName isEqualToString:@"homeButton"]){
-        NSLog(@"OTHER BUTTON CLICKED");
-        [self setArticleByIndex:0];
+    if ([buttonName isEqualToString:@"infoButton"]){
+        NSLog(@"infoButton CLICKED");
+        
     }
     
     

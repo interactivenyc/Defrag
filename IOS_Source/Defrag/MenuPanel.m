@@ -77,6 +77,8 @@ int TOC_HEIGHT = 726;
     DefragAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     DefragViewController *defragViewController = appDelegate.viewController;
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:BUTTON_CLICKED object:buttonName];
+    
     if ([buttonName isEqualToString:@"homeButton"]){
         [defragViewController setArticleByIndex:0];
         
@@ -85,8 +87,20 @@ int TOC_HEIGHT = 726;
         
     }else if ([buttonName isEqualToString:@"infoButton"]){
         
-    }else if ([buttonName isEqualToString:@"prefsButton"]){
+        UIViewController *infoViewController = [[UIViewController alloc] init];
+        infoViewController.view.backgroundColor = [UIColor whiteColor];
         
+        UIPopoverController *info = [[UIPopoverController alloc] initWithContentViewController:infoViewController];
+        info.popoverContentSize = CGSizeMake(300, 300);
+        [info presentPopoverFromRect:CGRectMake(952, 24, 24, 24) inView:self permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+
+    }else if ([buttonName isEqualToString:@"prefsButton"]){
+        UIViewController *infoViewController = [[UIViewController alloc] init];
+        infoViewController.view.backgroundColor = [UIColor whiteColor];
+        
+        UIPopoverController *info = [[UIPopoverController alloc] initWithContentViewController:infoViewController];
+        info.popoverContentSize = CGSizeMake(300, 300);
+        [info presentPopoverFromRect:CGRectMake(1000, 24, 24, 24) inView:self permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     }    
     
     

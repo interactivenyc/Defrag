@@ -61,12 +61,12 @@ extern NSString *BUTTON_CLICKED;
 -(void)setupGestureRecognizers;
 -(void)handleGesture: (UIGestureRecognizer *)sender;
 -(void)handleTap: (UITapGestureRecognizer *)sender;
+-(void)buttonClicked:(NSNotification *)aNotification;
 
 //ON SWIPE - PAGE NAVIGATION
 -(void)setArticleByIndex:(int)newIndex;
 -(void)createPage;
 -(void)displayPage;
-//-(void)pageHasDisplayed;
 
 -(void)displayMenuPanel;
 -(void)menuPanelHasAppeared;
