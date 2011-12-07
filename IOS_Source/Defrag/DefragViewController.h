@@ -10,12 +10,10 @@
 #import <CoreText/CoreText.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import <QuartzCore/CoreAnimation.h>
-#import "PageViewController.h"
 
-#import "DefragAppDelegate.h"
+#import "PageViewController.h"
 #import "ImagePVC.h"
 #import "MoviePVC.h"
-#import "TableOfContents.h"
 #import "MenuPanel.h"
 
 extern NSString *BUTTON_CLICKED;
@@ -26,19 +24,12 @@ extern NSString *BUTTON_CLICKED;
     int articleIndex;
     int pageCount;
     int pageIndex;
-    
     char direction;
     
     UITapGestureRecognizer *tapRecognizer;
-    
     NSDictionary *contentDict;
-    
     PageViewController *currentPageViewController;
-    TableOfContents *tableOfContentsView;
     MenuPanel *menuPanel;
-    
-    
-
     
 }
 
@@ -52,18 +43,11 @@ extern NSString *BUTTON_CLICKED;
 @property int articleIndex;
 @property int pageCount;
 @property int pageIndex;
-
 @property char direction;
 
 @property (nonatomic, retain) UITapGestureRecognizer *tapRecognizer;
-
-//CONTENT DATA
 @property (nonatomic, retain) NSDictionary *contentDict;
-
-//VIEW CONTROLLERS
 @property (nonatomic, retain) PageViewController *currentPageViewController;
-@property (nonatomic, retain) TableOfContents *tableOfContentsView;
-
 @property (nonatomic, retain) MenuPanel *menuPanel;
 
 
@@ -82,20 +66,11 @@ extern NSString *BUTTON_CLICKED;
 -(void)setArticleByIndex:(int)newIndex;
 -(void)createPage;
 -(void)displayPage;
--(void)pageHasDisplayed;
+//-(void)pageHasDisplayed;
 
-//TABLE OF CONTENTS
--(void)displayTableOfContents;
--(void)tableOfContentsHasAppeared;
--(void)removeTableOfContentsView;
-
-- (void)displayMenuPanel;
+-(void)displayMenuPanel;
 -(void)menuPanelHasAppeared;
 -(void)removeMenuPanelView;
-
-//EVENTS
--(void)handleEvent:(NSNotification *)aNotification;
--(void)showHome;
 
 //UTILITIES
 -(void)logPageInfo;

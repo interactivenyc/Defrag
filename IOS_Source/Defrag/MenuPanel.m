@@ -7,13 +7,18 @@
 //
 
 #import "MenuPanel.h"
+#import "DefragAppDelegate.h"
 #import "DefragViewController.h"
-
 
 @implementation MenuPanel
 
 @synthesize buttonDict;
 @synthesize toolbar;
+@synthesize tableOfContentsView;
+//@synthesize defragViewController;
+
+int TOC_WIDTH = 332;
+int TOC_HEIGHT = 726;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -69,8 +74,72 @@
     NSLog(@"MenuPanel buttonClicked %@", buttonName);
     NSLog(@"MenuPanel ***************************");  
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:BUTTON_CLICKED object:buttonName];
+    DefragAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    DefragViewController *defragViewController = appDelegate.viewController;
     
+    if ([buttonName isEqualToString:@"homeButton"]){
+        [defragViewController setArticleByIndex:0];
+        
+    }else if ([buttonName isEqualToString:@"menuButton"]){
+        [self displayTableOfContents];
+        
+    }else if ([buttonName isEqualToString:@"infoButton"]){
+        
+    }else if ([buttonName isEqualToString:@"prefsButton"]){
+        
+    }    
+    
+    
+}
+
+
+
+- (void)displayTableOfContents{
+    
+    if (!tableOfContentsView)
+    {
+        NSLog(@"DVC displayTableOfContents");
+        
+        tableOfContentsView = [[TableOfContents alloc] initWithFrame:CGRectMake(-TOC_WIDTH, 42, TOC_WIDTH, TOC_HEIGHT)];
+        
+        DefragAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        DefragViewController *defragViewController = appDelegate.viewController;
+        [tableOfContentsView createTableOfContents:defragViewController.contentDict];
+        
+        [self addSubview:tableOfContentsView];
+        
+        [UIView beginAnimations:nil context:nil];  
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+        [UIView animateWithDuration:0.2
+                         animations:^{tableOfContentsView.frame = CGRectMake(0, 42, TOC_WIDTH, TOC_HEIGHT);}
+                         completion:^(BOOL finished){ [self tableOfContentsHasAppeared]; }];
+        [UIView commitAnimations];
+    }
+    else
+    {
+        NSLog(@"DVC displayTableOfContents DELETE");
+        
+        [UIView beginAnimations:nil context:nil];  
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+        [UIView animateWithDuration:0.2
+                         animations:^{tableOfContentsView.frame = CGRectMake(-TOC_WIDTH, 42, TOC_WIDTH, TOC_HEIGHT);}
+                         completion:^(BOOL finished){ [self removeTableOfContentsView]; }];
+        [UIView commitAnimations];
+    }
+}
+
+
+-(void)tableOfContentsHasAppeared
+{
+    NSLog(@"DVC tableOfContentsHasAppeared");
+}
+
+
+-(void)removeTableOfContentsView
+{
+    [tableOfContentsView removeFromSuperview];
+    [tableOfContentsView release];
+    tableOfContentsView = nil;
 }
 
 - (void)action:(id)sender

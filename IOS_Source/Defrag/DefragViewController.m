@@ -7,12 +7,8 @@
 //
 
 #import "DefragViewController.h"
-#import "TableOfContents.h"
-#import "Utils.h"
 
 NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
-
-
 
 @implementation DefragViewController
 
@@ -23,11 +19,8 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
 
 @synthesize currentPageViewController;
 @synthesize contentDict;
+@synthesize menuPanel;
 
-@synthesize tableOfContentsView, menuPanel;
-
-int TOC_WIDTH = 332;
-int TOC_HEIGHT = 726;
 
 
 //*****************************************
@@ -38,9 +31,7 @@ int TOC_HEIGHT = 726;
     
     [contentDict release];
     [currentPageViewController release];
-    
-    [tableOfContentsView release];
-    
+    [menuPanel release];
     [super dealloc];
 }
 
@@ -53,13 +44,10 @@ int TOC_HEIGHT = 726;
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"DefragViewController viewDidLoad");
-    NSLog(@"DVC PAGE IS COVER - INIT");
+    NSLog(@"INITIALIZE");
     
-    //NSLog(@"DefragViewController PARSE PLIST");
     contentDict = [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Content" ofType:@"plist"]];
-    
     articleCount = [[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] count];
-    
     articleIndex = 0;
     pageIndex = 0;
     direction = 1;
@@ -67,17 +55,10 @@ int TOC_HEIGHT = 726;
     [self calculatePageCount];
     
     
-    [self setupGestureRecognizers];
-    //[self displayMenuPanel];
-    
+    [self setupGestureRecognizers];    
     [self setNavigationBarHidden:YES];    
     
     [self createPage];
-    
-    //ADD EVENT LISTENERS
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleEvent:) name:BUTTON_CLICKED object:nil];
-    
-     
     
 }
 
@@ -89,7 +70,10 @@ int TOC_HEIGHT = 726;
 
 - (void)setupGestureRecognizers {
     
-    //NSLog(@"setupGestureRecognizer NEW");
+    tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    [self.view addGestureRecognizer:tapRecognizer];
+    tapRecognizer.delegate = self;
+    [tapRecognizer release];
     
     UISwipeGestureRecognizer *swipeRecognizer;
     
@@ -113,11 +97,29 @@ int TOC_HEIGHT = 726;
     [self.view addGestureRecognizer:swipeRecognizer];
     [swipeRecognizer release];
     
-    tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    [self.view addGestureRecognizer:tapRecognizer];
-    tapRecognizer.delegate = self;
-    [tapRecognizer release];
+    
 }
+
+
+- (void)handleTap:(UITapGestureRecognizer *)sender 
+{
+    NSLog(@"DVC handleTap %@", sender);
+    [self displayMenuPanel];
+    
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+    
+    //ignore any touches from a UIToolbar
+    
+    if ([touch.view.superview isKindOfClass:[UIToolbar class]]) {      //change it to your condition
+        NSLog(@"DVC handleTap gestureRecognizer TEST NO");
+        return NO;
+    }
+    NSLog(@"DVC handleTap gestureRecognizer TEST YES");
+    return YES;
+}
+
 
 
 - (void)handleGesture:(UISwipeGestureRecognizer *)sender {
@@ -183,28 +185,9 @@ int TOC_HEIGHT = 726;
     }
     
     [self createPage];
-
-}
-
-
-- (void)handleTap:(UITapGestureRecognizer *)sender 
-{
-    NSLog(@"DVC handleTap %@", sender);
-    [self displayMenuPanel];
     
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
-    
-    //ignore any touches from a UIToolbar
-    
-    if ([touch.view.superview isKindOfClass:[UIToolbar class]]) {      //change it to your condition
-        NSLog(@"DVC handleTap gestureRecognizer TEST NO");
-        return NO;
-    }
-    NSLog(@"DVC handleTap gestureRecognizer TEST YES");
-    return YES;
-}
 
 
 
@@ -222,7 +205,7 @@ int TOC_HEIGHT = 726;
     articleIndex = newIndex;
     [self calculatePageCount];
     [self createPage];
-    [self displayTableOfContents];
+    //[self displayTableOfContents];
     
     if (menuPanel != nil){
         [self displayMenuPanel];
@@ -252,10 +235,6 @@ int TOC_HEIGHT = 726;
     
     [pageData release];
 }
-
-
-
-
 
 
 
@@ -290,98 +269,16 @@ int TOC_HEIGHT = 726;
     }
     
     [layer addAnimation:transition forKey:@"Transition"];  
-
+    
     [self pushViewController:currentPageViewController animated:NO];
     
 }
 
-- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
-{
-    NSLog(@"DVC animationDidStop");
-    
-    [self pageHasDisplayed];
-}
-
-
--(void)pageHasDisplayed
-{
-    int numControllers = [self.viewControllers count];
-    NSLog(@"numViewControllers:%i", numControllers);
-    
-    PageViewController *pageInstance;
-    //PageData *pageData;
-    for (int i=0; i<numControllers-1; i++) {
-        NSLog(@"i:%i", i);
-        pageInstance = (PageViewController *)[self.viewControllers objectAtIndex:i];
-        //pageData = pageInstance.pageData;
-        [pageInstance logLifetime];
-        
-        [pageInstance removeFromParentViewController];
-    }
-    
-    numControllers = [self.viewControllers count];
-    NSLog(@"numViewControllers after release:%i", numControllers);
-}
 
 
 //*****************************************
 #pragma mark - TABLE OF CONTENTS / ARTICLE NAVIGATION
 //*****************************************
-
-
-- (void)displayTableOfContents{
-    
-    if (!tableOfContentsView)
-    {
-        NSLog(@"DVC displayTableOfContents");
-        
-        tableOfContentsView = [[TableOfContents alloc] initWithFrame:CGRectMake(-TOC_WIDTH, 42, TOC_WIDTH, TOC_HEIGHT)];
-        [tableOfContentsView createTableOfContents:contentDict];
-        
-        [self.view addSubview:tableOfContentsView];
-        
-        [UIView beginAnimations:nil context:nil];  
-        
-        //find nice bouncy easing
-        //reference: http://stackoverflow.com/questions/5161465/how-to-create-custom-easing-function-with-core-animation
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-        
-        [UIView animateWithDuration:0.2
-                         animations:^{tableOfContentsView.frame = CGRectMake(0, 42, TOC_WIDTH, TOC_HEIGHT);}
-                         completion:^(BOOL finished){ [self tableOfContentsHasAppeared]; }];
-        
-        [UIView commitAnimations];
-    }
-    else
-    {
-        NSLog(@"DVC displayTableOfContents DELETE");
-        
-        [UIView beginAnimations:nil context:nil];  
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-        
-        [UIView animateWithDuration:0.2
-                         animations:^{tableOfContentsView.frame = CGRectMake(-TOC_WIDTH, 42, TOC_WIDTH, TOC_HEIGHT);}
-                         completion:^(BOOL finished){ [self removeTableOfContentsView]; }];
-        
-        [UIView commitAnimations];
-        
-    }
-    
-}
-
-
--(void)tableOfContentsHasAppeared
-{
-    NSLog(@"DVC tableOfContentsHasAppeared");
-}
-
-
--(void)removeTableOfContentsView
-{
-    [tableOfContentsView removeFromSuperview];
-    [tableOfContentsView release];
-    tableOfContentsView = nil;
-}
 
 
 - (void)displayMenuPanel{
@@ -421,11 +318,7 @@ int TOC_HEIGHT = 726;
         
         [UIView commitAnimations];
         
-        if (tableOfContentsView != nil){
-            [self displayTableOfContents];
-        }
     }
-    
 }
 
 -(void)menuPanelHasAppeared
@@ -451,23 +344,14 @@ int TOC_HEIGHT = 726;
     
     NSString *buttonName = (NSString *)[aNotification object];
     
-    if ([buttonName isEqualToString:@"menuButton"]) {
-        NSLog(@"MENU BUTTON CLICKED");
-        [self displayTableOfContents];
-    }else if ([buttonName isEqualToString:@"homeButton"]){
+    if ([buttonName isEqualToString:@"homeButton"]){
         NSLog(@"OTHER BUTTON CLICKED");
         [self setArticleByIndex:0];
-    }else{
-        NSLog(@"OTHER BUTTON CLICKED");
-        [self displayMenuPanel];
     }
     
     
 }
 
--(void)showHome {
-    
-}
 
 //*****************************************
 #pragma mark - UTILITIES
