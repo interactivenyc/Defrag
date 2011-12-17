@@ -16,9 +16,18 @@
 #import "MoviePVC.h"
 #import "MenuPanel.h"
 
+#import "FBConnect.h"
+
 extern NSString *BUTTON_CLICKED;
 
-@interface DefragViewController : UINavigationController <UIGestureRecognizerDelegate>
+@interface DefragViewController : UINavigationController
+    <UIGestureRecognizerDelegate,
+    FBRequestDelegate,
+    FBDialogDelegate,
+    FBSessionDelegate,
+    UITableViewDataSource,
+    UITableViewDelegate>
+
 {	    
     int articleCount;
     int articleIndex;
@@ -30,6 +39,8 @@ extern NSString *BUTTON_CLICKED;
     NSDictionary *contentDict;
     PageViewController *currentPageViewController;
     MenuPanel *menuPanel;
+    
+    NSArray *permissions;
     
 }
 
@@ -50,7 +61,7 @@ extern NSString *BUTTON_CLICKED;
 @property (nonatomic, retain) PageViewController *currentPageViewController;
 @property (nonatomic, retain) MenuPanel *menuPanel;
 
-
+@property (nonatomic, retain) NSArray *permissions;
 
 //*********************************************************
 #pragma mark - INTERNAL METHODS
@@ -76,5 +87,17 @@ extern NSString *BUTTON_CLICKED;
 -(void)logPageInfo;
 -(NSDictionary *)getMediaItem;
 -(void)calculatePageCount;
+
+
+//FACEBOOK
+- (void) apiFQLIMe;;
+- (void) apiGraphUserPermissions;
+- (void) showLoggedIn;
+- (void) showLoggedOut:(BOOL)clearInfo;
+- (void)login;
+- (void)logout;
+
+
+
 
 @end

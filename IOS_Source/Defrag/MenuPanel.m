@@ -46,13 +46,19 @@ int TOC_HEIGHT = 726;
 - (void)createToolbarItems
 {	
     UIBarButtonItem *homeButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"home.png"] style:UIBarButtonItemStylePlain target:self action:@selector(buttonClicked:)];
+    
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu.png"] style:UIBarButtonItemStylePlain target:self action:@selector(buttonClicked:)];
+    
     UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    UIBarButtonItem *facebookButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"facebook_32.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(buttonClicked:)];
+    UIBarButtonItem *twitterButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"twitter_32.png"] style:UIBarButtonItemStyleDone target:self action:@selector(buttonClicked:)];
+    
 	UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"info.png"] style:UIBarButtonItemStylePlain target:self action:@selector(buttonClicked:)];
     UIBarButtonItem *prefsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"prefs.png"] style:UIBarButtonItemStylePlain target:self action:@selector(buttonClicked:)];
     
-	NSArray *items = [NSArray arrayWithObjects: homeButton, menuButton, flexItem, infoButton,  prefsButton, nil];
-    NSArray *itemKeys = [NSArray arrayWithObjects: @"homeButton", @"menuButton", @"flexItem", @"infoButton",  @"prefsButton", nil];
+	NSArray *items = [NSArray arrayWithObjects: homeButton, menuButton, flexItem, facebookButton,  twitterButton, infoButton,  prefsButton, nil];
+    NSArray *itemKeys = [NSArray arrayWithObjects: @"homeButton", @"menuButton", @"flexItem", @"facebookButton",  @"twitterButton" @"infoButton",  @"prefsButton", @"nil"];
 
 	[self.toolbar setItems:items animated:NO];
         
@@ -61,6 +67,8 @@ int TOC_HEIGHT = 726;
 	[homeButton release];
 	[menuButton release];
     [flexItem release];
+    [facebookButton release];
+    [twitterButton release];
 	[infoButton release];
 	[prefsButton release];
 }
@@ -69,12 +77,13 @@ int TOC_HEIGHT = 726;
 -(void)buttonClicked:(id)sender {
         
     NSString *buttonName = [[buttonDict allKeysForObject:sender] objectAtIndex:0];
-    
+    /*
     NSLog(@"MenuPanel ***************************");
     NSLog(@"MenuPanel buttonClicked %@", buttonName);
-    NSLog(@"MenuPanel ***************************");  
+    NSLog(@"MenuPanel ***************************"); 
+     */
     
-    DefragAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    DefragAppDelegate *appDelegate = (DefragAppDelegate *) [[UIApplication sharedApplication] delegate];
     DefragViewController *defragViewController = appDelegate.viewController;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:BUTTON_CLICKED object:buttonName];
@@ -95,12 +104,11 @@ int TOC_HEIGHT = 726;
         [info presentPopoverFromRect:CGRectMake(952, 24, 24, 24) inView:self permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 
     }else if ([buttonName isEqualToString:@"prefsButton"]){
-        UIViewController *infoViewController = [[UIViewController alloc] init];
-        infoViewController.view.backgroundColor = [UIColor whiteColor];
         
-        UIPopoverController *info = [[UIPopoverController alloc] initWithContentViewController:infoViewController];
-        info.popoverContentSize = CGSizeMake(300, 300);
-        [info presentPopoverFromRect:CGRectMake(1000, 24, 24, 24) inView:self permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Attention" message:@"Do You Like This App?" delegate:self cancelButtonTitle:@"Exit" otherButtonTitles:@"Rate It!", @"Upgrade!", nil];
+        [alert show];
+        [alert release]; 
+        
     }    
     
     
@@ -116,7 +124,7 @@ int TOC_HEIGHT = 726;
         
         tableOfContentsView = [[TableOfContents alloc] initWithFrame:CGRectMake(-TOC_WIDTH, 42, TOC_WIDTH, TOC_HEIGHT)];
         
-        DefragAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        DefragAppDelegate *appDelegate = (DefragAppDelegate *) [[UIApplication sharedApplication] delegate];
         DefragViewController *defragViewController = appDelegate.viewController;
         [tableOfContentsView createTableOfContents:defragViewController.contentDict];
         

@@ -23,7 +23,6 @@
 		30EA739C13F5D372003DC0D2 /* APIResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30EA739413F5D372003DC0D2 /* APIResultsViewController.m */; };
 		30EA739E13F5D372003DC0D2 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 30EA739613F5D372003DC0D2 /* Icon.png */; };
 		30EA739F13F5D372003DC0D2 /* MenuButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 30EA739713F5D372003DC0D2 /* MenuButton.png */; };
-		30EA73CB13F5D502003DC0D2 /* FBConnect.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 30EA73CA13F5D502003DC0D2 /* FBConnect.bundle */; };
 		30EA73E713F5D523003DC0D2 /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 30EA73CE13F5D523003DC0D2 /* Facebook.m */; };
 		30EA73E813F5D523003DC0D2 /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 30EA73D013F5D523003DC0D2 /* FBDialog.bundle */; };
 		30EA73E913F5D523003DC0D2 /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 30EA73D213F5D523003DC0D2 /* FBDialog.m */; };
@@ -65,7 +64,6 @@
 		30EA739413F5D372003DC0D2 /* APIResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIResultsViewController.m; sourceTree = "<group>"; };
 		30EA739613F5D372003DC0D2 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		30EA739713F5D372003DC0D2 /* MenuButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuButton.png; sourceTree = "<group>"; };
-		30EA73CA13F5D502003DC0D2 /* FBConnect.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FBConnect.bundle; path = ../FBConnect.bundle; sourceTree = "<group>"; };
 		30EA73CD13F5D523003DC0D2 /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Facebook.h; path = ../../src/Facebook.h; sourceTree = "<group>"; };
 		30EA73CE13F5D523003DC0D2 /* Facebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Facebook.m; path = ../../src/Facebook.m; sourceTree = "<group>"; };
 		30EA73CF13F5D523003DC0D2 /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBConnect.h; path = ../../src/FBConnect.h; sourceTree = "<group>"; };
@@ -120,9 +118,8 @@
 		30EA734E13F5D21B003DC0D2 = {
 			isa = PBXGroup;
 			children = (
-				30EA73CC13F5D50D003DC0D2 /* FBConnect */,
-				30EA73CA13F5D502003DC0D2 /* FBConnect.bundle */,
 				30EA736313F5D21B003DC0D2 /* Hackbook */,
+				30EA73CC13F5D50D003DC0D2 /* FBConnect */,
 				30EA735C13F5D21B003DC0D2 /* Frameworks */,
 				30EA735A13F5D21B003DC0D2 /* Products */,
 			);
@@ -278,7 +275,6 @@
 				30EA739B13F5D372003DC0D2 /* Default.png in Resources */,
 				30EA739E13F5D372003DC0D2 /* Icon.png in Resources */,
 				30EA739F13F5D372003DC0D2 /* MenuButton.png in Resources */,
-				30EA73CB13F5D502003DC0D2 /* FBConnect.bundle in Resources */,
 				30EA73E813F5D523003DC0D2 /* FBDialog.bundle in Resources */,
 				3018B43A13F9B94D00F61944 /* MainWindow-iPad.xib in Resources */,
 				3085CC291415D68A00456CCC /* MenuButton@2x.png in Resources */,

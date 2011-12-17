@@ -9,12 +9,38 @@
 #import "DefragViewController.h"
 #import "PageViewController.h"
 
+#import "DataSet.h"
+
+// Your Facebook APP Id must be set before running this example
+// See http://www.facebook.com/developers/createapp.php
+// Also, your application must bind to the fb[app_id]:// URL
+// scheme (substitue [app_id] for your real Facebook app id).
+
+
+//static NSString* kAppId = @"210849718975311";
+static NSString* kAppId = @"152832481487502";
+
+
 
 @implementation DefragAppDelegate
 
 @synthesize window=_window;
 @synthesize viewController=_viewController;
 
+@synthesize facebook;
+@synthesize apiData;
+@synthesize userPermissions;
+
+
+- (void)dealloc
+{
+    [_window release];
+    [_viewController release];
+    [facebook release];
+    [apiData release];
+    [userPermissions release];
+    [super dealloc];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -23,19 +49,90 @@
     NSLog(@"DefragAppDelegate didFinishLaunchingWithOptions");
     
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    
+    // Initialize Facebook
+    facebook = [[Facebook alloc] initWithAppId:kAppId andDelegate:_viewController];
+    
+    // Initialize API data (for views, etc.)
+    apiData = [[DataSet alloc] init];
+    
+    // Initialize user permissions
+    userPermissions = [[NSMutableDictionary alloc] initWithCapacity:1];
 
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
-    return YES;
     
+    
+    // Check App ID:
+    // This is really a warning for the developer, this should not
+    // happen in a completed app
+    if (!kAppId) {
+        UIAlertView *alertView = [[UIAlertView alloc] 
+                                  initWithTitle:@"Setup Error" 
+                                  message:@"Missing app ID. You cannot run the app until you provide this in the code." 
+                                  delegate:self 
+                                  cancelButtonTitle:@"OK" 
+                                  otherButtonTitles:nil, 
+                                  nil];
+        [alertView show];
+        [alertView release];
+    } else {
+        // Now check that the URL scheme fb[app_id]://authorize is in the .plist and can
+        // be opened, doing a simple check without local app id factored in here
+        NSString *url = [NSString stringWithFormat:@"fb%@://authorize",kAppId];
+        BOOL bSchemeInPlist = NO; // find out if the sceme is in the plist file.
+        NSArray* aBundleURLTypes = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleURLTypes"];
+        if ([aBundleURLTypes isKindOfClass:[NSArray class]] && 
+            ([aBundleURLTypes count] > 0)) {
+            NSDictionary* aBundleURLTypes0 = [aBundleURLTypes objectAtIndex:0];
+            if ([aBundleURLTypes0 isKindOfClass:[NSDictionary class]]) {
+                NSArray* aBundleURLSchemes = [aBundleURLTypes0 objectForKey:@"CFBundleURLSchemes"];
+                if ([aBundleURLSchemes isKindOfClass:[NSArray class]] &&
+                    ([aBundleURLSchemes count] > 0)) {
+                    NSString *scheme = [aBundleURLSchemes objectAtIndex:0];
+                    if ([scheme isKindOfClass:[NSString class]] && 
+                        [url hasPrefix:scheme]) {
+                        bSchemeInPlist = YES;
+                    }
+                }
+            }
+        }
+        // Check if the authorization callback will work
+        BOOL bCanOpenUrl = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString: url]];
+        if (!bSchemeInPlist || !bCanOpenUrl) {
+            UIAlertView *alertView = [[UIAlertView alloc] 
+                                      initWithTitle:@"Setup Error" 
+                                      message:@"Invalid or missing URL scheme. You cannot run the app until you set up a valid URL scheme in your .plist." 
+                                      delegate:self 
+                                      cancelButtonTitle:@"OK" 
+                                      otherButtonTitles:nil, 
+                                      nil];
+            [alertView show];
+            [alertView release];
+        }
+    }
+    
+    return YES;
+
     
 }
 
 
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return [self.facebook handleOpenURL:url];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [self.facebook handleOpenURL:url];
+}
 
 
-
-
+#pragma mark - UIAlertViewDelegate methods
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    // Quit the app
+    exit(1);
+}
 
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -77,11 +174,6 @@
      */
 }
 
-- (void)dealloc
-{
-    [_window release];
-    [_viewController release];
-    [super dealloc];
-}
+
 
 @end

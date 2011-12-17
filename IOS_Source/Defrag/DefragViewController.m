@@ -7,6 +7,9 @@
 //
 
 #import "DefragViewController.h"
+#import "DefragAppDelegate.h"
+#import "APICallsViewController.h"
+
 
 NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
 
@@ -21,6 +24,7 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
 @synthesize contentDict;
 @synthesize menuPanel;
 
+@synthesize permissions;
 
 
 //*****************************************
@@ -29,9 +33,11 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
 
 - (void)dealloc {
     
-    [contentDict release];
+    [tapRecognizer release];
     [currentPageViewController release];
+    [contentDict release];
     [menuPanel release];
+    [permissions release];
     [super dealloc];
 }
 
@@ -61,8 +67,61 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
     
     [self createPage];
     
+    UILongPressGestureRecognizer *gr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
+    [self.view addGestureRecognizer:gr];
+    [gr release]; 
+    
 }
 
+
+//*****************************************
+#pragma mark - LONG PRESS MENU FOR TESTING
+//*****************************************
+
+- (void) longPress:(UILongPressGestureRecognizer *) gestureRecognizer {
+        NSLog(@"longPress state:%i", gestureRecognizer.state);
+}
+
+/*
+- (void) longPress:(UILongPressGestureRecognizer *) gestureRecognizer {
+    
+    NSLog(@"longPress state:%i", gestureRecognizer.state);
+
+    
+    
+    if ([gestureRecognizer state] == UIGestureRecognizerStateBegan) {
+        CGPoint location = [gestureRecognizer locationInView:[gestureRecognizer view]];
+        UIMenuController *menuController = [UIMenuController sharedMenuController];
+        UIMenuItem *resetMenuItem = [[UIMenuItem alloc] initWithTitle:@"1" action:@selector(menuItemClicked:)];
+        
+        NSAssert([self becomeFirstResponder], @"Sorry, UIMenuController will not work with %@ since it cannot become first responder", self);
+        [menuController setMenuItems:[NSArray arrayWithObjects:resetMenuItem, resetMenuItem, nil]];
+        [menuController setTargetRect:CGRectMake(location.x, location.y, 0, 0) inView:[gestureRecognizer view]];
+        [menuController setMenuVisible:YES animated:YES];
+        
+        [resetMenuItem release];
+    }
+}
+
+- (void) copy:(id) sender {
+    // called when copy clicked in menu
+}
+
+- (void) menuItemClicked:(id) sender {
+    // called when Item clicked in menu
+}
+
+- (BOOL) canPerformAction:(SEL)selector withSender:(id) sender {
+    if (selector == @selector(menuItemClicked:) || selector == @selector(copy:)) {
+        return YES;
+    }
+    return NO;
+}
+
+- (BOOL) canBecomeFirstResponder {
+    return YES;
+}
+*/
 
 //*****************************************
 #pragma mark - GESTURE SUPPORT
@@ -104,7 +163,7 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
 
 - (void)handleTap:(UITapGestureRecognizer *)sender 
 {
-    NSLog(@"DVC handleTap %@", sender);
+    //NSLog(@"DVC handleTap %@", sender);
     [self displayMenuPanel];
     
 }
@@ -114,10 +173,8 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
     //ignore any touches from a UIToolbar
     
     if ([touch.view.superview isKindOfClass:[UIToolbar class]]) {      //change it to your condition
-        NSLog(@"DVC handleTap gestureRecognizer TEST NO");
         return NO;
     }
-    NSLog(@"DVC handleTap gestureRecognizer TEST YES");
     return YES;
 }
 
@@ -215,13 +272,13 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
 
 -(void)createPage
 {
-    NSLog(@"DVC createPage");
+    //NSLog(@"DVC createPage");
     
     PageData *pageData = [[PageData alloc] init ];
     pageData.pageDictionary = [self getMediaItem];
     
     NSString *mediaType = [pageData getMediaType];
-    NSLog(@"DVC mediaType: %@", mediaType);
+    //NSLog(@"DVC mediaType: %@", mediaType);
     
     if ([mediaType isEqualToString:@"jpg"]){
         currentPageViewController = [[ImagePVC alloc] init ];
@@ -241,7 +298,7 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
 
 -(void)displayPage
 {
-    NSLog(@"DVC displayPage");
+    //NSLog(@"DVC displayPage");
     
     CATransition *transition = [CATransition animation];
     [transition setType:kCATransitionPush];
@@ -286,7 +343,7 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
     
     if (!menuPanel)
     {
-        NSLog(@"DVC displayMenuPanel");
+        //NSLog(@"DVC displayMenuPanel");
         
         menuPanel = [[MenuPanel alloc] initWithFrame:CGRectMake(0, 0, 1024, 768)];
         [menuPanel createMenuPanel];
@@ -308,7 +365,7 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
     }
     else
     {
-        NSLog(@"DVC displayMenuPanel DELETE");
+        //NSLog(@"DVC displayMenuPanel DELETE");
         
         [UIView beginAnimations:nil context:nil];  
         [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
@@ -324,7 +381,7 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
 
 -(void)menuPanelHasAppeared
 {
-    NSLog(@"DVC menuPanelHasAppeared");
+    //NSLog(@"DVC menuPanelHasAppeared");
 }
 
 
@@ -346,12 +403,152 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
     NSString *buttonName = (NSString *)[aNotification object];
     
     if ([buttonName isEqualToString:@"infoButton"]){
-        NSLog(@"infoButton CLICKED");
+        //NSLog(@"infoButton CLICKED");
+        
+    }else if ([buttonName isEqualToString:@"facebookButton"]){
+        //NSLog(@"facebookButton CLICKED");
+        
+        [self login];                 
         
     }
-    
-    
 }
+
+
+//*****************************************
+#pragma mark - Facebook API Calls
+//*****************************************
+
+
+/**
+ * Make a Graph API Call to get information about the current logged in user.
+ */
+- (void) apiFQLIMe {
+    NSLog(@"DVC apiFQLIMe");
+
+    // Using the "pic" picture since this currently has a maximum width of 100 pixels
+    // and since the minimum profile picture size is 180 pixels wide we should be able
+    // to get a 100 pixel wide version of the profile picture
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                   @"SELECT uid, name, pic FROM user WHERE uid=me()", @"query",
+                                   nil];
+    
+    
+    DefragAppDelegate *appDelegate = (DefragAppDelegate *) [[UIApplication sharedApplication] delegate];
+    [[appDelegate facebook] requestWithMethodName:@"fql.query"
+                                     andParams:params
+                                 andHttpMethod:@"POST"
+                                   andDelegate:self];
+}
+
+- (void) apiGraphUserPermissions {
+    NSLog(@"DVC apiGraphUserPermissions");
+
+    DefragAppDelegate *appDelegate = (DefragAppDelegate *) [[UIApplication sharedApplication] delegate]; 
+    [[appDelegate facebook] requestWithGraphPath:@"me/permissions" andDelegate:self];
+}
+
+
+#pragma - Private Helper Methods
+
+/**
+ * Show the logged in menu
+ */
+
+- (void) showLoggedIn {
+    NSLog(@"DVC showLoggedIn");
+    
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    
+    //self.backgroundImageView.hidden = YES;
+    //loginButton.hidden = YES;
+    //self.menuTableView.hidden = NO;
+    
+    [self apiFQLIMe];
+}
+
+/**
+ * Show the logged in menu
+ */
+
+- (void) showLoggedOut:(BOOL)clearInfo {
+    NSLog(@"DVC showLoggedOut");
+
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    // Remove saved authorization information if it exists and it is
+    // ok to clear it (logout, session invalid, app unauthorized)
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (clearInfo && [defaults objectForKey:@"FBAccessTokenKey"]) {
+        [defaults removeObjectForKey:@"FBAccessTokenKey"];
+        [defaults removeObjectForKey:@"FBExpirationDateKey"];
+        [defaults synchronize];
+        
+        // Nil out the session variables to prevent
+        // the app from thinking there is a valid session
+        DefragAppDelegate *appDelegate = (DefragAppDelegate *) [[UIApplication sharedApplication] delegate];
+        if (nil != [[appDelegate facebook] accessToken]) {
+            [appDelegate facebook].accessToken = nil;
+        }
+        if (nil != [[appDelegate facebook] expirationDate]) {
+            [appDelegate facebook].expirationDate = nil;
+        }
+    }
+    
+    //self.menuTableView.hidden = YES;
+    //self.backgroundImageView.hidden = NO;
+    //loginButton.hidden = NO;
+    
+    // Clear personal info
+    //nameLabel.text = @"";
+    // Get the profile image
+   // [profilePhotoImageView setImage:nil];
+}
+
+/**
+ * Show the authorization dialog.
+ */
+- (void)login {
+    DefragAppDelegate *delegate = (DefragAppDelegate *) [[UIApplication sharedApplication] delegate];
+    // Check and retrieve authorization information
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"] 
+        && [defaults objectForKey:@"FBExpirationDateKey"]) {
+        [delegate facebook].accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
+        [delegate facebook].expirationDate = [defaults objectForKey:@"FBExpirationDateKey"];
+    }
+    if (![[delegate facebook] isSessionValid]) {
+        NSLog(@"DVC login facebook session is not valid");
+        [delegate facebook].sessionDelegate = self;
+        [[delegate facebook] authorize:permissions];
+    } else {
+        NSLog(@"DVC login facebook session is valid");
+        [self showLoggedIn];
+    }
+}
+
+/**
+ * Invalidate the access token and clear the cookie.
+ */
+- (void)logout {
+    DefragAppDelegate *delegate = (DefragAppDelegate *) [[UIApplication sharedApplication] delegate];
+    [[delegate facebook] logout:self];
+}
+
+/**
+ * Helper method called when a menu button is clicked
+ */
+- (void)menuButtonClicked:(id) sender
+{
+    // Each menu button in the UITableViewController is initialized
+    // with a tag representing the table cell row. When the button
+    // is clicked the button is passed along in the sender object.
+    // From this object we can then read the tag property to determine
+    // which menu button was clicked.
+    APICallsViewController *controller = [[APICallsViewController alloc] 
+                                          initWithIndex:[sender tag]];
+    [self.navigationController pushViewController:controller animated:YES];
+    [controller release];
+}
+
 
 
 //*****************************************

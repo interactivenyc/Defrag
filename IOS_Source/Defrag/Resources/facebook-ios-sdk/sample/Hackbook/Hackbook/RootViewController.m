@@ -55,6 +55,7 @@
  * Make a Graph API Call to get information about the current logged in user.
  */
 - (void) apiFQLIMe {
+    NSLog(@"apiFQLIMe");
     // Using the "pic" picture since this currently has a maximum width of 100 pixels
     // and since the minimum profile picture size is 180 pixels wide we should be able
     // to get a 100 pixel wide version of the profile picture
@@ -81,6 +82,8 @@
  */
 
 - (void) showLoggedIn {
+    NSLog(@"showLoggedIn");
+
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     
     self.backgroundImageView.hidden = YES;
@@ -95,6 +98,8 @@
  */
 
 - (void) showLoggedOut:(BOOL)clearInfo {
+    NSLog(@"showLoggedOut");
+
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     // Remove saved authorization information if it exists and it is
     // ok to clear it (logout, session invalid, app unauthorized)
@@ -129,6 +134,8 @@
  * Show the authorization dialog.
  */
 - (void)login {
+    NSLog(@"login");
+
     HackbookAppDelegate *delegate = (HackbookAppDelegate *) [[UIApplication sharedApplication] delegate];
     // Check and retrieve authorization information
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -149,6 +156,8 @@
  * Invalidate the access token and clear the cookie.
  */
 - (void)logout {
+    NSLog(@"logout");
+
     HackbookAppDelegate *delegate = (HackbookAppDelegate *) [[UIApplication sharedApplication] delegate];
     [[delegate facebook] logout:self];
 }
@@ -158,6 +167,8 @@
  */
 - (void)menuButtonClicked:(id) sender
 {
+    NSLog(@"menuButtonClicked sender.tag:%i", [sender tag]);
+
     // Each menu button in the UITableViewController is initialized
     // with a tag representing the table cell row. When the button
     // is clicked the button is passed along in the sender object.
@@ -173,6 +184,8 @@
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
 {
+    NSLog(@"loadView");
+
     UIView *view = [[UIView alloc] initWithFrame:[UIScreen 
                                                   mainScreen].applicationFrame]; 
     [view setBackgroundColor:[UIColor whiteColor]]; 
@@ -262,6 +275,8 @@
 
 - (void)viewDidUnload
 {
+    NSLog(@"viewDidUnload");
+
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -269,6 +284,8 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
+    NSLog(@"viewWillAppear");
+
     //[self.navigationController setNavigationBarHidden:YES animated:animated];
     [super viewWillAppear:animated];
     
@@ -320,6 +337,8 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"tableView");
+
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -355,6 +374,8 @@
  * Called when the user has logged in successfully.
  */
 - (void)fbDidLogin {
+    NSLog(@"fbDidLogin");
+
     [self showLoggedIn];
     
     HackbookAppDelegate *delegate = (HackbookAppDelegate *) [[UIApplication sharedApplication] delegate];
@@ -370,6 +391,8 @@
  * Called when the user canceled the authorization dialog.
  */
 -(void)fbDidNotLogin:(BOOL)cancelled {
+    NSLog(@"fbDidNotLogin");
+
     NSLog(@"did not login");
 }
 
@@ -377,6 +400,8 @@
  * Called when the request logout has succeeded.
  */
 - (void)fbDidLogout {
+    NSLog(@"fbDidLogout");
+
     [self showLoggedOut:YES];
 }
 
@@ -401,6 +426,8 @@
  *      didReceiveResponse:(NSURLResponse *)response
  */
 - (void)request:(FBRequest *)request didLoad:(id)result {
+    NSLog(@"request didLoad");
+
     if ([result isKindOfClass:[NSArray class]]) {
         result = [result objectAtIndex:0];
     }
@@ -452,6 +479,8 @@
  * successfully.
  */
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
+    NSLog(@"request didFailWithError");
+
     NSLog(@"Err message: %@", [[error userInfo] objectForKey:@"error_msg"]);
     NSLog(@"Err code: %d", [error code]);
     
