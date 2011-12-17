@@ -408,7 +408,16 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
     }else if ([buttonName isEqualToString:@"facebookButton"]){
         //NSLog(@"facebookButton CLICKED");
         
-        [self login];                 
+        //[self login];      
+        
+        FacebookMenuTVC *facebookMenu = [[FacebookMenuTVC alloc] init];
+        //facebookMenu.view.backgroundColor = [UIColor whiteColor];
+        
+        UIPopoverController *info = [[UIPopoverController alloc] initWithContentViewController:facebookMenu];
+        info.popoverContentSize = CGSizeMake(300, 300);
+        [info presentPopoverFromRect:CGRectMake(952, 24, 24, 24) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        
+        [facebookMenu release];
         
     }
 }

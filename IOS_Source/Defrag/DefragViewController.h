@@ -17,6 +17,7 @@
 #import "MenuPanel.h"
 
 #import "FBConnect.h"
+#import "FacebookMenuTVC.h"
 
 extern NSString *BUTTON_CLICKED;
 
@@ -24,9 +25,7 @@ extern NSString *BUTTON_CLICKED;
     <UIGestureRecognizerDelegate,
     FBRequestDelegate,
     FBDialogDelegate,
-    FBSessionDelegate,
-    UITableViewDataSource,
-    UITableViewDelegate>
+    FBSessionDelegate>
 
 {	    
     int articleCount;
