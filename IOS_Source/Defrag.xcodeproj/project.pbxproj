@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA5D19E7149E7F2E00797686 /* facebook_32.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA5D19E6149E7F2E00797686 /* facebook_32.jpg */; };
+		AA5D19E9149E7FDD00797686 /* facebook_32.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA5D19E8149E7FDD00797686 /* facebook_32.gif */; };
 		AB0A5AFE147AB44100F18536 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB0A5AFD147AB44100F18536 /* CoreText.framework */; };
 		AB0CE71D13B1615E004E9497 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB0CE71C13B1615E004E9497 /* MediaPlayer.framework */; };
 		AB44F399144542F1004F3D37 /* ImagePVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AB44F396144542F1004F3D37 /* ImagePVC.m */; };
@@ -116,6 +118,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AA5D19E6149E7F2E00797686 /* facebook_32.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = facebook_32.jpg; sourceTree = "<group>"; };
+		AA5D19E8149E7FDD00797686 /* facebook_32.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = facebook_32.gif; sourceTree = "<group>"; };
 		AB0A5AFD147AB44100F18536 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		AB0CE71C13B1615E004E9497 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		AB44F395144542F1004F3D37 /* ImagePVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePVC.h; sourceTree = "<group>"; };
@@ -499,8 +503,10 @@
 		ABC6D92514858699006B7E59 /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				AA5D19E6149E7F2E00797686 /* facebook_32.jpg */,
 				ABC6BC0714990A5700A435B5 /* facebook_16.png */,
 				ABC6BC0814990A5700A435B5 /* facebook_32.png */,
+				AA5D19E8149E7FDD00797686 /* facebook_32.gif */,
 				ABC6BC0914990A5700A435B5 /* twitter_16.png */,
 				ABC6BC0A14990A5700A435B5 /* twitter_32.png */,
 				ABC6BBEA1496748300A435B5 /* twitter.png */,
@@ -698,6 +704,8 @@
 				ABC6BC0E14990A5700A435B5 /* twitter_32.png in Resources */,
 				AB580962149C323400159617 /* FacebookMenuTVC.xib in Resources */,
 				AB580964149C34EF00159617 /* facebook-menu.plist in Resources */,
+				AA5D19E7149E7F2E00797686 /* facebook_32.jpg in Resources */,
+				AA5D19E9149E7FDD00797686 /* facebook_32.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

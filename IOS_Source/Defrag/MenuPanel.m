@@ -51,8 +51,8 @@ int TOC_HEIGHT = 726;
     
     UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
-    UIBarButtonItem *facebookButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"facebook_32.png"] style:UIBarButtonItemStyleBordered target:self action:@selector(buttonClicked:)];
-    UIBarButtonItem *twitterButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"twitter_32.png"] style:UIBarButtonItemStyleDone target:self action:@selector(buttonClicked:)];
+    UIBarButtonItem *facebookButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"facebook.png"] style:UIBarButtonItemStyleDone target:self action:@selector(buttonClicked:)];
+    UIBarButtonItem *twitterButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"twitter.png"] style:UIBarButtonItemStyleDone target:self action:@selector(buttonClicked:)];
     
 	UIBarButtonItem *infoButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"info.png"] style:UIBarButtonItemStylePlain target:self action:@selector(buttonClicked:)];
     UIBarButtonItem *prefsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"prefs.png"] style:UIBarButtonItemStylePlain target:self action:@selector(buttonClicked:)];
