@@ -18,7 +18,6 @@
 		AB5067DF1463AB80003BB020 /* TableOfContents.m in Sources */ = {isa = PBXBuildFile; fileRef = AB5067DD1463AB80003BB020 /* TableOfContents.m */; };
 		AB580961149C323400159617 /* FacebookMenuTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AB58095F149C323400159617 /* FacebookMenuTVC.m */; };
 		AB580962149C323400159617 /* FacebookMenuTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB580960149C323400159617 /* FacebookMenuTVC.xib */; };
-		AB580964149C34EF00159617 /* facebook-menu.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB580963149C34EF00159617 /* facebook-menu.plist */; };
 		AB590D7F146B8B9F00F985F7 /* ThumbView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB590D7E146B8B9F00F985F7 /* ThumbView.m */; };
 		AB69E05F148C15A3005E45B6 /* prefs.png in Resources */ = {isa = PBXBuildFile; fileRef = AB69E05E148C15A3005E45B6 /* prefs.png */; };
 		AB69E097148C1CE7005E45B6 /* Ayush_h-fpo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AB69E06C148C1CE7005E45B6 /* Ayush_h-fpo.jpg */; };
@@ -134,7 +133,6 @@
 		AB58095E149C323400159617 /* FacebookMenuTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookMenuTVC.h; sourceTree = "<group>"; };
 		AB58095F149C323400159617 /* FacebookMenuTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookMenuTVC.m; sourceTree = "<group>"; };
 		AB580960149C323400159617 /* FacebookMenuTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FacebookMenuTVC.xib; sourceTree = "<group>"; };
-		AB580963149C34EF00159617 /* facebook-menu.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "facebook-menu.plist"; path = "../facebook-menu.plist"; sourceTree = "<group>"; };
 		AB590D7D146B8B9F00F985F7 /* ThumbView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbView.h; sourceTree = "<group>"; };
 		AB590D7E146B8B9F00F985F7 /* ThumbView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbView.m; sourceTree = "<group>"; };
 		AB69E05E148C15A3005E45B6 /* prefs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prefs.png; sourceTree = "<group>"; };
@@ -492,7 +490,6 @@
 			isa = PBXGroup;
 			children = (
 				AB6EEE2313B158CD00BBFB64 /* Defrag-Info.plist */,
-				AB580963149C34EF00159617 /* facebook-menu.plist */,
 				AB6EEE2413B158CD00BBFB64 /* InfoPlist.strings */,
 				AB6EEE2713B158CD00BBFB64 /* Defrag-Prefix.pch */,
 				AB6EEE2813B158CD00BBFB64 /* main.m */,
@@ -703,7 +700,6 @@
 				ABC6BC0D14990A5700A435B5 /* twitter_16.png in Resources */,
 				ABC6BC0E14990A5700A435B5 /* twitter_32.png in Resources */,
 				AB580962149C323400159617 /* FacebookMenuTVC.xib in Resources */,
-				AB580964149C34EF00159617 /* facebook-menu.plist in Resources */,
 				AA5D19E7149E7F2E00797686 /* facebook_32.jpg in Resources */,
 				AA5D19E9149E7FDD00797686 /* facebook_32.gif in Resources */,
 			);

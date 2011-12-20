@@ -38,7 +38,7 @@
 {
     [super viewDidLoad];
     
-    NSLog(@"FMTVC viewDidLoad");
+    //NSLog(@"FMTVC viewDidLoad");
     
     
 
@@ -49,8 +49,8 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     // Configure the table view.
-    self.tableView.rowHeight = 73.0;
-    self.tableView.backgroundColor = DARK_BACKGROUND;
+    self.tableView.rowHeight = 42.0;
+    //self.tableView.backgroundColor = DARK_BACKGROUND;
     //self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
 	// Load the data.
@@ -101,7 +101,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    NSLog(@"FMTVC numberOfSectionsInTableView");
+    //NSLog(@"FMTVC numberOfSectionsInTableView");
 
     return 1;
 }
@@ -109,14 +109,14 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    NSLog(@"FMTVC numberOfRowsInSection count:%i", [data count]);
+    //NSLog(@"FMTVC numberOfRowsInSection count:%i", [data count]);
 
     return [data count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"cellForRowAtIndexPath indexPath.row:%i", indexPath.row);
+    //NSLog(@"cellForRowAtIndexPath indexPath.row:%i", indexPath.row);
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];

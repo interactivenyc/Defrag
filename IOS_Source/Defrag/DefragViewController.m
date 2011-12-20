@@ -406,7 +406,7 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
         //NSLog(@"infoButton CLICKED");
         
     }else if ([buttonName isEqualToString:@"facebookButton"]){
-        //NSLog(@"facebookButton CLICKED");
+        NSLog(@"facebookButton CLICKED");
         
         //[self login];      
         
