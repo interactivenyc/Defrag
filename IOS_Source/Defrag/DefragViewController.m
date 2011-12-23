@@ -555,6 +555,16 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
     if (![[delegate facebook] isSessionValid]) {
         NSLog(@"DVC login facebook session is not valid");
         [delegate facebook].sessionDelegate = self;
+        
+        permissions = [[NSArray alloc] initWithObjects:
+                                @"user_photos",
+                                @"user_about_me",
+                                @"user_location",
+                                @"email",
+                                @"publish_stream",
+                                @"read_insights",
+                                nil];
+        
         [[delegate facebook] authorize:permissions];
     } else {
         NSLog(@"DVC login facebook session is valid");
@@ -593,6 +603,17 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
 
 - (void)fbDidLogin{
     NSLog(@"DVC fbDidLogin");
+    DefragAppDelegate *appDelegate = (DefragAppDelegate *) [[UIApplication sharedApplication] delegate];
+    
+    NSLog(@"DVC requestWithGraphPath me");
+    [[appDelegate facebook] requestWithGraphPath:@"me" andDelegate:self];
+    
+    //NSLog(@"DVC requestWithGraphPath platform/insights");
+    //[[appDelegate facebook] requestWithGraphPath:@"152832481487502/insights" andDelegate:self];
+    
+    [self apiFQLIMe];
+    [self apiGraphUserPermissions];
+
 }
 
 - (void)fbDidNotLogin:(BOOL)cancelled{
@@ -602,6 +623,62 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
 }
 - (void)fbDidLogout{
     NSLog(@"DVC fbDidLogout");
+
+}
+
+//*****************************************
+#pragma mark - FACEBOOK REQUEST DELEGATE FUNCTIONS
+//*****************************************
+
+/**
+ * Called just before the request is sent to the server.
+ */
+- (void)requestLoading:(FBRequest *)request{
+    NSLog(@"DVC requestLoading");
+
+}
+
+/**
+ * Called when the server responds and begins to send back data.
+ */
+- (void)request:(FBRequest *)request json:(NSURLResponse *)response{
+    NSLog(@"DVC request didReceiveResponse");
+    
+
+}
+
+/**
+ * Called when an error prevents the request from completing successfully.
+ */
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error{
+    NSLog(@"DVC request didFailWithError:%@", error.description);
+
+}
+
+/**
+ * Called when a request returns and its response has been parsed into
+ * an object.
+ *
+ * The resulting object may be a dictionary, an array, a string, or a number,
+ * depending on thee format of the API response.
+ */
+- (void)request:(FBRequest *)request didLoad:(id)result{
+    NSLog(@"DVC request didLoad");
+    if ([result isKindOfClass:[NSArray class]]) {
+        result = [result objectAtIndex:0];
+    }
+    NSLog(@"DVC response:%@", result);
+
+
+}
+
+/**
+ * Called when a request returns a response.
+ *
+ * The result object is the raw response from the server of type NSData
+ */
+- (void)request:(FBRequest *)request didLoadRawResponse:(NSData *)data{
+    NSLog(@"DVC request didLoadRawResponse");
 
 }
 

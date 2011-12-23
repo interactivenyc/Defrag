@@ -176,7 +176,8 @@ static const NSTimeInterval kTimeoutInterval = 180.0;
  * parse the response data
  */
 - (id)parseJsonResponse:(NSData *)data error:(NSError **)error {
-
+    NSLog(@"parseJsonResponse");
+    
   NSString* responseString = [[[NSString alloc] initWithData:data
                                                     encoding:NSUTF8StringEncoding]
                               autorelease];
