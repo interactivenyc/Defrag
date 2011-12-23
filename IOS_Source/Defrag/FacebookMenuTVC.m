@@ -60,7 +60,7 @@
     //data = [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Facebook-Menu" ofType:@"plist"]];
     
     
-    NSLog(@"FMTVC data:%@", data);
+    //NSLog(@"FMTVC data:%@", data);
 }
 
 - (void)viewDidUnload
@@ -116,7 +116,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //NSLog(@"cellForRowAtIndexPath indexPath.row:%i", indexPath.row);
+    //NSLog(@"FMTVC cellForRowAtIndexPath indexPath.row:%i", indexPath.row);
     static NSString *CellIdentifier = @"Cell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -129,6 +129,10 @@
     
     return cell;
 }
+
+
+
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -173,6 +177,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"FMTVC didSelectRowAtIndexPath:%i", indexPath.row);
+
     // Navigation logic may go here. Create and push another view controller.
     /*
      <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];

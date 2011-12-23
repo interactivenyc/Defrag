@@ -58,7 +58,7 @@ int TOC_HEIGHT = 726;
     UIBarButtonItem *prefsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"prefs.png"] style:UIBarButtonItemStylePlain target:self action:@selector(buttonClicked:)];
     
 	NSArray *items = [NSArray arrayWithObjects: homeButton, menuButton, flexItem, facebookButton,  twitterButton, infoButton,  prefsButton, nil];
-    NSArray *itemKeys = [NSArray arrayWithObjects: @"homeButton", @"menuButton", @"flexItem", @"facebookButton",  @"twitterButton" @"infoButton",  @"prefsButton", @"nil"];
+    NSArray *itemKeys = [NSArray arrayWithObjects: @"homeButton", @"menuButton", @"flexItem", @"facebookButton",  @"twitterButton" @"infoButton",  @"prefsButton", @"", nil];
 
 	[self.toolbar setItems:items animated:NO];
         

@@ -408,16 +408,35 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
     }else if ([buttonName isEqualToString:@"facebookButton"]){
         NSLog(@"facebookButton CLICKED");
         
-        //[self login];      
+        //[self login]; 
         
+        DefragAppDelegate *delegate = (DefragAppDelegate *) [[UIApplication sharedApplication] delegate];
+        
+        if (![[delegate facebook] isSessionValid]) {
+            NSLog(@"DVC tell facebook to login");
+            [self login];
+        } else {
+            NSLog(@"DVC facebook is logged in");
+            //[self showLoggedIn];
+            FacebookMenuTVC *facebookMenu = [[FacebookMenuTVC alloc] init];
+            
+            UIPopoverController *info = [[UIPopoverController alloc] initWithContentViewController:facebookMenu];
+            info.popoverContentSize = CGSizeMake(300, 300);
+            [info presentPopoverFromRect:CGRectMake(952, 24, 24, 24) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+            
+            [facebookMenu release];
+        }
+        
+        
+        /*
         FacebookMenuTVC *facebookMenu = [[FacebookMenuTVC alloc] init];
-        //facebookMenu.view.backgroundColor = [UIColor whiteColor];
         
         UIPopoverController *info = [[UIPopoverController alloc] initWithContentViewController:facebookMenu];
         info.popoverContentSize = CGSizeMake(300, 300);
         [info presentPopoverFromRect:CGRectMake(952, 24, 24, 24) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
         
         [facebookMenu release];
+         */
         
     }
 }
@@ -512,10 +531,19 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
    // [profilePhotoImageView setImage:nil];
 }
 
+
+
+//*****************************************
+#pragma mark - FACEBOOK FUNCTIONS
+//*****************************************
+
+
 /**
  * Show the authorization dialog.
  */
 - (void)login {
+    NSLog(@"DVC login");
+
     DefragAppDelegate *delegate = (DefragAppDelegate *) [[UIApplication sharedApplication] delegate];
     // Check and retrieve authorization information
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -558,7 +586,24 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
     [controller release];
 }
 
+//*****************************************
+#pragma mark - FACEBOOK DELEGATE FUNCTIONS
+//*****************************************
 
+
+- (void)fbDidLogin{
+    NSLog(@"DVC fbDidLogin");
+}
+
+- (void)fbDidNotLogin:(BOOL)cancelled{
+    //the boolean cancelled if true, means the user cancelled the login attempt
+    NSLog(@"DVC fbDidNotLogin");
+    
+}
+- (void)fbDidLogout{
+    NSLog(@"DVC fbDidLogout");
+
+}
 
 //*****************************************
 #pragma mark - UTILITIES

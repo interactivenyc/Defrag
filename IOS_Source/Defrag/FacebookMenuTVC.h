@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FacebookMenuTVC : UITableViewController
+@interface FacebookMenuTVC : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 {
         NSArray *data;
 }
