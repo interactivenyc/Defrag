@@ -417,14 +417,12 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
             [self login];
         } else {
             NSLog(@"DVC facebook is logged in");
-            //[self showLoggedIn];
-            FacebookMenuTVC *facebookMenu = [[FacebookMenuTVC alloc] init];
+
+            [self fbPostToWall];
+            //[self displayTableViewPopup];
+
             
-            UIPopoverController *info = [[UIPopoverController alloc] initWithContentViewController:facebookMenu];
-            info.popoverContentSize = CGSizeMake(300, 300);
-            [info presentPopoverFromRect:CGRectMake(952, 24, 24, 24) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
             
-            [facebookMenu release];
         }
         
         
@@ -596,6 +594,33 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
     [controller release];
 }
 
+- (void)fbPostToWall{
+    NSLog(@"DVC fbPostToWall");
+    
+    SBJSON *jsonWriter = [[SBJSON new] autorelease];
+    
+    NSDictionary* actionLinks = [NSArray arrayWithObjects:[NSDictionary 
+                                                           dictionaryWithObjectsAndKeys: @"Always Running",@"text",@"http://itsti.me/",
+                                                           @"href", nil], nil];
+    
+    NSString *actionLinksStr = [jsonWriter stringWithObject:actionLinks];
+    NSDictionary* attachment = [NSDictionary dictionaryWithObjectsAndKeys:
+                                @"a long run", @"name",
+                                @"The Facebook Running app", @"caption",
+                                @"it is fun", @"description",
+                                @"http://itsti.me/", @"href", nil];
+    NSString *attachmentStr = [jsonWriter stringWithObject:attachment];
+    NSMutableDictionary* params = [NSMutableDictionary
+                                   dictionaryWithObjectsAndKeys:
+                                   @"Share on Facebook",  @"user_message_prompt",
+                                   actionLinksStr, @"action_links",
+                                   attachmentStr, @"attachment",
+                                   nil];
+    
+    DefragAppDelegate *appDelegate = (DefragAppDelegate *) [[UIApplication sharedApplication] delegate];
+    [[appDelegate facebook] dialog:@"feed" andParams:params andDelegate:self];
+}
+
 //*****************************************
 #pragma mark - FACEBOOK DELEGATE FUNCTIONS
 //*****************************************
@@ -612,7 +637,10 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
     //[[appDelegate facebook] requestWithGraphPath:@"152832481487502/insights" andDelegate:self];
     
     [self apiFQLIMe];
-    [self apiGraphUserPermissions];
+
+    
+    [self fbPostToWall];
+   
 
 }
 
@@ -683,6 +711,50 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
 }
 
 //*****************************************
+#pragma mark - FACEBOOK DIALOG DELEGATE FUNCTIONS
+//*****************************************
+
+
+/**
+ * Called when the dialog succeeds and is about to be dismissed.
+ */
+- (void)dialogDidComplete:(FBDialog *)dialog{
+    NSLog(@"DVC dialogDelegate dialogDidComplete");
+}
+
+/**
+ * Called when the dialog succeeds with a returning url.
+ */
+- (void)dialogCompleteWithUrl:(NSURL *)url{
+    NSLog(@"DVC dialogDelegate dialogCompleteWithUrl");
+
+}
+
+/**
+ * Called when the dialog get canceled by the user.
+ */
+- (void)dialogDidNotCompleteWithUrl:(NSURL *)url{
+    NSLog(@"DVC dialogDelegate dialogDidNotCompleteWithUrl");
+
+}
+
+/**
+ * Called when the dialog is cancelled and is about to be dismissed.
+ */
+- (void)dialogDidNotComplete:(FBDialog *)dialog{
+    NSLog(@"DVC dialogDelegate dialogDidNotComplete");
+
+}
+
+/**
+ * Called when dialog failed to load due to an error.
+ */
+- (void)dialog:(FBDialog*)dialog didFailWithError:(NSError *)error{
+    NSLog(@"DVC dialogDelegate didFailWithError");
+
+}
+
+//*****************************************
 #pragma mark - UTILITIES
 //*****************************************
 
@@ -713,6 +785,20 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
     
     return [[[[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:articleIndex] objectForKey:@"Media"] objectAtIndex:pageIndex];
 }
+
+
+-(void)displayTableViewPopup{
+    FacebookMenuTVC *facebookMenu = [[FacebookMenuTVC alloc] init];
+    
+    UIPopoverController *info = [[UIPopoverController alloc] initWithContentViewController:facebookMenu];
+    info.popoverContentSize = CGSizeMake(300, 300);
+    [info presentPopoverFromRect:CGRectMake(952, 24, 24, 24) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    
+    [facebookMenu release];
+}
+
+
+
 
 
 

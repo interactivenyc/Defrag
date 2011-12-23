@@ -95,6 +95,7 @@ extern NSString *BUTTON_CLICKED;
 - (void) showLoggedOut:(BOOL)clearInfo;
 - (void)login;
 - (void)logout;
+- (void)fbPostToWall;
 
 
 
