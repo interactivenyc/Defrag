@@ -58,7 +58,7 @@ int TOC_HEIGHT = 726;
     UIBarButtonItem *prefsButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"prefs.png"] style:UIBarButtonItemStylePlain target:self action:@selector(buttonClicked:)];
     
 	NSArray *items = [NSArray arrayWithObjects: homeButton, menuButton, flexItem, facebookButton,  twitterButton, infoButton,  prefsButton, nil];
-    NSArray *itemKeys = [NSArray arrayWithObjects: @"homeButton", @"menuButton", @"flexItem", @"facebookButton",  @"twitterButton" @"infoButton",  @"prefsButton", @"", nil];
+    NSArray *itemKeys = [NSArray arrayWithObjects: @"homeButton", @"menuButton", @"flexItem", @"facebookButton",  @"twitterButton", @"infoButton",  @"prefsButton", nil];
 
 	[self.toolbar setItems:items animated:NO];
         
@@ -77,40 +77,7 @@ int TOC_HEIGHT = 726;
 -(void)buttonClicked:(id)sender {
         
     NSString *buttonName = [[buttonDict allKeysForObject:sender] objectAtIndex:0];
-    /*
-    NSLog(@"MenuPanel ***************************");
-    NSLog(@"MenuPanel buttonClicked %@", buttonName);
-    NSLog(@"MenuPanel ***************************"); 
-     */
-    
-    DefragAppDelegate *appDelegate = (DefragAppDelegate *) [[UIApplication sharedApplication] delegate];
-    DefragViewController *defragViewController = appDelegate.viewController;
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:BUTTON_CLICKED object:buttonName];
-    
-    if ([buttonName isEqualToString:@"homeButton"]){
-        [defragViewController setArticleByIndex:0];
-        
-    }else if ([buttonName isEqualToString:@"menuButton"]){
-        [self displayTableOfContents];
-        
-    }else if ([buttonName isEqualToString:@"infoButton"]){
-        
-        UIViewController *infoViewController = [[UIViewController alloc] init];
-        infoViewController.view.backgroundColor = [UIColor whiteColor];
-        
-        UIPopoverController *info = [[UIPopoverController alloc] initWithContentViewController:infoViewController];
-        info.popoverContentSize = CGSizeMake(300, 300);
-        [info presentPopoverFromRect:CGRectMake(952, 24, 24, 24) inView:self permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
-
-    }else if ([buttonName isEqualToString:@"prefsButton"]){
-        
-        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Attention" message:@"Do You Like This App?" delegate:self cancelButtonTitle:@"Exit" otherButtonTitles:@"Rate It!", @"Upgrade!", nil];
-        [alert show];
-        [alert release]; 
-        
-    }    
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:MENUPANEL_BTN_CLICKED object:buttonName];
     
 }
 

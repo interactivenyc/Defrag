@@ -19,7 +19,7 @@
 #import "FBConnect.h"
 #import "FacebookMenuTVC.h"
 
-extern NSString *BUTTON_CLICKED;
+extern NSString *MENUPANEL_BTN_CLICKED;
 
 @interface DefragViewController : UINavigationController
     <UIGestureRecognizerDelegate,
@@ -71,7 +71,7 @@ extern NSString *BUTTON_CLICKED;
 -(void)setupGestureRecognizers;
 -(void)handleGesture: (UIGestureRecognizer *)sender;
 -(void)handleTap: (UITapGestureRecognizer *)sender;
--(void)buttonClicked:(NSNotification *)aNotification;
+-(void)menuPanelButtonClicked:(NSNotification *)aNotification;
 
 //ON SWIPE - PAGE NAVIGATION
 -(void)setArticleByIndex:(int)newIndex;
@@ -97,7 +97,8 @@ extern NSString *BUTTON_CLICKED;
 - (void)logout;
 - (void)fbPostToWall;
 
-
+//TWITTER
+-(void)tweetAbout;
 
 
 @end

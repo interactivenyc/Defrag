@@ -9,9 +9,10 @@
 #import "DefragViewController.h"
 #import "DefragAppDelegate.h"
 #import "APICallsViewController.h"
+//#import "TWTweetComposeViewController.h"
 
 
-NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
+NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
 
 @implementation DefragViewController
 
@@ -63,7 +64,7 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
     [self setNavigationBarHidden:YES];   
     
     //ADD EVENT LISTENERS
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(buttonClicked:) name:BUTTON_CLICKED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuPanelButtonClicked:) name:MENUPANEL_BTN_CLICKED object:nil];
     
     [self createPage];
     
@@ -394,22 +395,24 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
 
 
 //*****************************************
-#pragma mark - EVENTS
+#pragma mark - MENU PANEL EVENTS
 //*****************************************
 
--(void)buttonClicked:(NSNotification *)aNotification {
-    NSLog(@"DVC buttonClicked name: %@ object: %@ ", aNotification.name, aNotification.object);
+-(void)menuPanelButtonClicked:(NSNotification *)aNotification {
+    NSLog(@"DVC menuPanelButtonClicked name: %@ object: %@ ", aNotification.name, aNotification.object);
     
     NSString *buttonName = (NSString *)[aNotification object];
     
-    if ([buttonName isEqualToString:@"infoButton"]){
-        //NSLog(@"infoButton CLICKED");
+    
+    if ([buttonName isEqualToString:@"homeButton"]){
+        [self setArticleByIndex:0];
+        
+    }else if ([buttonName isEqualToString:@"menuButton"]){
+        [menuPanel displayTableOfContents];
         
     }else if ([buttonName isEqualToString:@"facebookButton"]){
         NSLog(@"facebookButton CLICKED");
-        
-        //[self login]; 
-        
+                
         DefragAppDelegate *delegate = (DefragAppDelegate *) [[UIApplication sharedApplication] delegate];
         
         if (![[delegate facebook] isSessionValid]) {
@@ -417,14 +420,30 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
             [self login];
         } else {
             NSLog(@"DVC facebook is logged in");
-
             [self fbPostToWall];
-            //[self displayTableViewPopup];
-
-            
-            
         }
+        
+    }else if ([buttonName isEqualToString:@"twitterButton"]){
+        NSLog(@"twitterButton CLICKED");
+        [self tweetAbout];
+        
+    }else if ([buttonName isEqualToString:@"infoButton"]){
+            NSLog(@"infoButton CLICKED");
+            
+            UIViewController *infoViewController = [[UIViewController alloc] init];
+            infoViewController.view.backgroundColor = [UIColor whiteColor];
+            
+            UIPopoverController *info = [[UIPopoverController alloc] initWithContentViewController:infoViewController];
+            info.popoverContentSize = CGSizeMake(300, 300);
+            [info presentPopoverFromRect:CGRectMake(952, 24, 24, 24) inView:menuPanel permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        
+    }else if ([buttonName isEqualToString:@"prefsButton"]){
+        NSLog(@"prefsButton CLICKED");
+        UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"Attention" message:@"Do You Like This App?" delegate:self cancelButtonTitle:@"Exit" otherButtonTitles:@"Rate It!", @"Upgrade!", nil];
+        [alert show];
+        [alert release];
     }
+    
 }
 
 
@@ -630,6 +649,20 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
     
     DefragAppDelegate *appDelegate = (DefragAppDelegate *) [[UIApplication sharedApplication] delegate];
     [[appDelegate facebook] dialog:@"feed" andParams:params andDelegate:self];
+}
+
+
+-(void)tweetAbout{
+    NSLog(@"DVC tweetAbout");
+    /*
+    if ([TWTweetComposeViewController canSendTweet])
+    {
+        TWTweetComposeViewController *tweetSheet = 
+        [[TWTweetComposeViewController alloc] init];
+        [tweetSheet setInitialText:@"Initial Tweet Text!"];
+        [self presentModalViewController:tweetSheet animated:YES];
+    }
+     */
 }
 
 //*****************************************
