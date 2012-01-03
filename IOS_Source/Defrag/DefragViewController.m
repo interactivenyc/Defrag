@@ -424,18 +424,6 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
             
             
         }
-        
-        
-        /*
-        FacebookMenuTVC *facebookMenu = [[FacebookMenuTVC alloc] init];
-        
-        UIPopoverController *info = [[UIPopoverController alloc] initWithContentViewController:facebookMenu];
-        info.popoverContentSize = CGSizeMake(300, 300);
-        [info presentPopoverFromRect:CGRectMake(952, 24, 24, 24) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
-        
-        [facebookMenu release];
-         */
-        
     }
 }
 
@@ -597,25 +585,48 @@ NSString *BUTTON_CLICKED = @"BUTTON_CLICKED";
 - (void)fbPostToWall{
     NSLog(@"DVC fbPostToWall");
     
-    SBJSON *jsonWriter = [[SBJSON new] autorelease];
     
-    NSDictionary* actionLinks = [NSArray arrayWithObjects:[NSDictionary 
-                                                           dictionaryWithObjectsAndKeys: @"Always Running",@"text",@"http://itsti.me/",
+    
+    
+    /*
+    SBJSON *jsonWriter = [[SBJSON new] autorelease];
+     
+    NSString *defragURL = @"http://www.kickstarter.com/projects/1642957716/defrag-the-interactive-ipad-magazine-of-global-cul";
+     
+    NSDictionary *actionLinks = [NSArray arrayWithObjects:[NSDictionary 
+                                                           dictionaryWithObjectsAndKeys: @"Defrag Magazine", @"text", defragURL,
                                                            @"href", nil], nil];
     
     NSString *actionLinksStr = [jsonWriter stringWithObject:actionLinks];
-    NSDictionary* attachment = [NSDictionary dictionaryWithObjectsAndKeys:
-                                @"a long run", @"name",
-                                @"The Facebook Running app", @"caption",
-                                @"it is fun", @"description",
-                                @"http://itsti.me/", @"href", nil];
+    NSDictionary *attachment = [NSDictionary dictionaryWithObjectsAndKeys:
+                                @"Defrag Magazine", @"name",
+                                @"The Digital Magazine of Global Culture", @"caption",
+                                @"Check out Defrag in the App Store", @"description",
+                                @"Share on Facebook", @"link", 
+                                @"image", @"user_message_prompt", 
+                                @"http://s3.amazonaws.com/ksr/avatars/546922/Picture_10.large.jpg", @"picture", nil];
     NSString *attachmentStr = [jsonWriter stringWithObject:attachment];
-    NSMutableDictionary* params = [NSMutableDictionary
+    NSMutableDictionary *params = [NSMutableDictionary
                                    dictionaryWithObjectsAndKeys:
                                    @"Share on Facebook",  @"user_message_prompt",
                                    actionLinksStr, @"action_links",
                                    attachmentStr, @"attachment",
                                    nil];
+     
+     DefragAppDelegate *appDelegate = (DefragAppDelegate *) [[UIApplication sharedApplication] delegate];
+     [[appDelegate facebook] dialog:@"stream.publish" andParams:params andDelegate:self];
+     
+     */
+    
+    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                            @"The Digital Magazine of Global Culture", @"caption",
+                            @"Check out Defrag in the App Store", @"description",
+                            @"Share on Facebook",  @"user_message_prompt",
+                            @"http://www.kickstarter.com/projects/1642957716/defrag-the-interactive-ipad-magazine-of-global-cul", @"link",
+                            @"http://s3.amazonaws.com/ksr/avatars/546922/Picture_10.large.jpg", @"picture",
+                            nil];
+    
+    NSLog(@"DVC params: %@", params);
     
     DefragAppDelegate *appDelegate = (DefragAppDelegate *) [[UIApplication sharedApplication] delegate];
     [[appDelegate facebook] dialog:@"feed" andParams:params andDelegate:self];
