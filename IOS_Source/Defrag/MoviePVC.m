@@ -61,7 +61,7 @@
     
     moviePlayerViewController.moviePlayer.movieSourceType = MPMovieSourceTypeFile;
     [moviePlayerViewController.moviePlayer setFullscreen:YES];
-    [moviePlayerViewController.moviePlayer setControlStyle:MPMovieControlStyleFullscreen];
+    [moviePlayerViewController.moviePlayer setControlStyle:MPMovieControlStyleNone];
     
     [moviePlayerViewController.moviePlayer play];
     
@@ -159,6 +159,7 @@
         [moviePlayerViewController.moviePlayer setCurrentPlaybackRate:30.0F];
     }
      */
+     
     
     [[AppDelegate viewController] handleTap:sender];
     
