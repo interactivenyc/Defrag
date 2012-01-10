@@ -72,6 +72,8 @@ extern NSString *MENUPANEL_BTN_CLICKED;
 -(void)handleTap: (UITapGestureRecognizer *)sender;
 -(void)menuPanelButtonClicked:(NSNotification *)aNotification;
 
+-(void)introduceDefrag:(NSTimer *)timer;
+
 //ON SWIPE - PAGE NAVIGATION
 -(void)setArticleByIndex:(int)newIndex;
 -(void)createPage;

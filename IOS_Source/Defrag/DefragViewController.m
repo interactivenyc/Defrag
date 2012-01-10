@@ -66,12 +66,18 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
     //ADD EVENT LISTENERS
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuPanelButtonClicked:) name:MENUPANEL_BTN_CLICKED object:nil];
     
-    [self createPage];
-    
     UILongPressGestureRecognizer *gr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
     [self.view addGestureRecognizer:gr];
     [gr release]; 
     
+    //Wait a couple seconds, then start the app
+    [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(introduceDefrag:) userInfo:nil repeats:NO];
+    
+}
+
+-(void)introduceDefrag:(NSTimer *)timer{
+    NSLog(@"introduceDefrag");
+    [self createPage];
 }
 
 
@@ -337,7 +343,21 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
 }
 
 -(void)videoFinishedPlaying{
-    NSLog(@"videoFinishedPlaying");
+    NSLog(@"DVC videoFinishedPlaying");
+    
+    
+    if(articleIndex == 0 && pageIndex == 0){
+        NSLog(@"DVC video finished is introduction");
+        
+        pageIndex = 1;
+        
+        //[self calculatePageCount];
+        //direction = 1;
+        
+        [self createPage];
+    }
+     
+    
 }
 
 
@@ -860,7 +880,14 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     // Only support Landscape Orientations
-    return (UIInterfaceOrientationIsLandscape(interfaceOrientation));
+    
+    
+    
+    
+    //return (UIInterfaceOrientationIsLandscape(interfaceOrientation));
+    
+    return YES;
+    
 }
 
 - (void)didReceiveMemoryWarning {
