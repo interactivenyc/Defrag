@@ -78,6 +78,7 @@ extern NSString *MENUPANEL_BTN_CLICKED;
 -(void)setArticleByIndex:(int)newIndex;
 -(void)createPage;
 -(void)displayPage;
+-(void)pageHasDisplayed;
 -(void)videoFinishedPlaying;
 
 -(void)displayMenuPanel;

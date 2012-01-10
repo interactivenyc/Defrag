@@ -9,6 +9,7 @@
 #import "DefragViewController.h"
 #import "DefragAppDelegate.h"
 #import "APICallsViewController.h"
+#import "MoviePVC.h"
 //#import "TWTweetComposeViewController.h"
 
 
@@ -282,7 +283,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
 
 -(void)createPage
 {
-    //NSLog(@"DVC createPage");
+    NSLog(@"DVC createPage");
     
     PageData *pageData = [[PageData alloc] init ];
     pageData.pageDictionary = [self getMediaItem];
@@ -308,7 +309,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
 
 -(void)displayPage
 {
-    //NSLog(@"DVC displayPage");
+    NSLog(@"DVC displayPage direction:%i", direction);
     
     CATransition *transition = [CATransition animation];
     [transition setType:kCATransitionPush];
@@ -320,27 +321,85 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
     
     switch (direction)
     {
+        case 0://zero
+            NSLog(@"DVC Zero Duration Transition");
+            [transition setType:kCATransitionFade];
+            [transition setDuration:0];
+            
+            //self.view = currentPageViewController.view;
+            [self pushViewController:currentPageViewController animated:NO];
+            
+            break;
         case 1://left
+            NSLog(@"DVC Push Left Transition");
             [transition setSubtype:kCATransitionFromRight];
+            [layer addAnimation:transition forKey:@"Transition"]; 
+            [self pushViewController:currentPageViewController animated:NO];
             break;
         case 2://right
+            NSLog(@"DVC Push Right Transition");
             [transition setSubtype:kCATransitionFromLeft];
+            [layer addAnimation:transition forKey:@"Transition"]; 
+            [self pushViewController:currentPageViewController animated:NO];
             break;
         case 3://up
+            NSLog(@"DVC Push Up Transition");
             [transition setSubtype:kCATransitionFromTop];
+            [layer addAnimation:transition forKey:@"Transition"]; 
+            [self pushViewController:currentPageViewController animated:NO];
             break;
         case 4://down
+            NSLog(@"DVC Push Down Transition");
             [transition setSubtype:kCATransitionFromBottom];
+            [layer addAnimation:transition forKey:@"Transition"]; 
+            [self pushViewController:currentPageViewController animated:NO];
             break;
         default:
-            [transition setSubtype:kCATransitionFromRight];
+            NSLog(@"DVC Transition Not Recognized");
+            //[transition setSubtype:kCATransitionFromRight];
     }
     
-    [layer addAnimation:transition forKey:@"Transition"];  
-    
-    [self pushViewController:currentPageViewController animated:NO];
+     
+    NSLog(@"DVC numViewControllers:%i", self.viewControllers.count);    
     
 }
+
+- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
+{
+    NSLog(@"DVC animationDidStop");
+    
+    [self pageHasDisplayed];
+}
+
+
+-(void)pageHasDisplayed
+{
+    int numControllers = [self.viewControllers count];
+    NSLog(@"numViewControllers:%i", numControllers);
+    
+    for (int j=0; j<numControllers; j++) {
+        NSLog(@"DVC            viewController:%@", [self.viewControllers objectAtIndex:j]);
+    }
+    
+    PageViewController *pageInstance;
+    
+    for (int i=0; i<numControllers-1; i++) {
+        NSLog(@"i:%i", i);
+        
+        pageInstance = (PageViewController *)[self.viewControllers objectAtIndex:i];  
+        
+        NSLog(@"DVC pageInstance:%@", pageInstance);
+        [pageInstance logLifetime];
+        
+        [pageInstance removeFromParentViewController];        
+        pageInstance = nil;
+        [pageInstance release];
+    }    
+    
+    numControllers = [self.viewControllers count];
+    NSLog(@"numViewControllers after release:%i", numControllers);
+}
+
 
 -(void)videoFinishedPlaying{
     NSLog(@"DVC videoFinishedPlaying");
@@ -352,7 +411,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
         pageIndex = 1;
         
         //[self calculatePageCount];
-        //direction = 1;
+        direction = 0;
         
         [self createPage];
     }
