@@ -175,6 +175,9 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
     
     if ([touch.view.superview isKindOfClass:[UIToolbar class]]) {      //change it to your condition
         return NO;
+    }if ([touch.view.superview isKindOfClass:[MoviePVC class]]) {      //change it to your condition
+        NSLog(@"click inside MoviePVC");
+        return NO;
     }
     return YES;
 }
@@ -331,6 +334,10 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
     
     [self pushViewController:currentPageViewController animated:NO];
     
+}
+
+-(void)videoFinishedPlaying{
+    NSLog(@"videoFinishedPlaying");
 }
 
 
@@ -831,15 +838,6 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
 }
 
 
--(void)displayTableViewPopup{
-    FacebookMenuTVC *facebookMenu = [[FacebookMenuTVC alloc] init];
-    
-    UIPopoverController *info = [[UIPopoverController alloc] initWithContentViewController:facebookMenu];
-    info.popoverContentSize = CGSizeMake(300, 300);
-    [info presentPopoverFromRect:CGRectMake(952, 24, 24, 24) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
-    
-    [facebookMenu release];
-}
 
 
 

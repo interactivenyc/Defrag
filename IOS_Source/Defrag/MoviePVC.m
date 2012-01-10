@@ -8,6 +8,7 @@
 
 #import "MoviePVC.h"
 #import "DefragAppDelegate.h"
+#import "DefragViewController.h"
 
 @implementation MoviePVC
 
@@ -40,7 +41,7 @@
 -(void)pageWillDisplay
 {
     //[super displayPage];
-    NSLog(@"MoviePVC displayPage");
+    NSLog(@"MoviePVC pageWillDisplay");
     NSLog(@"MoviePVC MEDIA TYPE: MOV");
     
     NSString *rootPath = [[NSBundle mainBundle] resourcePath];
@@ -55,12 +56,16 @@
 
 -(void)pageDidDisplay
 {
+    NSLog(@"MoviePVC pageDidDisplay");
+    
     [[moviePlayerViewController view] setFrame:[self.view bounds]]; // size to fit parent view exactly    
     
     [self presentMoviePlayerViewControllerAnimated:moviePlayerViewController];
     
     moviePlayerViewController.moviePlayer.movieSourceType = MPMovieSourceTypeFile;
     [moviePlayerViewController.moviePlayer setFullscreen:YES];
+    
+    //[moviePlayerViewController.moviePlayer setControlStyle:MPMovieControlStyleFullscreen];
     [moviePlayerViewController.moviePlayer setControlStyle:MPMovieControlStyleNone];
     
     [moviePlayerViewController.moviePlayer play];
@@ -68,16 +73,7 @@
     [self setupGestureRecognizers];
 }
 
--(void)playerPlaybackDidFinish:(NSNotification *)notification
-{
-    NSLog(@"MoviePVC playerPlaybackDidFinish");
-    
-    [[NSNotificationCenter defaultCenter]
-     removeObserver: self
-     name: MPMoviePlayerPlaybackDidFinishNotification
-     object: moviePlayerViewController];
-    
-}
+
 
 
 //GESTURE SUPPORT
@@ -108,6 +104,18 @@
     [gestureCaptureView addGestureRecognizer:tapRecognizer];
     
     [gestureCaptureView release];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+    
+    //ignore any touches from a UIToolbar
+    /*
+    if (gestureRecognizer isKindOfClass:UISwipeGestureRecognizer) {      //change it to your condition
+        return NO;
+    }
+     */
+    return YES;
+     
 }
 
 
@@ -151,17 +159,8 @@
     NSLog(@"***************************");
     NSLog(@"MoviePVC handleTap");
     NSLog(@"***************************");
-    
-    /*
-    if ([moviePlayerViewController.moviePlayer currentPlaybackRate] == 0.0F){
-        [moviePlayerViewController.moviePlayer setCurrentPlaybackRate:0.0F];
-    }else{
-        [moviePlayerViewController.moviePlayer setCurrentPlaybackRate:30.0F];
-    }
-     */
-     
-    
-    [[AppDelegate viewController] handleTap:sender];
+        
+    [self togglePlayState];            
     
 }
 
@@ -170,6 +169,46 @@
     [moviePlayerViewController.moviePlayer stop];
 
 }
+
+-(void)togglePlayState{
+    
+    if (moviePlayerViewController.moviePlayer.playbackState == MPMoviePlaybackStatePaused){
+        [moviePlayerViewController.moviePlayer play];
+    }else{
+        [moviePlayerViewController.moviePlayer pause];
+    }
+}
+
+
+
+
+
+-(void)playerPlaybackDidFinish:(NSNotification *)notification
+{
+    NSLog(@"MoviePVC playerPlaybackDidFinish");
+    
+    
+    [[NSNotificationCenter defaultCenter]
+     removeObserver: self
+     name: MPMoviePlayerPlaybackDidFinishNotification
+     object: moviePlayerViewController];
+    
+    [self resetVideo];
+    
+    [[AppDelegate viewController] videoFinishedPlaying];
+    
+    
+}
+
+
+-(void)resetVideo{
+    [moviePlayerViewController.moviePlayer setCurrentPlaybackTime:0];
+}
+
+
+
+
+
 
 
 - (void)didReceiveMemoryWarning

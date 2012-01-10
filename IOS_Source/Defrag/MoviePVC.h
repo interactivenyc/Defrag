@@ -34,5 +34,7 @@
 -(void)handleGesture: (UIGestureRecognizer *)sender;
 -(void)handleTap: (UITapGestureRecognizer *)sender;
 -(void)stopPlaying;
+-(void)togglePlayState;
+-(void)resetVideo;
 
 @end

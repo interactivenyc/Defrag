@@ -17,7 +17,6 @@
 #import "MenuPanel.h"
 
 #import "FBConnect.h"
-#import "FacebookMenuTVC.h"
 
 extern NSString *MENUPANEL_BTN_CLICKED;
 
@@ -77,6 +76,7 @@ extern NSString *MENUPANEL_BTN_CLICKED;
 -(void)setArticleByIndex:(int)newIndex;
 -(void)createPage;
 -(void)displayPage;
+-(void)videoFinishedPlaying;
 
 -(void)displayMenuPanel;
 -(void)menuPanelHasAppeared;
