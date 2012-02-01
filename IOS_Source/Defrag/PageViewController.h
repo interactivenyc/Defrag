@@ -24,6 +24,7 @@
 -(void)pageWillDisplay;
 -(void)pageDidDisplay;
 
+-(void)removeFromParentViewController;
 -(void)logLifetime;
 
 @end

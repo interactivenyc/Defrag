@@ -29,7 +29,9 @@
 
 -(void)pageWillDisplay
 {
-     NSLog(@"ImagePVC displayPage");
+    [super pageWillDisplay];
+    
+     NSLog(@"ImagePVC pageWillDisplay");
     //THIS METHOD MUST BE OVERRIDEN IN IMPLEMENTATION CLASSES
     
     
@@ -45,6 +47,12 @@
     [myView release];
 }
 
+-(void)pageDidDisplay
+{
+    [super pageDidDisplay];
+    
+    NSLog(@"ImagePVC pageDidDisplay");
+}
 
 
 
@@ -62,7 +70,9 @@
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
 {
-    NSLog(@"ImagePVC loadView");
+    [super loadView];
+    
+    //NSLog(@"ImagePVC loadView");
 }
 
 
@@ -71,7 +81,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"ImagePVC viewDidLoad");
+    //NSLog(@"ImagePVC viewDidLoad");
     
 }
 
@@ -79,6 +89,8 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    NSLog(@"ImagePVC viewDidUnload");
+    
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }

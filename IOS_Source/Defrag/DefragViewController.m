@@ -191,7 +191,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
     
     switch (sender.direction) {
         case UISwipeGestureRecognizerDirectionLeft:
-            NSLog(@"DVC handleGesture Left");
+            //NSLog(@"DVC handleGesture Left");
             
             if (articleIndex >= (articleCount-1)) return;
             
@@ -203,7 +203,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
             break;
             
         case UISwipeGestureRecognizerDirectionRight:
-            NSLog(@"DVC handleGesture Right");
+            //NSLog(@"DVC handleGesture Right");
             
             if (articleIndex == 0) return;
             
@@ -215,7 +215,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
             break;
             
         case UISwipeGestureRecognizerDirectionUp:
-            NSLog(@"DVC handleGesture Up");
+            //NSLog(@"DVC handleGesture Up");
             
             if (pageIndex == (pageCount -1))
             {
@@ -230,7 +230,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
             break;
             
         case UISwipeGestureRecognizerDirectionDown:
-            NSLog(@"DVC handleGesture Down");
+            //NSLog(@"DVC handleGesture Down");
             
             if (pageIndex == 0) return;
             pageIndex = pageIndex - 1;
@@ -273,7 +273,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
 
 -(void)createPage
 {
-    //NSLog(@"DVC createPage");
+    NSLog(@"DVC createPage");
     
     PageData *pageData = [[PageData alloc] init ];
     pageData.pageDictionary = [self getMediaItem];
@@ -284,11 +284,20 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
     if ([mediaType isEqualToString:@"jpg"]){
         currentPageViewController = [[ImagePVC alloc] init ];
     }else if ([mediaType isEqualToString:@"mov"]){
+        NSLog(@"DVC MoviePVC alloc");
         currentPageViewController = [[MoviePVC alloc] init ];
     }
     
     [currentPageViewController initWithPageData:pageData];
     [currentPageViewController pageWillDisplay];
+    
+    if ([mediaType isEqualToString:@"mov"]){
+        
+        MPMoviePlayerController *moviePlayer = ((MoviePVC *)currentPageViewController).moviePlayerViewController.moviePlayer;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayerHasAppeared:) name:MPMoviePlayerPlaybackStateDidChangeNotification object:moviePlayer];
+    }
+    
     [self displayPage];
     [currentPageViewController pageDidDisplay];
     
@@ -299,7 +308,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
 
 -(void)displayPage
 {
-    //NSLog(@"DVC displayPage");
+    NSLog(@"DVC displayPage");
     
     CATransition *transition = [CATransition animation];
     [transition setType:kCATransitionPush];
@@ -331,6 +340,59 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
     
     [self pushViewController:currentPageViewController animated:NO];
     
+}
+
+- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
+{
+    NSLog(@"DVC animationDidStop");
+    
+    [self pageHasDisplayed];
+}
+
+-(void)moviePlayerHasAppeared:(NSNotification *)notification{
+    NSLog(@"DVC moviePlayerHasAppeared");
+    
+    MPMoviePlayerController *moviePlayer = ((MoviePVC *)currentPageViewController).moviePlayerViewController.moviePlayer;
+
+    
+    [[NSNotificationCenter defaultCenter]
+     removeObserver: self
+     name: MPMoviePlayerPlaybackStateDidChangeNotification
+     object:moviePlayer];
+    
+    [self pageHasDisplayed];
+}
+
+
+-(void)pageHasDisplayed
+{
+    int numControllers = [self.viewControllers count];
+    //NSLog(@"DVC numViewControllers:%i", numControllers);
+    
+    PageViewController *pageInstance;
+    //PageData *pageData;
+    
+    while (numControllers > 1) {
+        NSLog(@"DVC numControllers:%i", numControllers);
+        pageInstance = (PageViewController *)[self.viewControllers objectAtIndex:0];
+        
+        //pageData = pageInstance.pageData;
+        //[pageInstance logLifetime];
+        
+        [pageInstance.view removeFromSuperview];
+        NSMutableArray *allViewControllers = [NSMutableArray arrayWithArray: self.viewControllers];
+        [allViewControllers removeObjectIdenticalTo: pageInstance];
+        self.viewControllers = allViewControllers;
+        
+        pageInstance = nil;
+        //[pageInstance dealloc];
+        
+        numControllers = [self.viewControllers count];
+        
+    }
+    
+    numControllers = [self.viewControllers count];
+    NSLog(@"DVC numViewControllers after release:%i", numControllers);
 }
 
 
@@ -428,14 +490,17 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
         [self tweetAbout];
         
     }else if ([buttonName isEqualToString:@"infoButton"]){
-            NSLog(@"infoButton CLICKED");
-            
-            UIViewController *infoViewController = [[UIViewController alloc] init];
-            infoViewController.view.backgroundColor = [UIColor whiteColor];
-            
-            UIPopoverController *info = [[UIPopoverController alloc] initWithContentViewController:infoViewController];
-            info.popoverContentSize = CGSizeMake(300, 300);
-            [info presentPopoverFromRect:CGRectMake(952, 24, 24, 24) inView:menuPanel permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        NSLog(@"infoButton CLICKED");
+        
+        UIViewController *infoViewController = [[UIViewController alloc] init];
+        infoViewController.view.backgroundColor = [UIColor whiteColor];
+        
+        UIPopoverController *info = [[UIPopoverController alloc] initWithContentViewController:infoViewController];
+        info.popoverContentSize = CGSizeMake(300, 300);
+        [info presentPopoverFromRect:CGRectMake(952, 24, 24, 24) inView:menuPanel permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    
+        [infoViewController release];
+        [info release];
         
     }else if ([buttonName isEqualToString:@"prefsButton"]){
         NSLog(@"prefsButton CLICKED");
@@ -822,7 +887,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
 
 
 - (NSDictionary *)getMediaItem {
-    NSLog(@"DVC getMediaItem: ");
+    //NSLog(@"DVC getMediaItem: ");
     //NSLog(@"    articleIndex: %i pageIndex: %i", articleIndex, pageIndex);
     //NSLog(@"debug:  %@", [[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:articleIndex]);
     
@@ -839,6 +904,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
     [info presentPopoverFromRect:CGRectMake(952, 24, 24, 24) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     
     [facebookMenu release];
+    [info release];
 }
 
 

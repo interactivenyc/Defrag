@@ -44,6 +44,12 @@
     
 }
 
+-(void)removeFromParentViewController
+{
+    NSLog(@"PVC removeFromParentViewController");
+    
+}
+
 
 -(void)logLifetime
 {

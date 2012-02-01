@@ -39,14 +39,17 @@
 
 -(void)pageWillDisplay
 {
+    [super pageWillDisplay];
+    
     //[super displayPage];
-    NSLog(@"MoviePVC displayPage");
-    NSLog(@"MoviePVC MEDIA TYPE: MOV");
+    NSLog(@"MoviePVC pageWillDisplay");
+    //NSLog(@"MoviePVC MEDIA TYPE: MOV");
     
     NSString *rootPath = [[NSBundle mainBundle] resourcePath];
     NSString *filePath = [rootPath stringByAppendingPathComponent: [pageData getMediaPath]];
     NSURL *fileURL = [NSURL fileURLWithPath:filePath isDirectory:NO];
     
+    NSLog(@"MoviePVC MPMoviePlayerViewController alloc");
     moviePlayerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:fileURL];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerPlaybackDidFinish:) name:MPMoviePlayerPlaybackDidFinishNotification object:moviePlayerViewController.moviePlayer];
@@ -55,6 +58,10 @@
 
 -(void)pageDidDisplay
 {
+    [super pageDidDisplay];
+    
+    NSLog(@"MoviePVC pageDidDisplay");
+
     [[moviePlayerViewController view] setFrame:[self.view bounds]]; // size to fit parent view exactly    
     
     [self presentMoviePlayerViewControllerAnimated:moviePlayerViewController];
@@ -83,7 +90,7 @@
 //GESTURE SUPPORT
 -(void)setupGestureRecognizers
 {
-    NSLog(@"MoviePVC setupGestureRecognizers");
+    //NSLog(@"MoviePVC setupGestureRecognizers");
     
     UIView *gestureCaptureView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0, 1024.0f, 768.0f)];
     [moviePlayerViewController.moviePlayer.view addSubview:gestureCaptureView];
@@ -201,6 +208,8 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    NSLog(@"MoviePVC viewDidUnload");
+
     
     //[mpc dealloc];
     
