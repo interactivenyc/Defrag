@@ -95,8 +95,8 @@
     NSLog(@"TOC thumbnailClicked index:%i Title:%@", thumbView.thumbIndex, [thumbView.articleData objectForKey:@"Title"]);
     NSLog(@"TOC ***************************");
     
-    DefragAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    [appDelegate.viewController setArticleByIndex:thumbView.thumbIndex];
+    
+    [[AppDelegate viewController] setArticleByIndex:thumbView.thumbIndex];
     
 }
 
