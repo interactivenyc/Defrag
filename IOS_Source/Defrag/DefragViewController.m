@@ -66,7 +66,12 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
     //ADD EVENT LISTENERS
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuPanelButtonClicked:) name:MENUPANEL_BTN_CLICKED object:nil];
     
-    [self createPage];
+    //[self createPage];
+    
+    pageIndex = 1;
+    [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(createPage) userInfo:nil repeats:NO];
+    
+    //[self performSelector:@selector(setArticleByIndex:) withObject:(id)1 afterDelay:2];
     
     UILongPressGestureRecognizer *gr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
     [self.view addGestureRecognizer:gr];
@@ -165,6 +170,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
 - (void)handleTap:(UITapGestureRecognizer *)sender 
 {
     //NSLog(@"DVC handleTap %@", sender);
+    
     [self displayMenuPanel];
     
 }
@@ -174,6 +180,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
     //ignore any touches from a UIToolbar
     
     if ([touch.view.superview isKindOfClass:[UIToolbar class]]) {      //change it to your condition
+        NSLog(@"DVC gestureRecognizer IGNORE");
         return NO;
     }
     return YES;
@@ -186,12 +193,14 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
     NSLog(@"DVC handleGesture sender.direction:%i", sender.direction);
     NSLog(@"DVC ***************************");
     
+    NSLog(@"sender:%@", sender);
+    
     
     //articleIndex and pageIndex get set in this routine, then the new page is created
     
     switch (sender.direction) {
         case UISwipeGestureRecognizerDirectionLeft:
-            //NSLog(@"DVC handleGesture Left");
+            NSLog(@"DVC handleGesture Left");
             
             if (articleIndex >= (articleCount-1)) return;
             
@@ -203,7 +212,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
             break;
             
         case UISwipeGestureRecognizerDirectionRight:
-            //NSLog(@"DVC handleGesture Right");
+            NSLog(@"DVC handleGesture Right");
             
             if (articleIndex == 0) return;
             
@@ -215,7 +224,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
             break;
             
         case UISwipeGestureRecognizerDirectionUp:
-            //NSLog(@"DVC handleGesture Up");
+            NSLog(@"DVC handleGesture Up");
             
             if (pageIndex == (pageCount -1))
             {
@@ -230,7 +239,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
             break;
             
         case UISwipeGestureRecognizerDirectionDown:
-            //NSLog(@"DVC handleGesture Down");
+            NSLog(@"DVC handleGesture Down");
             
             if (pageIndex == 0) return;
             pageIndex = pageIndex - 1;
@@ -273,15 +282,18 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
 
 -(void)createPage
 {
-    NSLog(@"DVC createPage");
+    NSLog(@"DVC createPage: %i", pageIndex);
     
     PageData *pageData = [[PageData alloc] init ];
     pageData.pageDictionary = [self getMediaItem];
+    
+    NSLog(@"DVC mediaItem: %@", pageData.pageDictionary);
     
     NSString *mediaType = [pageData getMediaType];
     //NSLog(@"DVC mediaType: %@", mediaType);
     
     if ([mediaType isEqualToString:@"jpg"]){
+        NSLog(@"DVC ImagePVC alloc");
         currentPageViewController = [[ImagePVC alloc] init ];
     }else if ([mediaType isEqualToString:@"mov"]){
         NSLog(@"DVC MoviePVC alloc");
@@ -406,7 +418,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
     
     if (!menuPanel)
     {
-        //NSLog(@"DVC displayMenuPanel");
+        NSLog(@"DVC displayMenuPanel");
         
         menuPanel = [[MenuPanel alloc] initWithFrame:CGRectMake(0, 0, 1024, 768)];
         [menuPanel createMenuPanel];
@@ -887,25 +899,16 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
 
 
 - (NSDictionary *)getMediaItem {
-    //NSLog(@"DVC getMediaItem: ");
+    NSLog(@"DVC getMediaItem: ");
     //NSLog(@"    articleIndex: %i pageIndex: %i", articleIndex, pageIndex);
     //NSLog(@"debug:  %@", [[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:articleIndex]);
-    
+    //NSLog("item: %@", [[[[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:articleIndex] objectForKey:@"Media"] objectAtIndex:pageIndex]);
     
     return [[[[[contentDict objectForKey:@"Root"] objectForKey:@"Articles"] objectAtIndex:articleIndex] objectForKey:@"Media"] objectAtIndex:pageIndex];
 }
 
 
--(void)displayTableViewPopup{
-    FacebookMenuTVC *facebookMenu = [[FacebookMenuTVC alloc] init];
-    
-    UIPopoverController *info = [[UIPopoverController alloc] initWithContentViewController:facebookMenu];
-    info.popoverContentSize = CGSizeMake(300, 300);
-    [info presentPopoverFromRect:CGRectMake(952, 24, 24, 24) inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
-    
-    [facebookMenu release];
-    [info release];
-}
+
 
 
 

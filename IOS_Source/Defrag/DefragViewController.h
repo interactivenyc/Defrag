@@ -17,7 +17,6 @@
 #import "MenuPanel.h"
 
 #import "FBConnect.h"
-#import "FacebookMenuTVC.h"
 
 extern NSString *MENUPANEL_BTN_CLICKED;
 

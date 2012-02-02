@@ -18,6 +18,11 @@
 	UISwipeGestureRecognizer *swipeDownRecognizer; 
     
     UITapGestureRecognizer *tapRecognizer;
+    
+    NSURL *fileURL;
+    MPMoviePlayerController *moviePlayer;
+    
+    bool movieFinished;
 }
 
 @property (nonatomic, retain) MPMoviePlayerViewController *moviePlayerViewController;
@@ -29,9 +34,16 @@
 
 @property (nonatomic, retain) UITapGestureRecognizer *tapRecognizer;
 
+@property (nonatomic, retain) NSURL *fileURL;
+@property (nonatomic, retain) MPMoviePlayerController *moviePlayer;
+
+@property bool movieFinished;
+
+
 //GESTURE SUPPORT
 -(void)setupGestureRecognizers;
 -(void)handleGesture: (UIGestureRecognizer *)sender;
+-(void)sendGesture: (UISwipeGestureRecognizer *)sender;
 -(void)handleTap: (UITapGestureRecognizer *)sender;
 -(void)stopPlaying;
 

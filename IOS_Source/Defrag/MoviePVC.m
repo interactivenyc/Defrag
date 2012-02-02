@@ -14,6 +14,8 @@
 @synthesize moviePlayerViewController;
 @synthesize swipeLeftRecognizer, swipeRightRecognizer, swipeUpRecognizer, swipeDownRecognizer;
 @synthesize tapRecognizer;
+@synthesize fileURL, moviePlayer;
+
 
 -(void)dealloc
 {
@@ -45,9 +47,11 @@
     NSLog(@"MoviePVC pageWillDisplay");
     //NSLog(@"MoviePVC MEDIA TYPE: MOV");
     
+    movieFinished = FALSE;
+    
     NSString *rootPath = [[NSBundle mainBundle] resourcePath];
     NSString *filePath = [rootPath stringByAppendingPathComponent: [pageData getMediaPath]];
-    NSURL *fileURL = [NSURL fileURLWithPath:filePath isDirectory:NO];
+    fileURL = [NSURL fileURLWithPath:filePath isDirectory:NO];
     
     NSLog(@"MoviePVC MPMoviePlayerViewController alloc");
     moviePlayerViewController = [[MPMoviePlayerViewController alloc] initWithContentURL:fileURL];
@@ -63,13 +67,11 @@
     NSLog(@"MoviePVC pageDidDisplay");
 
     [[moviePlayerViewController view] setFrame:[self.view bounds]]; // size to fit parent view exactly    
-    
-    [self presentMoviePlayerViewControllerAnimated:moviePlayerViewController];
+    self.view = moviePlayerViewController.moviePlayer.view;
     
     moviePlayerViewController.moviePlayer.movieSourceType = MPMovieSourceTypeFile;
     [moviePlayerViewController.moviePlayer setFullscreen:YES];
-    [moviePlayerViewController.moviePlayer setControlStyle:MPMovieControlStyleFullscreen];
-    
+    [moviePlayerViewController.moviePlayer setControlStyle:MPMovieControlStyleNone];    
     [moviePlayerViewController.moviePlayer play];
     
     [self setupGestureRecognizers];
@@ -78,12 +80,8 @@
 -(void)playerPlaybackDidFinish:(NSNotification *)notification
 {
     NSLog(@"MoviePVC playerPlaybackDidFinish");
-    
-    [[NSNotificationCenter defaultCenter]
-     removeObserver: self
-     name: MPMoviePlayerPlaybackDidFinishNotification
-     object: moviePlayerViewController];
-    
+    movieFinished = TRUE;
+
 }
 
 
@@ -93,7 +91,7 @@
     //NSLog(@"MoviePVC setupGestureRecognizers");
     
     UIView *gestureCaptureView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0, 1024.0f, 768.0f)];
-    [moviePlayerViewController.moviePlayer.view addSubview:gestureCaptureView];
+    [self.view addSubview:gestureCaptureView];
     
     swipeRightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
     swipeRightRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
@@ -120,7 +118,7 @@
 
 -(void)handleGesture: (UISwipeGestureRecognizer *)sender
 {
-    NSLog(@"***************************");
+    NSLog(@"MoviePVC ***************************");
     
     
     switch (sender.direction) {
@@ -144,30 +142,33 @@
             break;
     }
     
-    
-    NSLog(@"***************************");
+    NSLog(@"MoviePVC ***************************");
     
     [self stopPlaying];
+    [self performSelector:@selector(sendGesture:) withObject:sender afterDelay:.5];
+        
+}
+
+-(void)sendGesture: (UISwipeGestureRecognizer *)sender{
     [[AppDelegate viewController] handleGesture:sender];
-    
 }
     
     
 -(void)handleTap: (UITapGestureRecognizer *)sender
 {
     NSLog(@"***************************");
-    NSLog(@"MoviePVC handleTap");
+    NSLog(@"MoviePVC handleTap:%@", moviePlayerViewController.moviePlayer);
     NSLog(@"***************************");
     
-    /*
-    if ([moviePlayerViewController.moviePlayer currentPlaybackRate] == 0.0F){
-        [moviePlayerViewController.moviePlayer setCurrentPlaybackRate:0.0F];
+    if (movieFinished) {
+        [[AppDelegate viewController] handleTap:sender];
     }else{
-        [moviePlayerViewController.moviePlayer setCurrentPlaybackRate:30.0F];
+        if (moviePlayerViewController.moviePlayer.playbackState == MPMoviePlaybackStatePlaying){
+            [moviePlayerViewController.moviePlayer pause];
+        }else if (moviePlayerViewController.moviePlayer.playbackState == MPMoviePlaybackStatePaused){
+            [moviePlayerViewController.moviePlayer play];
+        } 
     }
-     */
-    
-    [[AppDelegate viewController] handleTap:sender];
     
 }
 
