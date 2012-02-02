@@ -68,7 +68,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
     
     //[self createPage];
     
-    pageIndex = 1;
+    //pageIndex = 1;
     [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(createPage) userInfo:nil repeats:NO];
     
     //[self performSelector:@selector(setArticleByIndex:) withObject:(id)1 afterDelay:2];

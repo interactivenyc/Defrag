@@ -14,7 +14,7 @@
 @synthesize moviePlayerViewController;
 @synthesize swipeLeftRecognizer, swipeRightRecognizer, swipeUpRecognizer, swipeDownRecognizer;
 @synthesize tapRecognizer;
-@synthesize fileURL, moviePlayer;
+@synthesize fileURL, moviePlayer, movieFinished;
 
 
 -(void)dealloc
