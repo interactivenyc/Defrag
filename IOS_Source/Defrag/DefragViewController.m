@@ -85,49 +85,49 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
 //*****************************************
 
 - (void) longPress:(UILongPressGestureRecognizer *) gestureRecognizer {
-        NSLog(@"longPress state:%i", gestureRecognizer.state);
+    NSLog(@"longPress state:%i", gestureRecognizer.state);
 }
 
 /*
-- (void) longPress:(UILongPressGestureRecognizer *) gestureRecognizer {
-    
-    NSLog(@"longPress state:%i", gestureRecognizer.state);
-
-    
-    
-    if ([gestureRecognizer state] == UIGestureRecognizerStateBegan) {
-        CGPoint location = [gestureRecognizer locationInView:[gestureRecognizer view]];
-        UIMenuController *menuController = [UIMenuController sharedMenuController];
-        UIMenuItem *resetMenuItem = [[UIMenuItem alloc] initWithTitle:@"1" action:@selector(menuItemClicked:)];
-        
-        NSAssert([self becomeFirstResponder], @"Sorry, UIMenuController will not work with %@ since it cannot become first responder", self);
-        [menuController setMenuItems:[NSArray arrayWithObjects:resetMenuItem, resetMenuItem, nil]];
-        [menuController setTargetRect:CGRectMake(location.x, location.y, 0, 0) inView:[gestureRecognizer view]];
-        [menuController setMenuVisible:YES animated:YES];
-        
-        [resetMenuItem release];
-    }
-}
-
-- (void) copy:(id) sender {
-    // called when copy clicked in menu
-}
-
-- (void) menuItemClicked:(id) sender {
-    // called when Item clicked in menu
-}
-
-- (BOOL) canPerformAction:(SEL)selector withSender:(id) sender {
-    if (selector == @selector(menuItemClicked:) || selector == @selector(copy:)) {
-        return YES;
-    }
-    return NO;
-}
-
-- (BOOL) canBecomeFirstResponder {
-    return YES;
-}
-*/
+ - (void) longPress:(UILongPressGestureRecognizer *) gestureRecognizer {
+ 
+ NSLog(@"longPress state:%i", gestureRecognizer.state);
+ 
+ 
+ 
+ if ([gestureRecognizer state] == UIGestureRecognizerStateBegan) {
+ CGPoint location = [gestureRecognizer locationInView:[gestureRecognizer view]];
+ UIMenuController *menuController = [UIMenuController sharedMenuController];
+ UIMenuItem *resetMenuItem = [[UIMenuItem alloc] initWithTitle:@"1" action:@selector(menuItemClicked:)];
+ 
+ NSAssert([self becomeFirstResponder], @"Sorry, UIMenuController will not work with %@ since it cannot become first responder", self);
+ [menuController setMenuItems:[NSArray arrayWithObjects:resetMenuItem, resetMenuItem, nil]];
+ [menuController setTargetRect:CGRectMake(location.x, location.y, 0, 0) inView:[gestureRecognizer view]];
+ [menuController setMenuVisible:YES animated:YES];
+ 
+ [resetMenuItem release];
+ }
+ }
+ 
+ - (void) copy:(id) sender {
+ // called when copy clicked in menu
+ }
+ 
+ - (void) menuItemClicked:(id) sender {
+ // called when Item clicked in menu
+ }
+ 
+ - (BOOL) canPerformAction:(SEL)selector withSender:(id) sender {
+ if (selector == @selector(menuItemClicked:) || selector == @selector(copy:)) {
+ return YES;
+ }
+ return NO;
+ }
+ 
+ - (BOOL) canBecomeFirstResponder {
+ return YES;
+ }
+ */
 
 //*****************************************
 #pragma mark - GESTURE SUPPORT
@@ -202,30 +202,6 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
         case UISwipeGestureRecognizerDirectionLeft:
             NSLog(@"DVC handleGesture Left");
             
-            if (articleIndex >= (articleCount-1)) return;
-            
-            articleIndex = articleIndex + 1;
-            pageIndex = 0;
-            [self calculatePageCount];
-            direction = 1;
-            
-            break;
-            
-        case UISwipeGestureRecognizerDirectionRight:
-            NSLog(@"DVC handleGesture Right");
-            
-            if (articleIndex == 0) return;
-            
-            articleIndex = articleIndex - 1;
-            pageIndex = 0;
-            [self calculatePageCount];
-            direction = 2;
-            
-            break;
-            
-        case UISwipeGestureRecognizerDirectionUp:
-            NSLog(@"DVC handleGesture Up");
-            
             if (pageIndex == (pageCount -1))
             {
                 NSLog(@"DVC LAST PAGE");
@@ -234,6 +210,38 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
                 pageIndex = pageIndex + 1; 
             }
             
+            
+            
+            
+            direction = 1;
+            
+            break;
+            
+        case UISwipeGestureRecognizerDirectionRight:
+            NSLog(@"DVC handleGesture Right");
+            
+            
+            if (pageIndex == 0) return;
+            pageIndex = pageIndex - 1;
+            
+            if (articleIndex == 0) return;
+            
+            
+            
+            
+            direction = 2;
+            
+            break;
+            
+        case UISwipeGestureRecognizerDirectionUp:
+            NSLog(@"DVC handleGesture Up");
+            
+            if (articleIndex >= (articleCount-1)) return;
+            
+            articleIndex = articleIndex + 1;
+            pageIndex = 0;
+            [self calculatePageCount];
+            
             direction = 3;
             
             break;
@@ -241,8 +249,10 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
         case UISwipeGestureRecognizerDirectionDown:
             NSLog(@"DVC handleGesture Down");
             
-            if (pageIndex == 0) return;
-            pageIndex = pageIndex - 1;
+            articleIndex = articleIndex - 1;
+            pageIndex = 0;
+            [self calculatePageCount];
+            
             direction = 4;
             
             break;
@@ -268,9 +278,20 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
 {
     NSLog(@"DVC setArticleByIndex:%i",newIndex);
     
-    direction = 1;
+    if (newIndex == articleIndex) {
+        return;
+    }
+    
     pageIndex = 0;
+    
+    if (newIndex > articleIndex) {
+        direction = 3;
+    }else{
+        direction = 4;
+    }
+    
     articleIndex = newIndex;
+    
     [self calculatePageCount];
     [self createPage];
     //[self displayTableOfContents];
@@ -365,7 +386,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
     NSLog(@"DVC moviePlayerHasAppeared");
     
     MPMoviePlayerController *moviePlayer = ((MoviePVC *)currentPageViewController).moviePlayerViewController.moviePlayer;
-
+    
     
     [[NSNotificationCenter defaultCenter]
      removeObserver: self
@@ -486,7 +507,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
         
     }else if ([buttonName isEqualToString:@"facebookButton"]){
         NSLog(@"facebookButton CLICKED");
-                
+        
         DefragAppDelegate *delegate = (DefragAppDelegate *) [[UIApplication sharedApplication] delegate];
         
         if (![[delegate facebook] isSessionValid]) {
@@ -510,7 +531,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
         UIPopoverController *info = [[UIPopoverController alloc] initWithContentViewController:infoViewController];
         info.popoverContentSize = CGSizeMake(300, 300);
         [info presentPopoverFromRect:CGRectMake(952, 24, 24, 24) inView:menuPanel permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
-    
+        
         [infoViewController release];
         [info release];
         
@@ -534,7 +555,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
  */
 - (void) apiFQLIMe {
     NSLog(@"DVC apiFQLIMe");
-
+    
     // Using the "pic" picture since this currently has a maximum width of 100 pixels
     // and since the minimum profile picture size is 180 pixels wide we should be able
     // to get a 100 pixel wide version of the profile picture
@@ -545,14 +566,14 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
     
     DefragAppDelegate *appDelegate = (DefragAppDelegate *) [[UIApplication sharedApplication] delegate];
     [[appDelegate facebook] requestWithMethodName:@"fql.query"
-                                     andParams:params
-                                 andHttpMethod:@"POST"
-                                   andDelegate:self];
+                                        andParams:params
+                                    andHttpMethod:@"POST"
+                                      andDelegate:self];
 }
 
 - (void) apiGraphUserPermissions {
     NSLog(@"DVC apiGraphUserPermissions");
-
+    
     DefragAppDelegate *appDelegate = (DefragAppDelegate *) [[UIApplication sharedApplication] delegate]; 
     [[appDelegate facebook] requestWithGraphPath:@"me/permissions" andDelegate:self];
 }
@@ -582,7 +603,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
 
 - (void) showLoggedOut:(BOOL)clearInfo {
     NSLog(@"DVC showLoggedOut");
-
+    
     [self.navigationController setNavigationBarHidden:YES animated:NO];
     // Remove saved authorization information if it exists and it is
     // ok to clear it (logout, session invalid, app unauthorized)
@@ -610,7 +631,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
     // Clear personal info
     //nameLabel.text = @"";
     // Get the profile image
-   // [profilePhotoImageView setImage:nil];
+    // [profilePhotoImageView setImage:nil];
 }
 
 
@@ -625,7 +646,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
  */
 - (void)login {
     NSLog(@"DVC login");
-
+    
     DefragAppDelegate *delegate = (DefragAppDelegate *) [[UIApplication sharedApplication] delegate];
     // Check and retrieve authorization information
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -639,13 +660,13 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
         [delegate facebook].sessionDelegate = self;
         
         permissions = [[NSArray alloc] initWithObjects:
-                                @"user_photos",
-                                @"user_about_me",
-                                @"user_location",
-                                @"email",
-                                @"publish_stream",
-                                @"read_insights",
-                                nil];
+                       @"user_photos",
+                       @"user_about_me",
+                       @"user_location",
+                       @"email",
+                       @"publish_stream",
+                       @"read_insights",
+                       nil];
         
         [[delegate facebook] authorize:permissions];
     } else {
@@ -685,29 +706,29 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
     
     
     /*
-    SBJSON *jsonWriter = [[SBJSON new] autorelease];
+     SBJSON *jsonWriter = [[SBJSON new] autorelease];
      
-    NSString *defragURL = @"http://www.kickstarter.com/projects/1642957716/defrag-the-interactive-ipad-magazine-of-global-cul";
+     NSString *defragURL = @"http://www.kickstarter.com/projects/1642957716/defrag-the-interactive-ipad-magazine-of-global-cul";
      
-    NSDictionary *actionLinks = [NSArray arrayWithObjects:[NSDictionary 
-                                                           dictionaryWithObjectsAndKeys: @"Defrag Magazine", @"text", defragURL,
-                                                           @"href", nil], nil];
-    
-    NSString *actionLinksStr = [jsonWriter stringWithObject:actionLinks];
-    NSDictionary *attachment = [NSDictionary dictionaryWithObjectsAndKeys:
-                                @"Defrag Magazine", @"name",
-                                @"The Digital Magazine of Global Culture", @"caption",
-                                @"Check out Defrag in the App Store", @"description",
-                                @"Share on Facebook", @"link", 
-                                @"image", @"user_message_prompt", 
-                                @"http://s3.amazonaws.com/ksr/avatars/546922/Picture_10.large.jpg", @"picture", nil];
-    NSString *attachmentStr = [jsonWriter stringWithObject:attachment];
-    NSMutableDictionary *params = [NSMutableDictionary
-                                   dictionaryWithObjectsAndKeys:
-                                   @"Share on Facebook",  @"user_message_prompt",
-                                   actionLinksStr, @"action_links",
-                                   attachmentStr, @"attachment",
-                                   nil];
+     NSDictionary *actionLinks = [NSArray arrayWithObjects:[NSDictionary 
+     dictionaryWithObjectsAndKeys: @"Defrag Magazine", @"text", defragURL,
+     @"href", nil], nil];
+     
+     NSString *actionLinksStr = [jsonWriter stringWithObject:actionLinks];
+     NSDictionary *attachment = [NSDictionary dictionaryWithObjectsAndKeys:
+     @"Defrag Magazine", @"name",
+     @"The Digital Magazine of Global Culture", @"caption",
+     @"Check out Defrag in the App Store", @"description",
+     @"Share on Facebook", @"link", 
+     @"image", @"user_message_prompt", 
+     @"http://s3.amazonaws.com/ksr/avatars/546922/Picture_10.large.jpg", @"picture", nil];
+     NSString *attachmentStr = [jsonWriter stringWithObject:attachment];
+     NSMutableDictionary *params = [NSMutableDictionary
+     dictionaryWithObjectsAndKeys:
+     @"Share on Facebook",  @"user_message_prompt",
+     actionLinksStr, @"action_links",
+     attachmentStr, @"attachment",
+     nil];
      
      DefragAppDelegate *appDelegate = (DefragAppDelegate *) [[UIApplication sharedApplication] delegate];
      [[appDelegate facebook] dialog:@"stream.publish" andParams:params andDelegate:self];
@@ -715,12 +736,12 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
      */
     
     NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                            @"The Digital Magazine of Global Culture", @"caption",
-                            @"Check out Defrag in the App Store", @"description",
-                            @"Share on Facebook",  @"user_message_prompt",
-                            @"http://www.kickstarter.com/projects/1642957716/defrag-the-interactive-ipad-magazine-of-global-cul", @"link",
-                            @"http://s3.amazonaws.com/ksr/avatars/546922/Picture_10.large.jpg", @"picture",
-                            nil];
+                                   @"The Digital Magazine of Global Culture", @"caption",
+                                   @"Check out Defrag in the App Store", @"description",
+                                   @"Share on Facebook",  @"user_message_prompt",
+                                   @"http://www.kickstarter.com/projects/1642957716/defrag-the-interactive-ipad-magazine-of-global-cul", @"link",
+                                   @"http://s3.amazonaws.com/ksr/avatars/546922/Picture_10.large.jpg", @"picture",
+                                   nil];
     
     NSLog(@"DVC params: %@", params);
     
@@ -732,13 +753,13 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
 -(void)tweetAbout{
     NSLog(@"DVC tweetAbout");
     /*
-    if ([TWTweetComposeViewController canSendTweet])
-    {
-        TWTweetComposeViewController *tweetSheet = 
-        [[TWTweetComposeViewController alloc] init];
-        [tweetSheet setInitialText:@"Initial Tweet Text!"];
-        [self presentModalViewController:tweetSheet animated:YES];
-    }
+     if ([TWTweetComposeViewController canSendTweet])
+     {
+     TWTweetComposeViewController *tweetSheet = 
+     [[TWTweetComposeViewController alloc] init];
+     [tweetSheet setInitialText:@"Initial Tweet Text!"];
+     [self presentModalViewController:tweetSheet animated:YES];
+     }
      */
 }
 
@@ -758,11 +779,11 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
     //[[appDelegate facebook] requestWithGraphPath:@"152832481487502/insights" andDelegate:self];
     
     [self apiFQLIMe];
-
+    
     
     [self fbPostToWall];
-   
-
+    
+    
 }
 
 - (void)fbDidNotLogin:(BOOL)cancelled{
@@ -772,7 +793,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
 }
 - (void)fbDidLogout{
     NSLog(@"DVC fbDidLogout");
-
+    
 }
 
 //*****************************************
@@ -784,7 +805,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
  */
 - (void)requestLoading:(FBRequest *)request{
     NSLog(@"DVC requestLoading");
-
+    
 }
 
 /**
@@ -793,7 +814,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
 - (void)request:(FBRequest *)request json:(NSURLResponse *)response{
     NSLog(@"DVC request didReceiveResponse");
     
-
+    
 }
 
 /**
@@ -801,7 +822,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
  */
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error{
     NSLog(@"DVC request didFailWithError:%@", error.description);
-
+    
 }
 
 /**
@@ -817,8 +838,8 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
         result = [result objectAtIndex:0];
     }
     NSLog(@"DVC response:%@", result);
-
-
+    
+    
 }
 
 /**
@@ -828,7 +849,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
  */
 - (void)request:(FBRequest *)request didLoadRawResponse:(NSData *)data{
     NSLog(@"DVC request didLoadRawResponse");
-
+    
 }
 
 //*****************************************
@@ -848,7 +869,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
  */
 - (void)dialogCompleteWithUrl:(NSURL *)url{
     NSLog(@"DVC dialogDelegate dialogCompleteWithUrl");
-
+    
 }
 
 /**
@@ -856,7 +877,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
  */
 - (void)dialogDidNotCompleteWithUrl:(NSURL *)url{
     NSLog(@"DVC dialogDelegate dialogDidNotCompleteWithUrl");
-
+    
 }
 
 /**
@@ -864,7 +885,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
  */
 - (void)dialogDidNotComplete:(FBDialog *)dialog{
     NSLog(@"DVC dialogDelegate dialogDidNotComplete");
-
+    
 }
 
 /**
@@ -872,7 +893,7 @@ NSString *MENUPANEL_BTN_CLICKED = @"MENUPANEL_BTN_CLICKED";
  */
 - (void)dialog:(FBDialog*)dialog didFailWithError:(NSError *)error{
     NSLog(@"DVC dialogDelegate didFailWithError");
-
+    
 }
 
 //*****************************************

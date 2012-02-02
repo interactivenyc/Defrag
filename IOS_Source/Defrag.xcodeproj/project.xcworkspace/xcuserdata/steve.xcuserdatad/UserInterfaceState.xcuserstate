@@ -3744,7 +3744,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>268</integer>
+					<integer>274</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>
@@ -8543,8 +8543,8 @@
 		<string>PrimaryDocumentVisibleCharacterRange</string>
 		<string>HideAllIssues</string>
 		<string>PrimaryDocumentSelectedCharacterRange</string>
-		<real>349853067.49626201</real>
-		<string>{5192, 1352}</string>
+		<real>349894050.14909899</real>
+		<string>{0, 858}</string>
 		<string>{5535, 0}</string>
 		<string>-handleTap:</string>
 		<string>Xcode.IDEKit.EditorDocument.SourceCode</string>
@@ -8580,7 +8580,7 @@
 				</dict>
 			</array>
 		</dict>
-		<string>{{0, 0}, {1660, 849}}</string>
+		<string>{{0, 0}, {1020, 602}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -8680,7 +8680,7 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>162</integer>
+					<integer>26</integer>
 				</dict>
 			</array>
 		</dict>
@@ -8782,7 +8782,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>1125</real>
+		<real>485</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -8881,7 +8881,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>1125</real>
+		<real>485</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -9435,7 +9435,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>491</real>
+		<real>244</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -10082,7 +10082,7 @@
 		<string>IDECollapsedTypes</string>
 		<string>IDERecentFilteringEnabled</string>
 		<string>IDECollapsedGroups</string>
-		<string>{{0, 0}, {259, 805}}</string>
+		<string>{{0, 0}, {259, 558}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -10230,7 +10230,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>1660</real>
+		<real>1020</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -12961,7 +12961,7 @@
 			</array>
 		</dict>
 		<real>260</real>
-		<string>{{0, 82}, {1920, 969}}</string>
+		<string>{{0, 56}, {1280, 722}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -16871,7 +16871,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>491</real>
+		<real>244</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -17654,7 +17654,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>1660</real>
+		<real>1020</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -18297,10 +18297,10 @@
 				</dict>
 			</array>
 		</dict>
-		<real>349853067.49429399</real>
-		<string>{6004, 1878}</string>
-		<string>{5651, 0}</string>
-		<string>-handleTap:</string>
+		<real>349894050.14720398</real>
+		<string>{5811, 1200}</string>
+		<string>{5905, 56}</string>
+		<string>-handleGesture:</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -18333,7 +18333,7 @@
 				</dict>
 			</array>
 		</dict>
-		<string>{{0, 0}, {1660, 849}}</string>
+		<string>{{0, 0}, {1020, 602}}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -18433,7 +18433,7 @@
 			<array>
 				<dict>
 					<key>CF$UID</key>
-					<integer>26</integer>
+					<integer>162</integer>
 				</dict>
 			</array>
 		</dict>
@@ -18535,7 +18535,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>1185</real>
+		<real>545</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -18634,7 +18634,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>1185</real>
+		<real>545</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -19085,7 +19085,7 @@
 				</dict>
 			</array>
 		</dict>
-		<real>625</real>
+		<real>378</real>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -27372,9 +27372,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>349853067.49278498</real>
-		<string>{6004, 1878}</string>
-		<string>{5651, 0}</string>
+		<real>349894050.14569598</real>
+		<string>{5811, 1200}</string>
+		<string>{5905, 56}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -27987,8 +27987,8 @@
 				</dict>
 			</array>
 		</dict>
-		<real>349853067.49337798</real>
-		<string>{5192, 1352}</string>
+		<real>349894050.14626998</real>
+		<string>{0, 858}</string>
 		<string>{5535, 0}</string>
 		<dict>
 			<key>$class</key>
@@ -29744,8 +29744,8 @@
 		</dict>
 		<string>IDEDeviceLocation</string>
 		<string>IDEDeviceArchitecture</string>
-		<string>dvtdevice-iphonesimulator:/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator4.3.sdk-iPad</string>
-		<string>i386</string>
+		<string>dvtdevice-iphonePlaceholder:placeholder</string>
+		<string>armv7</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -29779,7 +29779,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>1777</integer>
+					<integer>551</integer>
 				</dict>
 			</array>
 		</dict>
@@ -30043,7 +30043,7 @@
 				<integer>1794</integer>
 			</dict>
 			<key>NS.time</key>
-			<real>349852848.66159803</real>
+			<real>349889496.59986699</real>
 		</dict>
 		<dict>
 			<key>$classes</key>
@@ -30054,7 +30054,7 @@
 			<key>$classname</key>
 			<string>NSDate</string>
 		</dict>
-		<string>Today at 12:20 AM</string>
+		<string>Today at 10:31 AM</string>
 		<integer>106</integer>
 		<dict>
 			<key>$class</key>
